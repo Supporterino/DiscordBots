@@ -1,4 +1,4 @@
-import { Message, Guild, Client, VoiceChannel, GuildChannel } from "discord.js";
+import { Message, Guild, Client, VoiceChannel } from "discord.js";
 import { format, transports, createLogger } from "winston";
 
 var auth = require('./token.json');
@@ -104,12 +104,4 @@ const checkAuth = (msg: Message) => {
     })
     logger.info(`Checked rights for user: ${author.displayName.toString()}. Result: ${authorized}`);
     return authorized;
-}
-
-const compTwoStringsInsensitive = (a: String, b: String) => {
-    return stringSanitize(a) === stringSanitize(b);
-}
-
-const stringSanitize = (a: String) => {
-    return a.trim().toUpperCase().replace(/\s/g, '');
 }
