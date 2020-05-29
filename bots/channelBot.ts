@@ -59,11 +59,15 @@ export class ChannelBot extends BasicBot {
     printHelp(msg: Message) {
         msg.reply(
             `The following commands are availible for the PrivateChannelBot:
-            \t!channelCreate
+            \t!channelCreate ?Name ?[Mentions] - Creates aprivate channel with the optional given name und moves the possible followers with you.
             `
-        )
+        );
     }
 
+    /**
+     * The function extracts the optinal name of a private channel and create the corresponding channel, if it doesn't already exist. The author is moved inside the channel and all mentioned users as well.
+     * @param msg Recieved message with command.
+     */
     createPrivateChannel(msg: Message) {
         const mentions = msg.mentions.users;
         let channelName = '';
@@ -84,27 +88,39 @@ export class ChannelBot extends BasicBot {
                 ]
             })
                 .then(vc => {
-                    msg.reply(`Your channel ${channelName} was created and you are moved to it. Leaving it will delete the channel.`)
+                    msg.reply(`Your channel ${channelName} was created and you are moved to it. Leaving it will delete the channel.`);
                     msg.member.voice.setChannel(vc);
                     if (mentions.size > 0) this.moveWithCreator(msg, vc);
                 });
+            this.logger.info(`Created private channel for user (${msg.member.displayName.toString()}) with name: ${channelName}`);
         }
     }
 
+    /**
+     * Moves all mentioned users with the creator of a private channel
+     * @param msg Recieved message with command
+     * @param vc The VoiceChannel object of the created channel
+     */
     moveWithCreator(msg: Message, vc: VoiceChannel) {
         msg.mentions.users.forEach(user => {
             msg.guild.member(user).voice.setChannel(vc);
         })
     }
 
+    /**
+     * Checks if a creator of a private channel leaves it. If this is true all other members are moved to AFK and channel is deleted.
+     * @param event The emitted VoiceState event
+     */
     checkDeleteRequired(event: VoiceState) {
         const activeUser = event.member.displayName.toString();
         let activeChannel = '';
         if(event.channel != undefined) activeChannel = event.channel.name.toString();
         if (this.activeChannels.has(activeChannel)) {
             if (this.activeChannels.get(activeChannel) === activeUser) {
+                if (event.channel.members.size > 0) event.channel.members.forEach(user => user.voice.setChannel(this.getVChannelByName(event.guild, 'AFK')));
                 event.channel.delete(`Owner left.`);
                 this.activeChannels.delete(activeChannel);
+                this.logger.info(`Removed private channel of ${activeUser}.`);
             }
         }
     }
