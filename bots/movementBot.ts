@@ -20,26 +20,29 @@ export class MovementBot extends BasicBot {
         });
         
         this.client.on('message', msg => {
-            if (msg.content.substring(0, 1) === '!') {
+            if (msg.content.substring(0, 5) === '!move') {
                 let args = msg.content.substring(1).split(' ');
                 let cmd = args[0];
         
                 if(!this.checkAuth(msg)) msg.reply("Not Authorized!");
                 else {
                     switch (cmd) {
-                        case 'ping':
-                            msg.reply('pong!');
-                        case 'moveToMe':
-                            this.movePlayer(msg);
+                        case 'moveHere':
+                            this.moveHere(msg);
+                            break;
                         case 'moveTo':
                             this.moveTo(msg);
+                            break;
+                        default:
+                            msg.reply(`Command (${cmd}) not found!`);
+                            break;
                     }
                 }
             }
         });
     }
 
-    movePlayer(msg: Message) {
+    moveHere(msg: Message) {
         if (!msg.mentions.users.first()) msg.channel.send("You need to mention a target!");
         else {
             const vChannel = msg.member.voice.channel;
