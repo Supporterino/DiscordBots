@@ -1,4 +1,4 @@
-const compTwoStringsInsensitive = (a: String, b: String) => {
+export const compTwoStringsInsensitive = (a: String, b: String) => {
     return stringSanitize(a) === stringSanitize(b);
 }
 
