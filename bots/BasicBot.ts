@@ -16,7 +16,7 @@ export class BasicBot {
 
     createLog() {
         this.logger = createLogger({
-            level: 'info',
+            level: 'debug',
             format: format.combine(
                 //format.colorize(),
                 format.timestamp(),
@@ -41,23 +41,14 @@ export class BasicBot {
     
     getVChannelByName(guild: Guild, name: String) {
         let temp: VoiceChannel = undefined;
-        guild.channels.cache.forEach(e => {
-            this.logger.silly(`Name: ${e.name}, Type: ${e.type}`)
-            if (e.type === 'voice' && compTwoStringsInsensitive(e.name, name)) {
-                this.logger.silly(`Found channel: ${e.name.toString()}`);
-                temp = <VoiceChannel> e;
-                return;
-            }
-        })
+        temp = <VoiceChannel> guild.channels.cache.find(channel => channel.type === 'voice' && compTwoStringsInsensitive(channel.name, name));
         return temp;
     }
     
     checkAuth(msg: Message) {
         const author = msg.guild.member(msg.author);
         let authorized = false;
-        author.roles.cache.forEach(e => {
-            if (compTwoStringsInsensitive(e.name, 'BotRights') || compTwoStringsInsensitive(e.name, 'ADMIN')) authorized = true;
-        })
+        if (author.roles.cache.some(role => compTwoStringsInsensitive(role.name, 'BotRights') || compTwoStringsInsensitive(role.name, 'ADMIN'))) authorized = true;
         this.logger.info(`Checked rights for user: ${author.displayName.toString()}. Result: ${authorized}`);
         return authorized;
     }

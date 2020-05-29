@@ -1,6 +1,5 @@
-import { BasicBot } from "./BasicBot";
+import { BasicBot } from "./basicBot";
 import { Message, VoiceChannel, Client } from "discord.js";
-import { createLogger } from "winston";
 
 export class MovementBot extends BasicBot {
     constructor() {
@@ -33,13 +32,26 @@ export class MovementBot extends BasicBot {
                         case 'moveTo':
                             this.moveTo(msg);
                             break;
+                        case 'moveHelp':
+                            this.printHelp(msg);
+                            break;
                         default:
                             msg.reply(`Command (${cmd}) not found!`);
+                            this.printHelp(msg);
                             break;
                     }
                 }
             }
         });
+    }
+
+    printHelp(msg: Message) {
+        msg.reply(
+            `The following commands are availible for the MovementBot:
+            \t!moveHere @Target - Moves a user to your voice channel.
+            \t!moveTo @Target voice_channel - Moves a user to a defined voice channel.
+            `
+        )
     }
 
     moveHere(msg: Message) {

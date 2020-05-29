@@ -1,6 +1,10 @@
 import { MovementBot } from "./bots/movementBot";
+import { ChannelBot } from "./bots/channelBot";
+let auth = require('./token.json');
 
-var auth = require('./token.json');
+const moveBot = new MovementBot();
+const channelBot = new ChannelBot();
 
-let moveBot = new MovementBot();
-moveBot.run(auth.token);
+
+moveBot.run(auth.MoveToken);
+channelBot.run(auth.ChannelToken);
