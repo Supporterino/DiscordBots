@@ -10,13 +10,12 @@ export class BasicBot {
         this.createLog();
     }
 
-    getClient() {
-        return this.client;
-    }
-
+    /**
+     * Creates the logger for the Bots.
+     */
     createLog() {
         this.logger = createLogger({
-            level: 'debug',
+            level: 'info',
             format: format.combine(
                 //format.colorize(),
                 format.timestamp(),
@@ -33,18 +32,34 @@ export class BasicBot {
         });
     }
 
+    /**
+     * Return the first mentioned user in a command.
+     * @param msg Recieved message with command
+     * @return The GuildMember object of the referenced user
+     */
     getTarget(msg: Message) {
         const temp = msg.guild.member(msg.mentions.users.first());
         this.logger.debug(`Fetched target with name: ${temp.displayName.toString()}`);
         return temp;
     }
     
+    /**
+     * Returns the VoiceChannel object of a givven channel name.
+     * @param guild The active guild of a message
+     * @param name The name of the channel to search
+     * @return VoiceChannel object
+     */
     getVChannelByName(guild: Guild, name: String) {
         let temp: VoiceChannel = undefined;
         temp = <VoiceChannel> guild.channels.cache.find(channel => channel.type === 'voice' && compTwoStringsInsensitive(channel.name, name));
         return temp;
     }
     
+    /**
+     * Checks if the author of the command is authorized to execute it.
+     * @param msg recieved message with command
+     * @return Boolean if the author is authorized
+     */
     checkAuth(msg: Message) {
         const author = msg.guild.member(msg.author);
         let authorized = false;
