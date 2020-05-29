@@ -12,7 +12,7 @@ export class ChannelBot extends BasicBot {
      * Wrapper function to initialize the Bot and connect it with its auth token.
      * @param auth token of the Bot.
      */
-    run(auth) {
+    run(auth: string) {
         this.init();
         this.client.login(auth);
     }
@@ -21,7 +21,15 @@ export class ChannelBot extends BasicBot {
      * This function creates the client with the needed event listeners and check if a command is present.
      */
     init() {
-        this.client = new Client();
+        this.client = new Client({
+            presence: {
+                status: 'online',
+                activity: {
+                    name: '!channelHelp',
+                    type: 'LISTENING'
+                }
+            }
+        });
 
         this.client.on('ready', () => {
             this.logger.info(`Logged in as ${this.client.user.tag}`);
@@ -59,7 +67,7 @@ export class ChannelBot extends BasicBot {
     printHelp(msg: Message) {
         msg.reply(
             `The following commands are availible for the PrivateChannelBot:
-            \t!channelCreate ?Name ?[Mentions] - Creates aprivate channel with the optional given name und moves the possible followers with you.
+            \t!channelCreate ?Name ?[Mentions] - Creates a private channel with the optional given name und moves the possible followers with you.
             `
         );
     }
@@ -73,9 +81,9 @@ export class ChannelBot extends BasicBot {
         let channelName = '';
         if (mentions.size <= 0) channelName = msg.content.substring(15).trim();
         else channelName = msg.content.substring(15).split('<@')[0].trim();
+        if (channelName === '') channelName = `${msg.member.displayName.toString()}'s Channel`;
         if (this.activeChannels.has(channelName)) msg.reply(`A channel with this name (${channelName}) already exists.`);
         else {
-            if (channelName === '') channelName = `${msg.member.displayName.toString()}'s Channel`;
             this.activeChannels.set(channelName, msg.member.displayName.toString());
             msg.guild.channels.create(channelName, {
                 type: 'voice',

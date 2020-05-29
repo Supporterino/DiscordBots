@@ -10,7 +10,7 @@ export class MovementBot extends BasicBot {
      * Wrapper function to initialize the Bot and connect it with its auth token.
      * @param auth token of the Bot.
      */
-    run(auth) {
+    run(auth: string) {
         this.init();
         this.client.login(auth);
     }
@@ -19,7 +19,15 @@ export class MovementBot extends BasicBot {
      * This function creates the client with the needed event listeners and check if a command is present.
      */
     init() {
-        this.client = new Client();
+        this.client = new Client({
+            presence: {
+                status: 'online',
+                activity: {
+                    name: '!moveHelp',
+                    type: 'LISTENING'
+                }
+            }
+        });
 
         this.client.on('ready', () => {
             this.logger.info(`Logged in as ${this.client.user.tag}`);
