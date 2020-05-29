@@ -15,7 +15,7 @@ export class BasicBot {
      */
     createLog() {
         this.logger = createLogger({
-            level: 'info',
+            level: 'silly',
             format: format.combine(
                 //format.colorize(),
                 format.timestamp(),

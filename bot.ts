@@ -1,10 +1,11 @@
 import { MovementBot } from "./bots/movementBot";
 import { ChannelBot } from "./bots/channelBot";
-let auth = require('./token.json');
+const { MoveToken, ChannelToken } = require('./token.json');
 
 const moveBot = new MovementBot();
 const channelBot = new ChannelBot();
 
+moveBot.run(MoveToken);
+channelBot.run(ChannelToken);
 
-moveBot.run(auth.MoveToken);
-channelBot.run(auth.ChannelToken);
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
