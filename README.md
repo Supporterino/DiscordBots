@@ -25,7 +25,7 @@ The bot allows the user to create a private channel. The created channel is not 
 | Command                          | Description                                                                                                        |
 | :------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
 | !channelHelp                     | This command replys to a user with the possible commands which can be execute by this bot with a short explanation |
-| !channelCreate ?name ?[mentions] | This command let's the user create a private channel                                                               |
+| !channelCreate ?name ?\[mentions\] | This command let's the user create a private channel                                                               |
 
 # Usage
 # Code explanation
