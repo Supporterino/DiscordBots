@@ -77,17 +77,13 @@ export class ChannelBot extends BasicBot {
      * @param msg Recieved message with command.
      */
     createPrivateChannel(msg: Message) {
-        const mentions = msg.mentions.users;
-        let channelName = '';
-        if (mentions.size <= 0) channelName = msg.content.substring(15).trim();
-        else channelName = msg.content.substring(15).split('<@')[0].trim();
-        if (channelName === '') channelName = `${msg.member.displayName.toString()}'s Channel`;
+        const channelName = this.extractOrCreateChannelname(msg);
         if (this.activeChannels.has(channelName)) msg.reply(`A channel with this name (${channelName}) already exists.`);
         else {
-            this.activeChannels.set(channelName, msg.member.displayName.toString());
+            this.activeChannels.set(channelName, this.getNameOfAuthor(msg));
             msg.guild.channels.create(channelName, {
                 type: 'voice',
-                parent: msg.guild.channels.cache.find(channel => channel.name === "Private Channels"),
+                parent: this.getChannelByName(msg.guild, 'Private Channels'),
                 permissionOverwrites: [
                     {
                         id: msg.guild.id,
@@ -98,7 +94,7 @@ export class ChannelBot extends BasicBot {
                 .then(vc => {
                     msg.reply(`Your channel ${channelName} was created and you are moved to it. Leaving it will delete the channel.`);
                     msg.member.voice.setChannel(vc);
-                    if (mentions.size > 0) this.moveWithCreator(msg, vc);
+                    if (msg.mentions.users.size > 0) this.moveWithCreator(msg, vc);
                 });
             this.logger.info(`Created private channel for user (${msg.member.displayName.toString()}) with name: ${channelName}`);
         }
@@ -131,5 +127,19 @@ export class ChannelBot extends BasicBot {
                 this.logger.info(`Removed private channel of ${activeUser}.`);
             }
         }
+    }
+
+    /**
+     * The function checks if there are mentions in the command and extracts the name of the private channel, if no name is provided the name is set to: Username's Channel.
+     * @param msg Message object to process
+     * @return string with the channel name
+     */
+    extractOrCreateChannelname(msg: Message) {
+        const mentions = msg.mentions.users;
+        let channelName = '';
+        if (mentions.size <= 0) channelName = msg.content.substring(15).trim();
+        else channelName = msg.content.substring(15).split('<@')[0].trim();
+        if (channelName === '') channelName = `${this.getNameOfAuthor(msg)}'s Channel`;
+        return channelName;
     }
 }

@@ -78,14 +78,12 @@ export class MovementBot extends BasicBot {
      * @param msg Recieved message with the command
      */
     moveHere(msg: Message) {
-        if (!msg.mentions.users.first()) msg.channel.send("You need to mention a target!");
+        if (!this.getSingleMention(msg)) msg.reply("You need to mention a target!");
         else {
-            const vChannel = msg.member.voice.channel;
+            const vChannel = this.getVChannelOfAuthor(msg);
             this.logger.debug(`Active voice channel: ${vChannel.name.toString()}`);
     
-            const target = this.getTarget(msg);
-            target.voice.setChannel(vChannel);
-            this.logger.info(`Moved ${target.displayName.toString()} to ${vChannel.name.toString()}`);
+            this.setVoiceChannel(this.getSingleMention(msg), vChannel);
         }
     }
     
@@ -94,16 +92,13 @@ export class MovementBot extends BasicBot {
      * @param msg  Recieved message with command.
     */
     moveTo(msg: Message) {
-        if (!msg.mentions.users.first()) msg.channel.send("You need to mention a target!");
+        if (!this.getSingleMention(msg)) msg.reply("You need to mention a target!");
         else {
-            const userTarget = this.getTarget(msg);
-            const channelTarget = msg.content.split(userTarget.user.toString().substring(3))[msg.content.split(userTarget.user.toString().substring(3)).length - 1].trim();
-            this.logger.debug(`User to move to channel: ${userTarget.displayName.toString()}`);
+            const channelTarget = msg.content.split(this.getSingleMention(msg).user.toString().substring(3))[msg.content.split(this.getSingleMention(msg).user.toString().substring(3)).length - 1].trim();
             this.logger.debug(`Target voice channel: ${channelTarget.toString()}`);
-            const vChannel: VoiceChannel = this.getVChannelByName(msg.guild, channelTarget);
+            const vChannel = this.getVChannelByName(msg.guild, channelTarget);
             if (vChannel != undefined) {
-                userTarget.voice.setChannel(vChannel);
-                this.logger.info(`Moved ${userTarget.displayName.toString()} to ${vChannel.name.toString()}`);
+                this.setVoiceChannel(this.getSingleMention(msg), vChannel);
             } else {
                 msg.reply(`Target channel (${channelTarget}) not found.`);
                 this.logger.warn(`Voice channel (${channelTarget}) not found.`);
