@@ -8,9 +8,12 @@ This is a node project written in TypeScript. The project has a base class used 
   - [PrivateChannel Bot](#privatechannel-bot)
     - [Functionalities](#functionalities)
     - [Commands](#commands)
+  - [Movement Bot](#movement-bot)
 - [Usage](#usage)
 - [Code explanation](#code-explanation)
   - [BasicBot class](#basicbot-class)
+  - [ChannelBot class](#channelbot-class)
+  - [MovementBot class](#movementbot-class)
 
 # Introduction
 The intend of this repo was to host the code of some discord bots which were created for my server as QoL updates. Since if found the discord api quite intressting to work with and put some time in it to write "readable" code, I thought i put this repo to public in case someone else sees some use in these bots. Also contributions are very welcome.
@@ -18,15 +21,19 @@ The intend of this repo was to host the code of some discord bots which were cre
 # The Bots
 In this section the diffrent bots are described and there commands are listed.
 ## PrivateChannel Bot
-The PrivateChannel Bot can be found inside the channelBot.ts file. The aim of this bot is to give the users the opprtunity to create a private channel on the fly.
+The PrivateChannel Bot can be found inside the channelBot.ts file. The aim of this bot is to give the users the opportunity to create a private channel on the fly.
 ### Functionalities
-The bot allows the user to create a private channel. The created channel is not visible to other people. Upon creating the channel the creator gets moved in side the channel. If the creator leaves the channel all users inside the channel get moved to a predefined channel (can be adjusted in source code) and the channel gets deleted.
+The bot allows the user to create a private channel. The created channel is not visible to other people. Upon creating the channel the creator gets moved in side the channel. If the creator leaves the channel all users inside the channel get moved to a predefined channel (can be adjusted in source code [(See here)](#channelbot-class)) and the channel gets deleted.
 ### Commands
-| Command                          | Description                                                                                                        |
-| :------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| !channelHelp                     | This command replys to a user with the possible commands which can be execute by this bot with a short explanation |
-| !channelCreate ?name ?\[mentions\] | This command let's the user create a private channel                                                               |
+| Command                            | Description                                                                                                                                                                                                                                                                                                                                      |
+| :--------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| !channelHelp                       | This command replys to a user with the possible commands which can be execute by this bot with a short explanation                                                                                                                                                                                                                               |
+| !channelCreate ?name ?\[mentions\] | This command let's the user create a private channel. As a first argument the user can specify a name for the channel, if no name is provided the channel gets named: Username's Channel. The second argument can be any number of mentions. If the mentioned users are active in a voice channel they get moved in the private channel as well. |
+## Movement Bot
+The Movement Bot is located inside the movementBot.ts. This Bot allows a user to execute basic move functionalities for users in an active voice channel. The access to the Bot is controlled by GuildRoles, the user which wants to have access to the bot must be in a specified role of the server (the roles with access can be defined in the source code [(See here)](#movementbot-class)).
 
 # Usage
 # Code explanation
 ## BasicBot class
+## ChannelBot class
+## MovementBot class
