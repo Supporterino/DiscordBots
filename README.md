@@ -10,6 +10,7 @@ This is a node project written in TypeScript. The project has a base class used 
     - [Commands](#commands)
   - [Movement Bot](#movement-bot)
 - [Usage](#usage)
+  - [Documentation](#documentation)
 - [Code explanation](#code-explanation)
   - [BasicBot class](#basicbot-class)
   - [ChannelBot class](#channelbot-class)
@@ -17,6 +18,7 @@ This is a node project written in TypeScript. The project has a base class used 
 
 # Introduction
 The intend of this repo was to host the code of some discord bots which were created for my server as QoL updates. Since if found the discord api quite intressting to work with and put some time in it to write "readable" code, I thought i put this repo to public in case someone else sees some use in these bots. Also contributions are very welcome.
+Besides the documentation of the bots inside this readme, the source code is documented with typedoc. So you can utilies the typedoc dev dependency to build an documentation [How to build TypeDoc](#documentation).
 
 # The Bots
 In this section the diffrent bots are described and there commands are listed.
@@ -33,6 +35,7 @@ The bot allows the user to create a private channel. The created channel is not 
 The Movement Bot is located inside the movementBot.ts. This Bot allows a user to execute basic move functionalities for users in an active voice channel. The access to the Bot is controlled by GuildRoles, the user which wants to have access to the bot must be in a specified role of the server (the roles with access can be defined in the source code [(See here)](#movementbot-class)).
 
 # Usage
+## Documentation
 # Code explanation
 ## BasicBot class
 ## ChannelBot class

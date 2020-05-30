@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
+    "typedoc": "^0.17.7",
     "typescript": "^3.9.3"
   }
 }
