@@ -52,6 +52,11 @@ export class BasicBot {
         return msg.member.displayName.toString();
     }
 
+    /**
+     * Change to GuildMembers VoiceChannel to the provided one.
+     * @param target The GuildMember object whichs VoiceChannel should be changed
+     * @param vc The target VoiceChannel object
+     */
     setVoiceChannel(target: GuildMember, vc: VoiceChannel) {
         target.voice.setChannel(vc);
         this.logger.info(`Moved ${target.displayName.toString()} to ${vc.name.toString()}`);
