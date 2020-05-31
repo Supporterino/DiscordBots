@@ -36,6 +36,32 @@ The Movement Bot is located inside the movementBot.ts. This Bot allows a user to
 
 # Usage
 ## Documentation
+The indepth documentation of the repo can be build with the following command:
+```bash
+npx typedoc --options "typedoc.json"
+```
+This will generate a new directory named `docs`, inside this directory is a webpage with the entrypoint `index.html`. The options for typedoc can be adjusted inside the `typedoc.json`.
+```json
+{
+    "inputFiles": ["./src"],
+    "mode": "modules",
+    "out": "docs",
+    "entryPoint": "./src/bot.ts",
+    "includeVersion": "true",
+    "name": "Discord Bots",
+    "readme": "./README.md"
+}
+```
+| Option         | Effect                                                                                 |
+| :------------- | :------------------------------------------------------------------------------------- |
+| inputFiles     | Base directory of the sourcecode.                                                      |
+| mode           | The kind of code found inside the source directory.                                    |
+| out            | Name of the folder to store the documentation inside.                                  |
+| entryPoint     | Main TypeScript file of the project.                                                   |
+| includeVersion | Includes the version tag from the `package.json` insode the title of the documentation |
+| name           | Name of the docmentation                                                               |
+| readme         | Path to the readme file, can be `none` to exclude the readme.                          |
+More options for the `typedoc.json` can be found [here](https://typedoc.org/guides/options/).
 # Code explanation
 ## BasicBot class
 ## ChannelBot class
