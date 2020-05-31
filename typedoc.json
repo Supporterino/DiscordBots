@@ -1,0 +1,9 @@
+{
+    "inputFiles": ["./src"],
+    "mode": "modules",
+    "out": "docs",
+    "entryPoint": "./src/bot.ts",
+    "includeVersion": "true",
+    "name": "Discord Bots",
+    "readme": "./README.md"
+}
