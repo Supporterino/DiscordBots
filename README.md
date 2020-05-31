@@ -10,6 +10,8 @@ This is a node project written in TypeScript. The project has a base class used 
     - [Commands](#commands)
   - [Movement Bot](#movement-bot)
 - [Usage](#usage)
+  - [Development](#development)
+  - [Deployment](#deployment)
   - [Documentation](#documentation)
 - [Code explanation](#code-explanation)
   - [BasicBot class](#basicbot-class)
@@ -35,6 +37,20 @@ The bot allows the user to create a private channel. The created channel is not 
 The Movement Bot is located inside the movementBot.ts. This Bot allows a user to execute basic move functionalities for users in an active voice channel. The access to the Bot is controlled by GuildRoles, the user which wants to have access to the bot must be in a specified role of the server (the roles with access can be defined in the source code [(See here)](#movementbot-class)).
 
 # Usage
+## Development
+Since it isn't best practice to execute TypeScript as a Node.js application directly and this project is written in TypeScrit there is an additional way to execute the project for development purposes.
+
+You can start the bots with the command: `npm run start-dev`. This command utilises the `ts-node` npm package to run the TypeScript files to skip the process of compiling them to JavaScript to execute it.
+## Deployment
+For using the bots in a productive environment their are two commands for use inside the `package.json`.
+```bash
+npm run build
+```
+This command will compile the TypeScript project into JavaScript files which are placed inside the directory `build`. It is still a node module at this point and has to be executed with `node ./build/bot.js`.
+```bash
+npm run start
+```
+This command extends the build command and starts the bots with the previous mentioned command.
 ## Documentation
 The indepth documentation of the repo can be build with the following command:
 ```bash
@@ -61,6 +77,7 @@ This will generate a new directory named `docs`, inside this directory is a webp
 | includeVersion | Includes the version tag from the `package.json` insode the title of the documentation |
 | name           | Name of the docmentation                                                               |
 | readme         | Path to the readme file, can be `none` to exclude the readme.                          |
+
 More options for the `typedoc.json` can be found [here](https://typedoc.org/guides/options/).
 # Code explanation
 ## BasicBot class
