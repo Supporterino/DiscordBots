@@ -1,7 +1,7 @@
 {
-  "name": "dcbot",
-  "version": "1.0.0",
-  "description": "Bot to move people around",
+  "name": "discordbots",
+  "version": "0.1.0",
+  "description": "Project for multiple discord bots",
   "main": "src/bot.ts",
   "scripts": {
     "build": "rimraf ./build && tsc",
@@ -9,8 +9,11 @@
     "start-dev": "ts-node ./src/bot.ts"
   },
   "author": "Supporterino",
-  "license": "ISC",
-  "bin": "build/bot.js",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Supporterino/DiscordBots.git"
+  },
   "dependencies": {
     "@types/node": "^14.0.5",
     "discord.js": "^12.2.0",
