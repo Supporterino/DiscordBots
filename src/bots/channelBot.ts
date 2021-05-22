@@ -1,5 +1,7 @@
 import { BasicBot } from "./basicBot";
-import { Client, Message, VoiceState, VoiceChannel, PermissionOverwrites } from "discord.js";
+import { Message, VoiceState, VoiceChannel } from "discord.js";
+import { ArgumentCollectorResult, Command, CommandInfo, CommandoClient } from "discord.js-commando";
+import { cli } from "winston/lib/winston/config";
 
 export class ChannelBot extends BasicBot {
     private activeChannels: Map<String, String>;
@@ -21,7 +23,7 @@ export class ChannelBot extends BasicBot {
      * This function creates the client with the needed event listeners and check if a command is present.
      */
     init() {
-        this.client = new Client({
+        this.client = new CommandoClient({
             presence: {
                 status: 'online',
                 activity: {
@@ -35,25 +37,33 @@ export class ChannelBot extends BasicBot {
             this.logger.info(`Logged in as ${this.client.user.tag}`);
         });
 
-        this.client.on('message', msg => {
-            if (msg.content.substring(0, 8) === '!channel') {
-                let args = msg.content.substring(1).split(' ');
-                let cmd = args[0];
+        const createCommand: CreateChannelCommand = new CreateChannelCommand(this.client)
+        const helpCommand: ChannelHelpCommand = new ChannelHelpCommand(this.client);
 
-                switch (cmd) {
-                    case 'channelHelp':
-                        this.printHelp(msg);
-                        break;
-                    case 'channelCreate':
-                        this.createPrivateChannel(msg);
-                        break;
-                    default:
-                        msg.reply(`Command (${cmd}) not found!`);
-                        this.printHelp(msg);
-                        break;
-                }
-            }
-        });
+        this.client.registry
+            .registerGroups([['channelbot', 'Commands to manage private channel bot']])
+            .registerDefaults()
+            .registerCommand(helpCommand)
+            .registerCommand(createCommand)
+        // this.client.on('message', msg => {
+        //     if (msg.content.substring(0, 8) === '!channel') {
+        //         let args = msg.content.substring(1).split(' ');
+        //         let cmd = args[0];
+
+        //         switch (cmd) {
+        //             case 'channelHelp':
+        //                 this.printHelp(msg);
+        //                 break;
+        //             case 'channelCreate':
+        //                 this.createPrivateChannel(msg);
+        //                 break;
+        //             default:
+        //                 msg.reply(`Command (${cmd}) not found!`);
+        //                 this.printHelp(msg);
+        //                 break;
+        //         }
+        //     }
+        // });
 
         this.client.on('voiceStateUpdate', event => {
             this.checkDeleteRequired(event);
@@ -141,5 +151,59 @@ export class ChannelBot extends BasicBot {
         else channelName = msg.content.substring(15).split('<@')[0].trim();
         if (channelName === '') channelName = `${this.getNameOfAuthor(msg)}'s Channel`;
         return channelName;
+    }
+}
+
+class ChannelHelpCommand extends Command {
+    constructor(client: CommandoClient) {
+        const info: CommandInfo = {
+            name: 'channel-help',
+            aliases: ['ch', 'channelHelp'],
+            group: 'channelbot',
+            memberName: 'help',
+            description: 'Create a private channel for a user and move all mentions to it',
+        }
+        super(client, info)
+    }
+    run(msg: Message): Promise<Message> {
+        return msg.reply(
+            `The following commands are availible for the PrivateChannelBot:
+            \t!channelCreate ?Name ?[Mentions] - Creates a private channel with the optional given name und moves the possible followers with you.
+            `
+        );
+    }
+}
+
+class CreateChannelCommand extends Command {
+    constructor(client: CommandoClient) {
+        const info: CommandInfo = {
+            name: 'create-channel',
+            aliases: ['cc', 'createChannel'],
+            group: 'channelbot',
+            memberName: 'create',
+            description: 'Create a private channel for a user and move all mentions to it',
+            args: [
+                {
+                    key: 'name',
+                    label: 'ChannelName',
+                    prompt: 'What is the name of the channel?',
+                    type: 'string',
+                    default: ''
+                },
+                {
+                    key: 'mention',
+                    label: 'Mentions',
+                    prompt: 'Users to move in your channel',
+                    type: 'user',
+                    default: '',
+                    infinite: true
+                }
+            ]
+        }
+        super(client, info)
+    }
+    run(message: Message, args: ArgumentCollectorResult): null {
+        //return message.reply(``);
+        return
     }
 }
