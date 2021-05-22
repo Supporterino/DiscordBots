@@ -30,40 +30,38 @@ export class ChannelBot extends BasicBot {
                     name: '!channelHelp',
                     type: 'LISTENING'
                 }
-            }
+            },
+            owner: '244161825082441729'
         });
 
         this.client.on('ready', () => {
             this.logger.info(`Logged in as ${this.client.user.tag}`);
         });
 
-        const createCommand: CreateChannelCommand = new CreateChannelCommand(this.client)
-        const helpCommand: ChannelHelpCommand = new ChannelHelpCommand(this.client);
-
         this.client.registry
             .registerGroups([['channelbot', 'Commands to manage private channel bot']])
             .registerDefaults()
-            .registerCommand(helpCommand)
-            .registerCommand(createCommand)
-        // this.client.on('message', msg => {
-        //     if (msg.content.substring(0, 8) === '!channel') {
-        //         let args = msg.content.substring(1).split(' ');
-        //         let cmd = args[0];
+            .registerCommand( new CreateChannelCommand(this.client))
+            .registerCommand(new ChannelHelpCommand(this.client));
+        this.client.on('message', msg => {
+            if (msg.content.substring(0, 8) === '!channel') {
+                let args = msg.content.substring(1).split(' ');
+                let cmd = args[0];
 
-        //         switch (cmd) {
-        //             case 'channelHelp':
-        //                 this.printHelp(msg);
-        //                 break;
-        //             case 'channelCreate':
-        //                 this.createPrivateChannel(msg);
-        //                 break;
-        //             default:
-        //                 msg.reply(`Command (${cmd}) not found!`);
-        //                 this.printHelp(msg);
-        //                 break;
-        //         }
-        //     }
-        // });
+                switch (cmd) {
+                    case 'channelHelp':
+                        this.printHelp(msg);
+                        break;
+                    case 'channelCreate':
+                        this.createPrivateChannel(msg);
+                        break;
+                    default:
+                        msg.reply(`Command (${cmd}) not found!`);
+                        this.printHelp(msg);
+                        break;
+                }
+            }
+        });
 
         this.client.on('voiceStateUpdate', event => {
             this.checkDeleteRequired(event);
@@ -158,7 +156,7 @@ class ChannelHelpCommand extends Command {
     constructor(client: CommandoClient) {
         const info: CommandInfo = {
             name: 'channel-help',
-            aliases: ['ch', 'channelHelp'],
+            aliases: ['ch', 'channelhelp'],
             group: 'channelbot',
             memberName: 'help',
             description: 'Create a private channel for a user and move all mentions to it',
@@ -167,8 +165,7 @@ class ChannelHelpCommand extends Command {
     }
     run(msg: Message): Promise<Message> {
         return msg.reply(
-            `The following commands are availible for the PrivateChannelBot:
-            \t!channelCreate ?Name ?[Mentions] - Creates a private channel with the optional given name und moves the possible followers with you.
+            `Yeah Slash Commands
             `
         );
     }
@@ -178,7 +175,7 @@ class CreateChannelCommand extends Command {
     constructor(client: CommandoClient) {
         const info: CommandInfo = {
             name: 'create-channel',
-            aliases: ['cc', 'createChannel'],
+            aliases: ['cc', 'createchannel'],
             group: 'channelbot',
             memberName: 'create',
             description: 'Create a private channel for a user and move all mentions to it',

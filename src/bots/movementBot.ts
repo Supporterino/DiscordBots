@@ -27,7 +27,8 @@ export class MovementBot extends BasicBot {
                     name: '!moveHelp',
                     type: 'LISTENING'
                 }
-            }
+            },
+            owner: '244161825082441729'
         });
 
         this.client.on('ready', () => {
