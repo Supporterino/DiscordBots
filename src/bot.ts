@@ -1,14 +1,17 @@
 import { MovementBot } from "./bots/movementBot";
 import { ChannelBot } from "./bots/channelBot";
-const { MoveToken, ChannelToken } = require('../token.json');
+import dotenv from 'dotenv'
 
+dotenv.config({ path: '.env' })
 
 const run = () => {
+    console.log(process.env.PWD)
+    console.log(process.env.ChannelToken)
     const channelBot = new ChannelBot();
-    channelBot.run(ChannelToken);
+    channelBot.run(process.env.ChannelToken);
 
-    const moveBot = new MovementBot();
-    moveBot.run(MoveToken);
+    // const moveBot = new MovementBot();
+    // moveBot.run(process.env.MoveToken);
 };
 
 run();

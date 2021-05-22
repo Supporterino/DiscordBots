@@ -1,10 +1,11 @@
 import { Logger, createLogger, format, transports } from "winston";
-import { Client, Message, Guild, VoiceChannel, GuildMember } from "discord.js";
+import { Message, Guild, VoiceChannel, GuildMember } from "discord.js";
 import { compTwoStringsInsensitive } from "../utils/basicUtils";
+import { CommandoClient } from "discord.js-commando";
 
 export class BasicBot {
     protected logger: Logger = null;
-    protected client: Client = null;
+    protected client: CommandoClient = null;
 
     constructor() {
         this.createLog();

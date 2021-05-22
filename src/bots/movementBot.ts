@@ -1,5 +1,6 @@
 import { BasicBot } from "./basicBot";
-import { Message, VoiceChannel, Client } from "discord.js";
+import { Message, VoiceChannel } from "discord.js";
+import { CommandoClient } from "discord.js-commando";
 
 export class MovementBot extends BasicBot {
     constructor() {
@@ -19,7 +20,7 @@ export class MovementBot extends BasicBot {
      * This function creates the client with the needed event listeners and check if a command is present.
      */
     init() {
-        this.client = new Client({
+        this.client = new CommandoClient({
             presence: {
                 status: 'online',
                 activity: {
