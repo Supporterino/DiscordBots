@@ -1,0 +1,18 @@
+build:
+  image: docker:stable
+
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+
+  services:
+    - name: docker:dind
+      alias: docker
+
+  stage: build
+
+  script:
+    - echo $DOCKER_PW | docker login --username supporterino --password-stdin
+    - docker build -t supporterino/discord_bots:latest .
+    - docker push supporterino/discord_bots
