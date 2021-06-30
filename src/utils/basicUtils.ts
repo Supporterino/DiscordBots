@@ -5,8 +5,8 @@
  * @return Boolean if the strings do match
  */
 export const compTwoStringsInsensitive = (a: String, b: String) => {
-    return stringSanitize(a) === stringSanitize(b);
-}
+  return stringSanitize(a) === stringSanitize(b);
+};
 
 /**
  * Function to make a string all upper case and remove whitespaces.
@@ -14,5 +14,5 @@ export const compTwoStringsInsensitive = (a: String, b: String) => {
  * @return Modified string
  */
 const stringSanitize = (a: String) => {
-    return a.trim().toUpperCase().replace(/\s/g, '');
-}
+  return a.trim().toUpperCase().replace(/\s/g, '');
+};

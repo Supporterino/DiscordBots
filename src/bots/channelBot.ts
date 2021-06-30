@@ -1,5 +1,5 @@
-import { BasicBot } from "./basicBot";
-import { Message, VoiceState, VoiceChannel, Client, Intents } from "discord.js";
+import { BasicBot } from './basicBot';
+import { Message, VoiceState, VoiceChannel, Client, Intents, Interaction, CommandInteraction } from 'discord.js';
 
 export class ChannelBot extends BasicBot {
     private activeChannels: Map<String, String>;
@@ -25,27 +25,38 @@ export class ChannelBot extends BasicBot {
             presence: {
                 status: 'online'
             },
-            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGE_TYPING, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_WEBHOOKS]
+            intents: [
+                Intents.FLAGS.GUILDS,
+                Intents.FLAGS.GUILD_BANS,
+                Intents.FLAGS.GUILD_EMOJIS,
+                Intents.FLAGS.GUILD_INTEGRATIONS,
+                Intents.FLAGS.GUILD_INVITES,
+                Intents.FLAGS.GUILD_MESSAGES,
+                Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+                Intents.FLAGS.GUILD_MESSAGE_TYPING,
+                Intents.FLAGS.GUILD_VOICE_STATES,
+                Intents.FLAGS.GUILD_WEBHOOKS
+            ]
         });
 
         const createCommand = {
-            "name": "channelcreate",
-            "description": "Create a private Channel",
-            "options": [
-              {
-                "type": 3,
-                "name": "channelname",
-                "description": "Name for the channel",
-                "required": false
-              },
-              {
-                "type": 9,
-                "name": "mentions",
-                "description": "People to move with you",
-                "required": false
-              }
+            name: 'channelcreate',
+            description: 'Create a private Channel',
+            options: [
+                {
+                    type: 3,
+                    name: 'channelname',
+                    description: 'Name for the channel',
+                    required: false
+                },
+                {
+                    type: 6,
+                    name: 'users',
+                    description: 'People to move with you',
+                    required: false
+                }
             ]
-        }
+        };
 
         this.client.on('ready', () => {
             this.logger.info(`Logged in as ${this.client.user.tag}`);
@@ -53,31 +64,16 @@ export class ChannelBot extends BasicBot {
 
         this.client.once('ready', () => {
             this.client.application.commands.create(createCommand);
-        })
+        });
 
-        // this.client.on('message', (msg: Message) => {
-        //     if (msg.content.substring(0, 8) === '!channel') {
-        //         let args = msg.content.substring(1).split(' ');
-        //         let cmd = args[0];
-
-        //         switch (cmd) {
-        //             case 'channelHelp':
-        //                 this.printHelp(msg);
-        //                 break;
-        //             case 'channelCreate':
-        //                 this.createPrivateChannel(msg);
-        //                 break;
-        //             default:
-        //                 msg.reply(`Command (${cmd}) not found!`);
-        //                 this.printHelp(msg);
-        //                 break;
-        //         }
-        //     }
-        // });
-
-        this.client.ws.on('INTERACTION_CREATE', async (interaction: any) => {
-            this.logger.info(`Test interaction ${JSON.stringify(interaction)}`)
-        })
+        this.client.ws.on('INTERACTION_CREATE', (interaction: any) => {
+            if (interaction.type == '2') {
+                const command = new CommandInteraction(this.client, interaction);
+                this.createPrivateChannel(command);
+            } else {
+                this.logger.warn(`Received interaction isn't a command. Type is ${interaction.type}`);
+            }
+        });
 
         this.client.on('voiceStateUpdate', (event: VoiceState) => {
             this.checkDeleteRequired(event);
@@ -100,27 +96,32 @@ export class ChannelBot extends BasicBot {
      * The function extracts the optinal name of a private channel and create the corresponding channel, if it doesn't already exist. The author is moved inside the channel and all mentioned users as well.
      * @param msg Recieved message with command.
      */
-    createPrivateChannel(msg: Message) {
+    createPrivateChannel(msg: CommandInteraction) {
         const channelName = this.extractOrCreateChannelname(msg);
-        if (this.activeChannels.has(channelName)) msg.reply(`A channel with this name (${channelName}) already exists.`);
-        else {
+        if (this.activeChannels.has(channelName)) {
+            msg.reply(`A channel with this name (${channelName}) already exists.`);
+        } else {
             this.activeChannels.set(channelName, this.getNameOfAuthor(msg));
-            msg.guild.channels.create(channelName, {
-                type: 'voice',
-                parent: this.getChannelByName(msg.guild, 'Private Channels'),
-                permissionOverwrites: [
-                    {
-                        id: msg.guild.id,
-                        deny: ['VIEW_CHANNEL']
-                    }
-                ]
-            })
-                .then(vc => {
+            msg.guild.channels
+                .create(channelName, {
+                    type: 'voice',
+                    parent: this.getChannelByName(msg.guild, 'Private Channels'),
+                    permissionOverwrites: [
+                        {
+                            id: msg.guild.id,
+                            deny: ['VIEW_CHANNEL']
+                        }
+                    ]
+                })
+                .then((vc) => {
                     msg.reply(`Your channel ${channelName} was created and you are moved to it. Leaving it will delete the channel.`);
-                    msg.member.voice.setChannel(vc);
-                    if (msg.mentions.users.size > 0) this.moveWithCreator(msg, vc);
+                    this.getGuildMember(msg).voice.setChannel(vc);
+                    if (msg.options && msg.options.has('users')) {
+                        const target = msg.options.find((option) => option.name === 'users');
+                        this.getGuildMemberById(msg.guild, target.user).voice.setChannel(vc);
+                    }
                 });
-            this.logger.info(`Created private channel for user (${msg.member.displayName.toString()}) with name: ${channelName}`);
+            this.logger.info(`Created private channel for user (${this.getNameOfAuthor(msg)}) with name: ${channelName}`);
         }
     }
 
@@ -130,9 +131,9 @@ export class ChannelBot extends BasicBot {
      * @param vc The VoiceChannel object of the created channel
      */
     moveWithCreator(msg: Message, vc: VoiceChannel) {
-        msg.mentions.users.forEach(user => {
+        msg.mentions.users.forEach((user) => {
             //msg.guild.member(user).voice.setChannel(vc);
-        })
+        });
     }
 
     /**
@@ -142,10 +143,11 @@ export class ChannelBot extends BasicBot {
     checkDeleteRequired(event: VoiceState) {
         const activeUser = event.member.displayName.toString();
         let activeChannel = '';
-        if(event.channel != undefined) activeChannel = event.channel.name.toString();
+        if (event.channel != undefined) activeChannel = event.channel.name.toString();
         if (this.activeChannels.has(activeChannel)) {
             if (this.activeChannels.get(activeChannel) === activeUser) {
-                if (event.channel.members.size > 0) event.channel.members.forEach(user => user.voice.setChannel(this.getVChannelByName(event.guild, 'AFK')));
+                if (event.channel.members.size > 0)
+                    event.channel.members.forEach((user) => user.voice.setChannel(this.getVChannelByName(event.guild, 'AFK')));
                 event.channel.delete(`Owner left.`);
                 this.activeChannels.delete(activeChannel);
                 this.logger.info(`Removed private channel of ${activeUser}.`);
@@ -158,12 +160,14 @@ export class ChannelBot extends BasicBot {
      * @param msg Message object to process
      * @return string with the channel name
      */
-    extractOrCreateChannelname(msg: Message) {
-        const mentions = msg.mentions.users;
+    extractOrCreateChannelname(msg: CommandInteraction): string {
         let channelName = '';
-        if (mentions.size <= 0) channelName = msg.content.substring(15).trim();
-        else channelName = msg.content.substring(15).split('<@')[0].trim();
-        if (channelName === '') channelName = `${this.getNameOfAuthor(msg)}'s Channel`;
+        if (msg.options && msg.options.has('channelname')) {
+            channelName = msg.options.find((option) => option.name === 'channelname').value.toString();
+        } else {
+            channelName = `${this.getNameOfAuthor(msg)}'s Channel`;
+        }
+        this.logger.debug(`Channelname set to: ${channelName}`);
         return channelName;
     }
 }
