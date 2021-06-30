@@ -1,7 +1,5 @@
 import { BasicBot } from "./basicBot";
-import { Message, VoiceState, VoiceChannel } from "discord.js";
-import { ArgumentCollectorResult, Command, CommandInfo, CommandoClient } from "discord.js-commando";
-import { cli } from "winston/lib/winston/config";
+import { Message, VoiceState, VoiceChannel, Client, Intents } from "discord.js";
 
 export class ChannelBot extends BasicBot {
     private activeChannels: Map<String, String>;
@@ -23,47 +21,65 @@ export class ChannelBot extends BasicBot {
      * This function creates the client with the needed event listeners and check if a command is present.
      */
     init() {
-        this.client = new CommandoClient({
+        this.client = new Client({
             presence: {
-                status: 'online',
-                activity: {
-                    name: '!channelHelp',
-                    type: 'LISTENING'
-                }
+                status: 'online'
             },
-            owner: '244161825082441729'
+            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGE_TYPING, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_WEBHOOKS]
         });
+
+        const createCommand = {
+            "name": "channelcreate",
+            "description": "Create a private Channel",
+            "options": [
+              {
+                "type": 3,
+                "name": "channelname",
+                "description": "Name for the channel",
+                "required": false
+              },
+              {
+                "type": 9,
+                "name": "mentions",
+                "description": "People to move with you",
+                "required": false
+              }
+            ]
+        }
 
         this.client.on('ready', () => {
             this.logger.info(`Logged in as ${this.client.user.tag}`);
         });
 
-        this.client.registry
-            .registerGroups([['channelbot', 'Commands to manage private channel bot']])
-            .registerDefaults()
-            .registerCommand( new CreateChannelCommand(this.client))
-            .registerCommand(new ChannelHelpCommand(this.client));
-        this.client.on('message', msg => {
-            if (msg.content.substring(0, 8) === '!channel') {
-                let args = msg.content.substring(1).split(' ');
-                let cmd = args[0];
+        this.client.once('ready', () => {
+            this.client.application.commands.create(createCommand);
+        })
 
-                switch (cmd) {
-                    case 'channelHelp':
-                        this.printHelp(msg);
-                        break;
-                    case 'channelCreate':
-                        this.createPrivateChannel(msg);
-                        break;
-                    default:
-                        msg.reply(`Command (${cmd}) not found!`);
-                        this.printHelp(msg);
-                        break;
-                }
-            }
-        });
+        // this.client.on('message', (msg: Message) => {
+        //     if (msg.content.substring(0, 8) === '!channel') {
+        //         let args = msg.content.substring(1).split(' ');
+        //         let cmd = args[0];
 
-        this.client.on('voiceStateUpdate', event => {
+        //         switch (cmd) {
+        //             case 'channelHelp':
+        //                 this.printHelp(msg);
+        //                 break;
+        //             case 'channelCreate':
+        //                 this.createPrivateChannel(msg);
+        //                 break;
+        //             default:
+        //                 msg.reply(`Command (${cmd}) not found!`);
+        //                 this.printHelp(msg);
+        //                 break;
+        //         }
+        //     }
+        // });
+
+        this.client.ws.on('INTERACTION_CREATE', async (interaction: any) => {
+            this.logger.info(`Test interaction ${JSON.stringify(interaction)}`)
+        })
+
+        this.client.on('voiceStateUpdate', (event: VoiceState) => {
             this.checkDeleteRequired(event);
         });
     }
@@ -115,7 +131,7 @@ export class ChannelBot extends BasicBot {
      */
     moveWithCreator(msg: Message, vc: VoiceChannel) {
         msg.mentions.users.forEach(user => {
-            msg.guild.member(user).voice.setChannel(vc);
+            //msg.guild.member(user).voice.setChannel(vc);
         })
     }
 
@@ -149,58 +165,5 @@ export class ChannelBot extends BasicBot {
         else channelName = msg.content.substring(15).split('<@')[0].trim();
         if (channelName === '') channelName = `${this.getNameOfAuthor(msg)}'s Channel`;
         return channelName;
-    }
-}
-
-class ChannelHelpCommand extends Command {
-    constructor(client: CommandoClient) {
-        const info: CommandInfo = {
-            name: 'channel-help',
-            aliases: ['ch', 'channelhelp'],
-            group: 'channelbot',
-            memberName: 'help',
-            description: 'Create a private channel for a user and move all mentions to it',
-        }
-        super(client, info)
-    }
-    run(msg: Message): Promise<Message> {
-        return msg.reply(
-            `Yeah Slash Commands
-            `
-        );
-    }
-}
-
-class CreateChannelCommand extends Command {
-    constructor(client: CommandoClient) {
-        const info: CommandInfo = {
-            name: 'create-channel',
-            aliases: ['cc', 'createchannel'],
-            group: 'channelbot',
-            memberName: 'create',
-            description: 'Create a private channel for a user and move all mentions to it',
-            args: [
-                {
-                    key: 'name',
-                    label: 'ChannelName',
-                    prompt: 'What is the name of the channel?',
-                    type: 'string',
-                    default: ''
-                },
-                {
-                    key: 'mention',
-                    label: 'Mentions',
-                    prompt: 'Users to move in your channel',
-                    type: 'user',
-                    default: '',
-                    infinite: true
-                }
-            ]
-        }
-        super(client, info)
-    }
-    run(message: Message, args: ArgumentCollectorResult): null {
-        //return message.reply(``);
-        return
     }
 }

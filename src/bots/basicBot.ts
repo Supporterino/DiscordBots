@@ -1,11 +1,10 @@
 import { Logger, createLogger, format, transports } from "winston";
-import { Message, Guild, VoiceChannel, GuildMember } from "discord.js";
+import { Message, Guild, VoiceChannel, GuildMember, Client, StageChannel } from "discord.js";
 import { compTwoStringsInsensitive } from "../utils/basicUtils";
-import { CommandoClient } from "discord.js-commando";
 
 export class BasicBot {
     protected logger: Logger = null;
-    protected client: CommandoClient = null;
+    protected client: Client = null;
 
     constructor() {
         this.createLog();
@@ -18,7 +17,7 @@ export class BasicBot {
         this.logger = createLogger({
             level: 'silly',
             format: format.combine(
-                //format.colorize(),
+                format.colorize(),
                 format.timestamp(),
                 format.align(),
                 format.printf(log => {
@@ -39,7 +38,7 @@ export class BasicBot {
      * @return The GuildMember object of the referenced user
      */
     getSingleMention(msg: Message) {
-        const temp = msg.guild.member(msg.mentions.users.first());
+        const temp = msg.guild.members.cache.find( user => user.displayName.toString() === msg.mentions.users.first().username.toString());
         this.logger.debug(`Fetched target with name: ${temp.displayName.toString()}`);
         return temp;
     }
@@ -89,7 +88,7 @@ export class BasicBot {
      * @return the VoiceChannel object
      */
     getVChannelOfAuthor(msg: Message) {
-        let temp: VoiceChannel = undefined;
+        let temp: VoiceChannel | StageChannel = undefined;
         temp = msg.member.voice.channel;
         return temp;
     }
@@ -100,7 +99,7 @@ export class BasicBot {
      * @return Boolean if the author is authorized
      */
     checkAuth(msg: Message) {
-        const author = msg.guild.member(msg.author);
+        const author = msg.guild.members.cache.find(user => user.id === msg.author.id);
         let authorized = false;
         if (author.roles.cache.some(role => compTwoStringsInsensitive(role.name, 'BotRights') || compTwoStringsInsensitive(role.name, 'ADMIN'))) authorized = true;
         this.logger.info(`Checked rights for user: ${author.displayName.toString()}. Result: ${authorized}`);
