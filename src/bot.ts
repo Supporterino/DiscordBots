@@ -1,4 +1,4 @@
-import { MovementBot } from './bots/movementBot';
+//import { MovementBot } from './bots/movementBot';
 import { ChannelBot } from './bots/channelBot';
 import dotenv from 'dotenv';
 

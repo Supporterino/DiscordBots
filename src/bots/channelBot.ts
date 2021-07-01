@@ -1,5 +1,5 @@
 import { BasicBot } from './basicBot';
-import { Message, VoiceState, VoiceChannel, Client, Intents, Interaction, CommandInteraction } from 'discord.js';
+import { Message, VoiceState, VoiceChannel, Client, Intents, CommandInteraction } from 'discord.js';
 
 export class ChannelBot extends BasicBot {
     private activeChannels: Map<String, String>;
@@ -132,7 +132,7 @@ export class ChannelBot extends BasicBot {
      */
     moveWithCreator(msg: Message, vc: VoiceChannel) {
         msg.mentions.users.forEach((user) => {
-            //msg.guild.member(user).voice.setChannel(vc);
+            msg.guild.members.cache.find(e => e.id === user.id).voice.setChannel(vc);
         });
     }
 

@@ -6,7 +6,6 @@ import {
   Client,
   StageChannel,
   CommandInteraction,
-  CommandInteractionOption,
   User
 } from 'discord.js';
 import { Logger, TLogLevelName } from 'tslog';
@@ -51,6 +50,7 @@ export class BasicBot {
   getNameOfAuthor(msg: Message | CommandInteraction) {
     if (msg instanceof Message) return msg.member.displayName.toString();
     if (msg instanceof CommandInteraction) return this.getGuildMember(msg).displayName.toString();
+    else throw new Error(`You somehow managed to sneak a not type allowed parameter in here. ;)`)
   }
 
   /**
