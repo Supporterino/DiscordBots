@@ -148,7 +148,7 @@ export class ChannelBot extends BasicBot {
             if (this.activeChannels.get(activeChannel) === activeUser) {
                 if (event.channel.members.size > 0)
                     event.channel.members.forEach((user) => user.voice.setChannel(this.getVChannelByName(event.guild, 'AFK')));
-                event.channel.delete(`Owner left.`);
+                event.channel.delete();
                 this.activeChannels.delete(activeChannel);
                 this.logger.info(`Removed private channel of ${activeUser}.`);
             }
