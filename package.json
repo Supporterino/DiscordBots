@@ -2,11 +2,11 @@
   "name": "discordbots",
   "version": "0.1.0",
   "description": "Project for multiple discord bots",
-  "main": "src/bot.ts",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node build/bot.js",
-    "start:dev": "ts-node ./src/bot.ts",
+    "start": "npm run build && node build/index.js",
+    "start:dev": "ts-node ./src/index.ts",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "author": "Supporterino",
@@ -21,6 +21,7 @@
     "bufferutil": "^4.0.3",
     "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:discord/erlpack",
+    "nanoid": "^3.1.23",
     "tslog": "^3.2.0",
     "typescript": "^3.9.10",
     "utf-8-validate": "^5.0.5",
