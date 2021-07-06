@@ -107,9 +107,9 @@ export class BasicBot {
    * @param msg recieved message with command
    * @return the VoiceChannel object
    */
-  getVChannelOfAuthor(msg: Message) {
+  getVChannelOfAuthor(msg: CommandInteraction) {
     let temp: VoiceChannel | StageChannel = undefined;
-    temp = msg.member.voice.channel;
+    temp = this.getGuildMember(msg).voice.channel
     return temp;
   }
 
