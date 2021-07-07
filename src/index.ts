@@ -1,5 +1,5 @@
-import { PrivateChannelBot } from './bot';
-import { logger } from './utils';
+import { PrivateChannelBot } from '@/bot';
+import { logger } from '@/utils';
 
 logger.debug(`Retrieving API token from environment variables.`);
 const apiToken = process.env.ChannelToken;

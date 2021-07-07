@@ -1,4 +1,4 @@
-import { genID, logger } from '../utils';
+import { genID, logger } from '@/utils';
 
 export class PrivateChannelRegistry {
   private __store: Map<String, String>;
@@ -15,7 +15,7 @@ export class PrivateChannelRegistry {
    * @param channelName The name of the channel to check.
    * @returns A boolean indecating true if the channel can be created.
    */
-  availible(channelName: string): boolean {
+  available(channelName: string): boolean {
     return !this.__store.has(channelName);
   }
 
@@ -51,6 +51,6 @@ export class PrivateChannelRegistry {
    * @returns Boolean if the deletion was successful.
    */
   deleteChannelEntry(channelName: string): boolean {
-      return this.__store.delete(channelName);
+    return this.__store.delete(channelName);
   }
 }
