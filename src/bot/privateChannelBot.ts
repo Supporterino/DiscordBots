@@ -21,6 +21,7 @@ export class PrivateChannelBot {
     this.createClient();
     this.registerEventHandler();
     this.registerCommands(['privateChannelCreate']);
+    this.__client.login(this.__token);
   }
 
   /**
