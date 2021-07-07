@@ -1,7 +1,7 @@
-import { ApplicationCommandData, Client, CommandInteraction, Intents } from 'discord.js';
+import { ApplicationCommandData, Client, CommandInteraction, Intents, VoiceState } from 'discord.js';
 import { CommandRegistry, PrivateChannelRegistry } from '@/registry';
 import { logger } from '@/utils';
-import { ChannelRequest } from '@/requests';
+import { ChannelRequest, VoiceStateUpdate } from '@/requests';
 export class PrivateChannelBot {
   private __token: string;
   private __channelRegistry: PrivateChannelRegistry;
@@ -69,6 +69,23 @@ export class PrivateChannelBot {
         logger.warn(`Received interaction isn't a command. Type is ${interaction.type}`);
       }
     });
+
+    this.__client.on('voiceStateUpdate', async (vs: VoiceState) => {
+      this.handleVoiceStateUpdate(vs);
+    });
+  }
+
+  /**
+   * Handle VoiceStateUpdate and delete channel if owner leaves it
+   * @param vs The VoiceState event
+   */
+  private handleVoiceStateUpdate(vs: VoiceState): void {
+    const event = new VoiceStateUpdate(vs);
+    if (this.__channelRegistry.checkOwnerMatch(event.ChannelName, event.OwnerName)) {
+      event.deleteChannel();
+      if (!this.__channelRegistry.deleteChannelEntry(event.ChannelName))
+        logger.warn(`Couldn't delete channel (${event.ChannelName}) from PrivateChannelRegistry.`);
+    }
   }
 
   /**
