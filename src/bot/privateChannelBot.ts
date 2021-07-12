@@ -33,7 +33,7 @@ export class PrivateChannelBot {
         status: 'online',
         activities: [
           {
-            name: 'Waiting to serve your requests',
+            name: 'serve your commands.',
             type: 'LISTENING'
           }
         ]

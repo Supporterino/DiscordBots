@@ -1,6 +1,5 @@
 import { createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, logger, setVoiceChannel } from '../utils';
 import { CommandInteraction, Guild, GuildChannelCreateOptions, GuildMember, VoiceChannel } from 'discord.js';
-import { ChannelTypes } from 'discord.js/typings/enums';
 
 export class ChannelRequest {
   private __guild: Guild;
@@ -34,7 +33,7 @@ export class ChannelRequest {
     if (!parentChannel) logger.error(`The parent channel for privat channels wasn't found.`);
 
     const data: GuildChannelCreateOptions = {
-      type: ChannelTypes.GUILD_VOICE,
+      type: 2,
       parent: parentChannel,
       permissionOverwrites: [
         {
