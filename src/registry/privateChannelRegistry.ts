@@ -1,4 +1,4 @@
-import { genID, logger } from '@/utils';
+import { genID, logger } from '../utils';
 
 export class PrivateChannelRegistry {
   private __store: Map<String, String>;

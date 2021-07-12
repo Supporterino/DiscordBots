@@ -1,5 +1,5 @@
 import { ApplicationCommandData } from 'discord.js';
-import { genID, logger } from '@/utils';
+import { genID, logger } from '../utils';
 
 export class CommandRegistry {
   private __store: Map<string, ApplicationCommandData>;

@@ -13,7 +13,7 @@ import {
   TextChannel,
   VoiceChannel
 } from 'discord.js';
-import { logger, compTwoStringsInsensitive } from '@/utils';
+import { logger, compTwoStringsInsensitive } from '../utils';
 
 /**
  * Returns a GuildMember based on its ID from the guild

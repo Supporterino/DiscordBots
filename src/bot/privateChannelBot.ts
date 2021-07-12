@@ -1,12 +1,12 @@
 import { ApplicationCommandData, Client, CommandInteraction, Intents, VoiceState } from 'discord.js';
-import { CommandRegistry, PrivateChannelRegistry } from '@/registry';
-import { logger } from '@/utils';
-import { ChannelRequest, VoiceStateUpdate } from '@/requests';
+import { CommandRegistry, PrivateChannelRegistry } from '../registry';
+import { logger } from '../utils';
+import { ChannelRequest, VoiceStateUpdate } from '../requests';
 export class PrivateChannelBot {
   private __token: string;
-  private __channelRegistry: PrivateChannelRegistry;
-  private __commandRegistry: CommandRegistry;
-  private __client: Client;
+  private __channelRegistry!: PrivateChannelRegistry;
+  private __commandRegistry!: CommandRegistry;
+  private __client!: Client;
 
   constructor(tok: string) {
     this.__token = tok;

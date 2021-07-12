@@ -1,4 +1,4 @@
-import { getChannelByName, setVoiceChannel } from '@/utils';
+import { getChannelByName, setVoiceChannel } from '../utils';
 import { Guild, GuildMember, VoiceChannel, VoiceState } from 'discord.js';
 
 export class VoiceStateUpdate {
