@@ -58,7 +58,8 @@ export class PrivateChannelBot {
    */
   private registerEventHandler(): void {
     this.__client.on('ready', () => {
-      logger.info(`Logged in as ${this.__client.user.tag}`);
+      if (this.__client.user) logger.info(`Logged in as ${this.__client.user.tag}`);
+      else logger.warn(`Client wasn't logged in correctly and didn't get a user object.`);
     });
 
     this.__client.ws.on('INTERACTION_CREATE', async (interaction: any) => {
@@ -125,7 +126,8 @@ export class PrivateChannelBot {
 
     this.__client.once('ready', () => {
       commandsToRegister.forEach((data: ApplicationCommandData) => {
-        this.__client.application.commands.create(data);
+        if (this.__client.application) this.__client.application.commands.create(data);
+        else logger.warn(`The application object of the client isn't present.`)
       });
     });
   }

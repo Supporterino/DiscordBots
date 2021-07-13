@@ -1,11 +1,11 @@
-import { getChannelByName, setVoiceChannel } from '../utils';
+import { getChannelByName, logger, setVoiceChannel } from '../utils';
 import { Guild, GuildMember, VoiceChannel, VoiceState } from 'discord.js';
 
 export class VoiceStateUpdate {
   private __state: VoiceState;
-  private __guild: Guild;
-  private __owner: GuildMember;
-  private __channelName: string;
+  private __guild!: Guild;
+  private __owner!: GuildMember;
+  private __channelName!: string;
 
   constructor(vs: VoiceState) {
     this.__state = vs;
@@ -17,21 +17,23 @@ export class VoiceStateUpdate {
    */
   private init(): void {
     this.__guild = this.__state.guild;
-    this.__owner = this.__state.member;
-    this.__channelName = this.__state.channel.name;
+    if (this.__state.member) this.__owner = this.__state.member;
+    else logger.error(new Error(`The VoiceState didn't have a member assosiated`));
+    if (this.__state.channel) this.__channelName = this.__state.channel.name;
+    else logger.error(new Error(`The VoiceState didn't have a channel assosiated`));
   }
 
   /**
    * Move all other member to AFK channel and delete channel
    */
   deleteChannel(): void {
-    if (this.__state.channel.members.size > 0) {
+    if (this.__state.channel!.members.size > 0) {
       const afkChannel = getChannelByName(this.__guild, 'AFK');
-      this.__state.channel.members.forEach((user: GuildMember) => {
+      this.__state.channel!.members.forEach((user: GuildMember) => {
         setVoiceChannel(user, <VoiceChannel>afkChannel);
       });
     }
-    this.__state.channel.delete();
+    this.__state.channel!.delete();
   }
 
   /**

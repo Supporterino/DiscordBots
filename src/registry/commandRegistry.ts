@@ -72,6 +72,6 @@ export class CommandRegistry {
    * @returns The ApplicationCommandData of the command
    */
   getCommandData(name: string): ApplicationCommandData {
-    return this.__store.get(name);
+    return this.__store.get(name)!;
   }
 }

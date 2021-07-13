@@ -2,11 +2,11 @@ import { createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, lo
 import { CommandInteraction, Guild, GuildChannelCreateOptions, GuildMember, VoiceChannel } from 'discord.js';
 
 export class ChannelRequest {
-  private __guild: Guild;
+  private __guild!: Guild;
   private __command: CommandInteraction;
-  private __owner: GuildMember;
+  private __owner!: GuildMember;
   private __mentions: Array<GuildMember>;
-  private __channelName: string;
+  private __channelName!: string;
 
   constructor(cmd: CommandInteraction) {
     this.__command = cmd;
@@ -17,7 +17,8 @@ export class ChannelRequest {
    * This function extracts the initial information from a CommandInteraction
    */
   extractInformation(): void {
-    this.__guild = this.__command.guild;
+    if (this.__command.guild) this.__guild = this.__command.guild;
+    else logger.error(new Error(`No Guild attached to request.`));
     this.__owner = getGuildMemberByID(this.__guild, this.__command.user.id);
     if (this.__command.options) {
       this.getMentionedUsers();
@@ -69,7 +70,7 @@ export class ChannelRequest {
     for (const mentionable of ['user1', 'user2', 'user3']) {
       const mentionedUser = getOptionByKey(this.__command.options, mentionable);
       if (mentionedUser) {
-        const mentionedGuildUser = getGuildMemberByID(this.__guild, mentionedUser.user.id);
+        const mentionedGuildUser = getGuildMemberByID(this.__guild, mentionedUser.user!.id);
         if (mentionedGuildUser) this.__mentions.push(mentionedGuildUser);
       }
     }
@@ -80,7 +81,7 @@ export class ChannelRequest {
    */
   private extractChannelName(): void {
     const name = getOptionByKey(this.__command.options, 'channelname');
-    if (name) this.__channelName = name.value.toString();
+    if (name) this.__channelName = name.value!.toString();
     else this.__channelName = `${this.__owner.displayName}'s Channel`;
   }
 

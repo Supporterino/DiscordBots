@@ -13,7 +13,7 @@ import {
   TextChannel,
   VoiceChannel
 } from 'discord.js';
-import { logger, compTwoStringsInsensitive } from '../utils';
+import { compTwoStringsInsensitive } from '../utils';
 
 /**
  * Returns a GuildMember based on its ID from the guild
@@ -22,11 +22,8 @@ import { logger, compTwoStringsInsensitive } from '../utils';
  * @returns The requested GuildMember
  */
 export const getGuildMemberByID = (guild: Guild, id: Snowflake): GuildMember => {
-  if (guild.members.cache.has(id)) return guild.members.cache.get(id);
-  else {
-    logger.warn(`The requested User (${id}) isn't part of this guild.`);
-    return undefined;
-  }
+  if (guild.members.cache.has(id)) return guild.members.cache.get(id)!;
+  else throw new Error(`The user (${id}) isn't present in this guild.`);
 };
 
 /**
@@ -36,11 +33,8 @@ export const getGuildMemberByID = (guild: Guild, id: Snowflake): GuildMember => 
  * @returns The requested CommandInteractionOption | undefined
  */
 export const getOptionByKey = (options: Collection<string, CommandInteractionOption>, key: string): CommandInteractionOption => {
-  if (options.has(key)) return options.get(key);
-  else {
-    logger.warn(`The requested key (${key}) isn't part of this collection.`);
-    return undefined;
-  }
+  if (options.has(key)) return options.get(key)!;
+  else throw new Error(`The requested key (${key}) isn't part of this collection.`);
 };
 
 /**
