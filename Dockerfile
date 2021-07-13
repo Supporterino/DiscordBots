@@ -12,7 +12,7 @@ FROM node:14
 WORKDIR /usr
 COPY package.json ./
 RUN npm install -g npm
-RUN npm install --only=production
+RUN npm install
 COPY --from=0 /usr/local/app/build ./
 RUN npm install pm2 -g
 ENV PM2_PUBLIC_KEY l531cd6zgz75xzy
