@@ -1,4 +1,4 @@
-import { genID, logger } from '../utils';
+import { genID, logger, activeChannels } from '../utils';
 
 export class PrivateChannelRegistry {
   private __store: Map<String, String>;
@@ -26,6 +26,7 @@ export class PrivateChannelRegistry {
    */
   addChannelToRegistry(channelName: string, owner: string): void {
     this.__store.set(channelName, owner);
+    activeChannels.set(this.__store.size);
   }
 
   /**
@@ -51,6 +52,10 @@ export class PrivateChannelRegistry {
    * @returns Boolean if the deletion was successful.
    */
   deleteChannelEntry(channelName: string): boolean {
-    return this.__store.delete(channelName);
+    const del = this.__store.delete(channelName);
+    if (del) {
+      activeChannels.set(this.__store.size);
+      return true;
+    } else return false;
   }
 }

@@ -1,4 +1,4 @@
-import { createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, logger, setVoiceChannel } from '../utils';
+import { channelRequests, createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, logger, setVoiceChannel } from '../utils';
 import { CommandInteraction, Guild, GuildChannelCreateOptions, GuildMember, VoiceChannel } from 'discord.js';
 
 export class ChannelRequest {
@@ -11,6 +11,7 @@ export class ChannelRequest {
   constructor(cmd: CommandInteraction) {
     this.__command = cmd;
     this.__mentions = new Array<GuildMember>();
+    channelRequests.inc();
   }
 
   /**

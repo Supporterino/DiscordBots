@@ -127,7 +127,7 @@ export class PrivateChannelBot {
     this.__client.once('ready', () => {
       commandsToRegister.forEach((data: ApplicationCommandData) => {
         if (this.__client.application) this.__client.application.commands.create(data);
-        else logger.warn(`The application object of the client isn't present.`)
+        else logger.warn(`The application object of the client isn't present.`);
       });
     });
   }

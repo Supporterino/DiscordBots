@@ -1,4 +1,4 @@
-import { getChannelByName, logger, setVoiceChannel } from '../utils';
+import { getChannelByName, logger, setVoiceChannel, voiceStates } from '../utils';
 import { Guild, GuildMember, VoiceChannel, VoiceState } from 'discord.js';
 
 export class VoiceStateUpdate {
@@ -10,6 +10,7 @@ export class VoiceStateUpdate {
   constructor(vs: VoiceState) {
     this.__state = vs;
     this.init();
+    voiceStates.inc();
   }
 
   /**
