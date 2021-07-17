@@ -94,7 +94,7 @@ export class PrivateChannelBot {
    * @param cmd the recieved CommandInteraction
    */
   private handleCommand(cmd: CommandInteraction): void {
-    if (cmd.commandName === 'privateChannelCreate') {
+    if (cmd.commandName === 'create_channel') {
       this.handlePrivateChannelCommand(cmd);
     }
   }
