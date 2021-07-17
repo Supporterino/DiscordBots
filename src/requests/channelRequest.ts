@@ -46,7 +46,10 @@ export class ChannelRequest {
     };
 
     createChannel(this.__guild, this.__channelName, data).then((vc) => {
-      if (setVoiceChannel(this.__owner, <VoiceChannel>vc)) this.moveMentions(<VoiceChannel>vc);
+      if (setVoiceChannel(this.__owner, <VoiceChannel>vc)) {
+        this.moveMentions(<VoiceChannel>vc);
+        this.__command.reply(`Your channel has been created and you are moved to it with your mentions.`);
+      }
       else logger.warn(`The owner (${this.__owner.displayName}) isn't connected to voice.`);
     });
   }
