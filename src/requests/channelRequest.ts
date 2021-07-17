@@ -1,4 +1,4 @@
-import { channelRequests, createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, logger, setVoiceChannel } from '../utils';
+import { channelRequests, createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, hasOptionKey, logger, setVoiceChannel } from '../utils';
 import { CommandInteraction, Guild, GuildChannelCreateOptions, GuildMember, VoiceChannel } from 'discord.js';
 
 export class ChannelRequest {
@@ -69,8 +69,8 @@ export class ChannelRequest {
    */
   private getMentionedUsers(): void {
     for (const mentionable of ['user1', 'user2', 'user3']) {
-      const mentionedUser = getOptionByKey(this.__command.options, mentionable);
-      if (mentionedUser) {
+      if (hasOptionKey(this.__command.options, mentionable)) {
+        const mentionedUser = getOptionByKey(this.__command.options, mentionable);
         const mentionedGuildUser = getGuildMemberByID(this.__guild, mentionedUser.user!.id);
         if (mentionedGuildUser) this.__mentions.push(mentionedGuildUser);
       }

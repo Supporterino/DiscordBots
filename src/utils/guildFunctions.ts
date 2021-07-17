@@ -30,11 +30,21 @@ export const getGuildMemberByID = (guild: Guild, id: Snowflake): GuildMember => 
  * Gets a CommandInteractionOption from an options collection of a CommandInteraction by key
  * @param options The collection from the CommandInteraction
  * @param key The key to get
- * @returns The requested CommandInteractionOption | undefined
+ * @returns The requested CommandInteractionOption
  */
 export const getOptionByKey = (options: Collection<string, CommandInteractionOption>, key: string): CommandInteractionOption => {
   if (options.has(key)) return options.get(key)!;
   else throw new Error(`The requested key (${key}) isn't part of this collection.`);
+};
+
+/**
+ * Wrapperfunction to check if a OptionsCollection has the requested key
+ * @param options The collection from the CommandInteraction
+ * @param key The key to get
+ * @returns boolean indecating if key exists
+ */
+export const hasOptionKey = (options: Collection<string, CommandInteractionOption>, key: string): boolean => {
+  return options.has(key);
 };
 
 /**
