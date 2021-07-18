@@ -84,8 +84,7 @@ export class ChannelRequest {
    * Extract the channel name from the CommandInteractionOption or create it from the owner's name
    */
   private extractChannelName(): void {
-    const name = getOptionByKey(this.__command.options, 'channelname');
-    if (name) this.__channelName = name.value!.toString();
+    if (hasOptionKey(this.__command.options, 'channelname')) this.__channelName = getOptionByKey(this.__command.options, 'channelname').value!.toString();
     else this.__channelName = `${this.__owner.displayName}'s Channel`;
   }
 
