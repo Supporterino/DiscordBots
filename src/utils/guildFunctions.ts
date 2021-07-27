@@ -1,7 +1,5 @@
 import {
   CategoryChannel,
-  Collection,
-  CommandInteractionOption,
   Guild,
   GuildChannel,
   GuildChannelCreateOptions,
@@ -25,27 +23,6 @@ export const getGuildMemberByID = (guild: Guild, id: Snowflake): GuildMember => 
   if (guild.members.cache.has(id)) return guild.members.cache.get(id)!;
   else throw new Error(`The user (${id}) isn't present in this guild.`);
 };
-
-/**
- * Gets a CommandInteractionOption from an options collection of a CommandInteraction by key
- * @param options The collection from the CommandInteraction
- * @param key The key to get
- * @returns The requested CommandInteractionOption
- */
-// export const getOptionByKey = (options: Collection<string, CommandInteractionOption>, key: string): CommandInteractionOption => {
-//   if (options.has(key)) return options.get(key)!;
-//   else throw new Error(`The requested key (${key}) isn't part of this collection.`);
-// };
-
-/**
- * Wrapperfunction to check if a OptionsCollection has the requested key
- * @param options The collection from the CommandInteraction
- * @param key The key to get
- * @returns boolean indecating if key exists
- */
-// export const hasOptionKey = (options: Collection<string, CommandInteractionOption>, key: string): boolean => {
-//   return options.has(key);
-// };
 
 /**
  * Create a channel inside the provided guild with the given name and options

@@ -1,4 +1,4 @@
-import { channelRequests, createChannel, getChannelByName, getGuildMemberByID, getOptionByKey, hasOptionKey, logger, setVoiceChannel } from '../utils';
+import { channelRequests, createChannel, getChannelByName, getGuildMemberByID, logger, setVoiceChannel } from '../utils';
 import { CommandInteraction, Guild, GuildChannelCreateOptions, GuildMember, VoiceChannel } from 'discord.js';
 
 export class ChannelRequest {
