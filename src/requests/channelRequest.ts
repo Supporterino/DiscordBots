@@ -72,8 +72,8 @@ export class ChannelRequest {
    */
   private getMentionedUsers(): void {
     for (const mentionable of ['user1', 'user2', 'user3']) {
-      if (hasOptionKey(this.__command.options, mentionable)) {
-        const mentionedUser = getOptionByKey(this.__command.options, mentionable);
+      let mentionedUser = this.__command.options.get(mentionable);
+      if (mentionedUser !== null) {
         const mentionedGuildUser = getGuildMemberByID(this.__guild, mentionedUser.user!.id);
         if (mentionedGuildUser) this.__mentions.push(mentionedGuildUser);
       }
@@ -84,7 +84,8 @@ export class ChannelRequest {
    * Extract the channel name from the CommandInteractionOption or create it from the owner's name
    */
   private extractChannelName(): void {
-    if (hasOptionKey(this.__command.options, 'channelname')) this.__channelName = getOptionByKey(this.__command.options, 'channelname').value!.toString();
+    let option = this.__command.options.get('channelname');
+    if (option !== null) this.__channelName = option.value!.toString(); 
     else this.__channelName = `${this.__owner.displayName}'s Channel`;
   }
 
