@@ -1,0 +1,198 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Discord Bots - v0.1.0</title>
+	<meta name="description" content="Documentation for Discord Bots - v0.1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Discord Bots - v0.1.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>Discord Bots - v0.1.0</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#discordbots" id="discordbots" style="color: inherit; text-decoration: none;">
+					<h1>DiscordBots</h1>
+				</a>
+				<p>This repository houses a discord bot written in typescript with the discord.js library based on the lasted <code>master</code> build. The bot is primarly written for use on a private discord server. But this repository can be used as a good template to
+				develop your own bot or extend the existing one with you desired function. The structure of the project and the usecase of each component is described at <a href="#project-structure">the project structure</a>.</p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<p>The project relies on typedoc and all code should be usable with the written typedoc so no further documentation is provided.</p>
+				<a href="#functionality" id="functionality" style="color: inherit; text-decoration: none;">
+					<h2>Functionality</h2>
+				</a>
+				<p>As is the bot provides two main functionalities.</p>
+				<a href="#private-channels" id="private-channels" style="color: inherit; text-decoration: none;">
+					<h3>Private Channels</h3>
+				</a>
+				<p>The main functionality of the bot is to create a private channel for a user on demand. For the bot to function correctly some prerequisits must be met:</p>
+				<ul>
+					<li>The server has a channel named <code>AFK</code> where all users are moved to if a private channel is disbanded.</li>
+					<li>A category named <code>Private Channels</code>. Under this category all private channels get created.</li>
+					<li>A text channel where the user can interact with the bot.</li>
+				</ul>
+				<p>The private channels created by the bot are invisible to other users. To create a private channel the user can use the <code>/create_channel</code>. The command doesn&#39;t need any arguments but you can optionaly provied a channel name under the option key <code>channelname</code> and mention up to three users under the option key <code>user1-3</code>. On command execution the private channel is created and the owner and all mentioned users are moved to the channel.</p>
+				<a href="#move-commands" id="move-commands" style="color: inherit; text-decoration: none;">
+					<h3>Move Commands</h3>
+				</a>
+				<p>To make the <a href="#private-channels">channels</a> more usable the bot provides a two additional commands. The <code>move_here</code> command which requires the user to mention a target user which gets moved to the users channel. The <code>move_to</code> command which requires a mentioned target user and a channelname. The mentioned user gets moved to the targeted channel.</p>
+				<a href="#logging" id="logging" style="color: inherit; text-decoration: none;">
+					<h2>Logging</h2>
+				</a>
+				<p>The project uses a centalized logger which is provided from the utils package. The logger can be imported with this statement:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { logger } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../utils&#x27;</span>;</code></pre>
+				<p>The logger is based on the npm package <code>ts-node</code> and provides the typical five logging levels. The logger is able to print stacktraces or objects in a pretty form with your log message. To do so chain you element to the log message or pretty print the error.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// Print a log entry with a JSON Object</span>
+logger.debug(<span class="hljs-string">`I am logging a object to check its values.`</span>, my_object);
+
+<span class="hljs-comment">// Print a error with a pretty stacktrace</span>
+logger.prettyError(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Oh no something has gone wrong here.`</span>));</code></pre>
+				<a href="#project-structure" id="project-structure" style="color: inherit; text-decoration: none;">
+					<h2>project structure</h2>
+				</a>
+				<p>The project is separeted into folders. Each folder represents a logical group of code with a barrel <code>index.ts</code> exporting all external facing functions. At the moment there are four folders. Each is exlpained in a subsection below. Folders:
+					|Folder|Usage|
+					|------|-----|
+					|bot|This logical group holds the primary bot class. Inside this class all needed subcomponents are initialized and the connection to Discord is established. The bot class should catch the command or what ever you are listening to from your bot and create a corresponding request instance and execute it.|
+					|registry|Classes inside this group provied registrys which hold data for the bot which are needed outside the lifecycle of a single request.|
+					|requests|A request is a class which is instantiated by the bot when the associated command or what ever is called. A request should handle all logic needed the complete it.|
+				|utils|The <code>utils</code> group provides functions which aren&#39;t directly associated with a class or which are needed inside multiple classes. A example is the <code>guildFunctions.ts</code> which provides wrapper functions to ineract with a Discord server (Guild).|</p>
+				<p>The main <code>index.ts</code> file is simple wrapper for the bot. It loads your Discord API Token either from a <code>.env</code> file for development purposes or from the environment variable <code>ChannelToken</code> and then initializes the bot with the token.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_bot_index_.html">&quot;bot/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_bot_privatechannelbot_.html">&quot;bot/private<wbr>Channel<wbr>Bot&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_registry_commandregistry_.html">&quot;registry/command<wbr>Registry&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_registry_index_.html">&quot;registry/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_registry_privatechannelregistry_.html">&quot;registry/private<wbr>Channel<wbr>Registry&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_requests_channelrequest_.html">&quot;requests/channel<wbr>Request&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_requests_index_.html">&quot;requests/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_requests_voicestateupdate_.html">&quot;requests/voice<wbr>State<wbr>Update&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_compare_.html">&quot;utils/compare&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_guildfunctions_.html">&quot;utils/guild<wbr>Functions&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_id_.html">&quot;utils/id&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_index_.html">&quot;utils/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_logger_.html">&quot;utils/logger&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_metricprovider_.html">&quot;utils/metric<wbr>Provider&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
