@@ -1,7 +1,7 @@
 {
     "inputFiles": ["./src"],
     "mode": "modules",
-    "out": "public",
+    "out": "docs",
     "entryPoint": "./src/index.ts",
     "includeVersion": "true",
     "name": "Discord Bots",

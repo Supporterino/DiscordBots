@@ -8,7 +8,7 @@
     "start": "npm run build && node build/index.js",
     "start:dev": "ts-node ./src/index.ts",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "docu": "rm -Rf public && npx typedoc --options 'typedoc.json'"
+    "docu": "rm -Rf docs && npx typedoc --options 'typedoc.json'"
   },
   "author": "Supporterino",
   "license": "GPL-3.0",
