@@ -1,9 +1,14 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+pages:
+  image: alpine:latest
+  stage: deploy
+  script:
+  - echo 'Nothing to do...'
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+
 build:
   image: docker:stable
   variables:
@@ -13,14 +18,13 @@ build:
   services:
   - name: docker:dind
     alias: docker
-  stage: .post
+  stage: deploy
   script:
   - echo $DOCKER_PW | docker login --username supporterino --password-stdin
   - docker build -t supporterino/discord_bots:latest .
   - docker push supporterino/discord_bots
-stages:
-- test
+
 sast:
-  stage: test
+  stage: .post
 include:
 - template: Security/SAST.gitlab-ci.yml
