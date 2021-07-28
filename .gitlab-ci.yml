@@ -13,7 +13,7 @@ build:
   services:
   - name: docker:dind
     alias: docker
-  stage: build
+  stage: .post
   script:
   - echo $DOCKER_PW | docker login --username supporterino --password-stdin
   - docker build -t supporterino/discord_bots:latest .
