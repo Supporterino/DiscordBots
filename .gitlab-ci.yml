@@ -8,6 +8,7 @@ pages:
     - public
   only:
   - master
+  allow_failure: true
 
 build:
   image: docker:stable
