@@ -81,7 +81,7 @@ export class PrivateChannelBot {
    */
   private handleVoiceStateUpdate(vs: VoiceState): void {
     const event = new VoiceStateUpdate(vs);
-    if (this.__channelRegistry.checkOwnerMatch(event.ChannelName, event.OwnerName)) {
+    if (event.doable() && this.__channelRegistry.checkOwnerMatch(event.ChannelName, event.OwnerName)) {
       event.deleteChannel();
       if (!this.__channelRegistry.deleteChannelEntry(event.ChannelName))
         logger.warn(`Couldn't delete channel (${event.ChannelName}) from PrivateChannelRegistry.`);

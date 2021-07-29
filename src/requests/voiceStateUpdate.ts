@@ -25,6 +25,15 @@ export class VoiceStateUpdate {
   }
 
   /**
+   * This function indicates if a VoiceStateUpdate is relevant and runable for the bot.
+   * @returns true if runable else false
+   */
+  doable(): boolean {
+    if (this.__owner && this.__channelName) return true;
+    else return false;
+  }
+
+  /**
    * Move all other member to AFK channel and delete channel
    */
   deleteChannel(): void {
