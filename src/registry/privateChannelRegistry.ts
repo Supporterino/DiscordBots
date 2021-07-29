@@ -41,7 +41,7 @@ export class PrivateChannelRegistry {
       if (ownerOfChannel === ownerToCheck) return true;
       else return false;
     } else {
-      logger.warn(`Tried to check owner for non-existend channel.`);
+      logger.debug(`Tried to check owner for non-existend channel (${channelName}).`);
       return false;
     }
   }

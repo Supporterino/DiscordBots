@@ -19,9 +19,9 @@ export class VoiceStateUpdate {
   private init(): void {
     this.__guild = this.__state.guild;
     if (this.__state.member) this.__owner = this.__state.member;
-    else logger.error(new Error(`The VoiceState didn't have a member assosiated`));
+    else logger.debug(`Skipped a VoiceStateUpdate without a member`);
     if (this.__state.channel) this.__channelName = this.__state.channel.name;
-    else logger.error(new Error(`The VoiceState didn't have a channel assosiated`));
+    else logger.debug(`Skipped a VoiceStateUpdate without channel`);
   }
 
   /**
@@ -33,8 +33,8 @@ export class VoiceStateUpdate {
       this.__state.channel!.members.forEach((user: GuildMember) => {
         setVoiceChannel(user, <VoiceChannel>afkChannel);
       });
-    }
-    this.__state.channel!.delete();
+      this.__state.channel!.delete();
+    } else this.__state.channel!.delete();
   }
 
   /**
