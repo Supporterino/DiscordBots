@@ -46,6 +46,30 @@ export class CommandRegistry {
         }
       ]
     });
+    this.addCommand('moveHere', {
+      name: 'move_to_me',
+      description: 'Moves up to 3 users to your active voice channel.',
+      options: [
+        {
+          type: 6,
+          name: 'user1',
+          description: 'User to move',
+          required: true
+        },
+        {
+          type: 6,
+          name: 'user2',
+          description: 'User to move',
+          required: false
+        },
+        {
+          type: 6,
+          name: 'user3',
+          description: 'User to move',
+          required: false
+        }
+      ]
+    });
   }
 
   /**

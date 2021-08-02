@@ -60,3 +60,16 @@ export const setVoiceChannel = (user: GuildMember, vc: VoiceChannel): boolean =>
     return true;
   } else return false;
 };
+
+/**
+ * Extracts the VoiceChannel of a GuildMemer if it is present.
+ * @param user The GuildMember to extract the Channel from
+ * @returns The VoiceChannel of the user or undefined if user isn't connected to a VC
+ */
+export const getVoiceChannelOfUser = (user: GuildMember): VoiceChannel | undefined => {
+  if (user.voice.channel) {
+    return <VoiceChannel>user.voice.channel;
+  } else {
+    return undefined;
+  }
+};

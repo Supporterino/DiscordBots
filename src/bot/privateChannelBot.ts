@@ -1,7 +1,7 @@
 import { ApplicationCommandData, Client, CommandInteraction, Intents, VoiceState } from 'discord.js';
 import { CommandRegistry, PrivateChannelRegistry } from '../registry';
 import { logger } from '../utils';
-import { ChannelRequest, VoiceStateUpdate } from '../requests';
+import { ChannelRequest, MoveRequest, VoiceStateUpdate } from '../requests';
 export class PrivateChannelBot {
   private __token: string;
   private __channelRegistry!: PrivateChannelRegistry;
@@ -93,9 +93,26 @@ export class PrivateChannelBot {
    * @param cmd the recieved CommandInteraction
    */
   private handleCommand(cmd: CommandInteraction): void {
-    if (cmd.commandName === 'create_channel') {
-      this.handlePrivateChannelCommand(cmd);
+    switch (cmd.commandName) {
+      case 'create_channel':
+        this.handlePrivateChannelCommand(cmd);
+        break;
+      case 'move_to_me':
+        this.handleMoveHereCommand(cmd);
+        break;
+      default:
+        break;
     }
+  }
+
+  /**
+   * Creates a MoveRequest and executes it
+   * @param cmd The initiating CommandInteraction
+   */
+  private handleMoveHereCommand(cmd: CommandInteraction): void {
+    const request = new MoveRequest(cmd);
+    request.extractInformation();
+    request.execute();
   }
 
   /**

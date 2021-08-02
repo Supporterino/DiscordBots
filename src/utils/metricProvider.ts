@@ -14,3 +14,8 @@ export const voiceStates = io.counter({
   name: 'Nubmer of VoiceStateUpdates',
   id: 'requests/voicestateupdates'
 });
+
+export const moveRequests = io.counter({
+  name: 'Number of Move Requests',
+  id: 'requests/moveRequests'
+});
