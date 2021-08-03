@@ -36,7 +36,7 @@ export class ChannelRequest {
 
     const data: GuildChannelCreateOptions = {
       type: 2,
-      parent: parentChannel,
+      parent: parentChannel.id,
       permissionOverwrites: [
         {
           id: this.__guild.id,
@@ -49,8 +49,7 @@ export class ChannelRequest {
       if (setVoiceChannel(this.__owner, <VoiceChannel>vc)) {
         this.moveMentions(<VoiceChannel>vc);
         this.__command.reply(`Your channel has been created and you are moved to it with your mentions.`);
-      }
-      else logger.warn(`The owner (${this.__owner.displayName}) isn't connected to voice.`);
+      } else logger.warn(`The owner (${this.__owner.displayName}) isn't connected to voice.`);
     });
   }
 
@@ -85,7 +84,7 @@ export class ChannelRequest {
    */
   private extractChannelName(): void {
     let option = this.__command.options.get('channelname');
-    if (option !== null) this.__channelName = option.value!.toString(); 
+    if (option !== null) this.__channelName = option.value!.toString();
     else this.__channelName = `${this.__owner.displayName}'s Channel`;
   }
 
