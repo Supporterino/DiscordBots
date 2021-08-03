@@ -1,11 +1,9 @@
-import { PrivateChannelBot } from './bot';
-import { logger } from './utils';
-import dotenv from 'dotenv';
+import { PrivateChannelBot } from './executables';
+import { EnvLoader, logger } from './utils';
 
-dotenv.config();
-logger.debug(`Retrieving API token from environment variables.`);
-const apiToken = process.env.ChannelToken || 'not a token';
-logger.debug(`API token is: ${apiToken}.`);
+const loader = new EnvLoader();
+loader.loadVariable('ChannelToken');
 logger.info(`Creating Bots.`);
-const bot = new PrivateChannelBot(apiToken);
+
+const bot = new PrivateChannelBot(loader.getVariable('ChannelToken'));
 bot.start();
