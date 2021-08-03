@@ -1,9 +1,16 @@
-import { PrivateChannelBot } from './executables';
-import { EnvLoader, logger } from './utils';
+import { DocsProvider, PrivateChannelBot } from './executables';
+import { Executable } from './executables/executable';
+import { EnvLoader } from './utils';
 
+const executables = new Array<Executable>();
 const loader = new EnvLoader();
 loader.loadVariable('ChannelToken');
-logger.info(`Creating Bots.`);
+loader.loadVariable('enableDocs');
 
-const bot = new PrivateChannelBot(loader.getVariable('ChannelToken'));
-bot.start();
+executables.push(new PrivateChannelBot(loader.getVariable('ChannelToken')));
+
+if (loader.getVariable('enableDocs') === 'True') executables.push(new DocsProvider(loader));
+
+executables.forEach((binary) => {
+  binary.start();
+});

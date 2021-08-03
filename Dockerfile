@@ -11,6 +11,7 @@ RUN npm run build
 FROM node:14
 WORKDIR /usr
 COPY package.json ./
+COPY docs ./docs
 RUN npm install -g npm
 RUN npm install
 COPY --from=0 /usr/local/app/build ./

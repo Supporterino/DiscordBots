@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CommandRegistry | Discord Bots - v0.1.0</title>
+	<title>MoveRequest | Discord Bots - v0.1.0</title>
 	<meta name="description" content="Documentation for Discord Bots - v0.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_registry_commandregistry_.html">&quot;registry/commandRegistry&quot;</a>
+					<a href="../modules/_requests_moverequest_.html">&quot;requests/moveRequest&quot;</a>
 				</li>
 				<li>
-					<a href="_registry_commandregistry_.commandregistry.html">CommandRegistry</a>
+					<a href="_requests_moverequest_.moverequest.html">MoveRequest</a>
 				</li>
 			</ul>
-			<h1>Class CommandRegistry</h1>
+			<h1>Class MoveRequest</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CommandRegistry</span>
+						<span class="target">MoveRequest</span>
 					</li>
 				</ul>
 			</section>
@@ -84,23 +84,24 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_registry_commandregistry_.commandregistry.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_requests_moverequest_.moverequest.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_registry_commandregistry_.commandregistry.html#__id" class="tsd-kind-icon">__id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_registry_commandregistry_.commandregistry.html#__store" class="tsd-kind-icon">__store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_moverequest_.moverequest.html#__command" class="tsd-kind-icon">__command</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_moverequest_.moverequest.html#__guild" class="tsd-kind-icon">__guild</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_moverequest_.moverequest.html#__mentions" class="tsd-kind-icon">__mentions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_moverequest_.moverequest.html#__owner" class="tsd-kind-icon">__owner</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_commandregistry_.commandregistry.html#addcommand" class="tsd-kind-icon">add<wbr>Command</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_commandregistry_.commandregistry.html#getcommanddata" class="tsd-kind-icon">get<wbr>Command<wbr>Data</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_commandregistry_.commandregistry.html#hascommand" class="tsd-kind-icon">has<wbr>Command</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_registry_commandregistry_.commandregistry.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_requests_moverequest_.moverequest.html#execute" class="tsd-kind-icon">execute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_requests_moverequest_.moverequest.html#extractinformation" class="tsd-kind-icon">extract<wbr>Information</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_requests_moverequest_.moverequest.html#getmentionedusers" class="tsd-kind-icon">get<wbr>Mentioned<wbr>Users</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,16 +113,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Command<wbr>Registry<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_registry_commandregistry_.commandregistry.html" class="tsd-signature-type">CommandRegistry</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Move<wbr>Request<span class="tsd-signature-symbol">(</span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_requests_moverequest_.moverequest.html" class="tsd-signature-type">MoveRequest</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:6</li>
+									<li>Defined in src/requests/moveRequest.ts:8</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_registry_commandregistry_.commandregistry.html" class="tsd-signature-type">CommandRegistry</a></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cmd: <span class="tsd-signature-type">CommandInteraction</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_requests_moverequest_.moverequest.html" class="tsd-signature-type">MoveRequest</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -129,22 +136,42 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="__id" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __id</h3>
-					<div class="tsd-signature tsd-kind-icon">__id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="__command" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __command</h3>
+					<div class="tsd-signature tsd-kind-icon">__command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CommandInteraction</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/registry/commandRegistry.ts:6</li>
+							<li>Defined in src/requests/moveRequest.ts:6</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="__store" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __store</h3>
-					<div class="tsd-signature tsd-kind-icon">__store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ApplicationCommandData</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="__guild" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __guild</h3>
+					<div class="tsd-signature tsd-kind-icon">__guild<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Guild</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/registry/commandRegistry.ts:5</li>
+							<li>Defined in src/requests/moveRequest.ts:5</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="__mentions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __mentions</h3>
+					<div class="tsd-signature tsd-kind-icon">__mentions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GuildMember</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/requests/moveRequest.ts:8</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="__owner" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __owner</h3>
+					<div class="tsd-signature tsd-kind-icon">__owner<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GuildMember</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/requests/moveRequest.ts:7</li>
 						</ul>
 					</aside>
 				</section>
@@ -152,122 +179,65 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="addcommand" class="tsd-anchor"></a>
-					<h3>add<wbr>Command</h3>
+					<a name="execute" class="tsd-anchor"></a>
+					<h3>execute</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Command<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApplicationCommandData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:80</li>
+									<li>Defined in src/requests/moveRequest.ts:29</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Adds a command defintion to the registry</p>
+									<p> Start the execution of a MoveRequest</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name to identify the command</p>
-									</div>
-								</li>
-								<li>
-									<h5>command: <span class="tsd-signature-type">ApplicationCommandData</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The command definiton object</p>
-									</div>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getcommanddata" class="tsd-anchor"></a>
-					<h3>get<wbr>Command<wbr>Data</h3>
+					<a name="extractinformation" class="tsd-anchor"></a>
+					<h3>extract<wbr>Information</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Command<wbr>Data<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApplicationCommandData</span></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>Information<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:98</li>
+									<li>Defined in src/requests/moveRequest.ts:19</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Retrieve a command from the registry by name.</p>
+									<p>This function extracts the initial information from a CommandInteraction</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name of the command to retrieve from the registry</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ApplicationCommandData</span></h4>
-							<p>The ApplicationCommandData of the command</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="hascommand" class="tsd-anchor"></a>
-					<h3>has<wbr>Command</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Command<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:89</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if the Registry has the requested command</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name of the command to check</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>Boolean indicating if the command is present</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="init" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> init</h3>
+					<a name="getmentionedusers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Mentioned<wbr>Users</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Mentioned<wbr>Users<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:18</li>
+									<li>Defined in src/requests/moveRequest.ts:49</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Initializes the CommandRegistry with the predefined commands</p>
+									<p>Extracts the possible mentioned users from the CommandInteraction and stores them in a local array</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -297,7 +267,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_registry_commandregistry_.html">&quot;registry/command<wbr>Registry&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -312,7 +282,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_requests_index_.html">&quot;requests/index&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_requests_moverequest_.html">&quot;requests/move<wbr>Request&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -346,28 +316,31 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="_registry_commandregistry_.commandregistry.html" class="tsd-kind-icon">Command<wbr>Registry</a>
+						<a href="_requests_moverequest_.moverequest.html" class="tsd-kind-icon">Move<wbr>Request</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_registry_commandregistry_.commandregistry.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_requests_moverequest_.moverequest.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_registry_commandregistry_.commandregistry.html#__id" class="tsd-kind-icon">__id</a>
+								<a href="_requests_moverequest_.moverequest.html#__command" class="tsd-kind-icon">__command</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_registry_commandregistry_.commandregistry.html#__store" class="tsd-kind-icon">__store</a>
+								<a href="_requests_moverequest_.moverequest.html#__guild" class="tsd-kind-icon">__guild</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_requests_moverequest_.moverequest.html#__mentions" class="tsd-kind-icon">__mentions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_requests_moverequest_.moverequest.html#__owner" class="tsd-kind-icon">__owner</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_commandregistry_.commandregistry.html#addcommand" class="tsd-kind-icon">add<wbr>Command</a>
+								<a href="_requests_moverequest_.moverequest.html#execute" class="tsd-kind-icon">execute</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_commandregistry_.commandregistry.html#getcommanddata" class="tsd-kind-icon">get<wbr>Command<wbr>Data</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_commandregistry_.commandregistry.html#hascommand" class="tsd-kind-icon">has<wbr>Command</a>
+								<a href="_requests_moverequest_.moverequest.html#extractinformation" class="tsd-kind-icon">extract<wbr>Information</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_registry_commandregistry_.commandregistry.html#init" class="tsd-kind-icon">init</a>
+								<a href="_requests_moverequest_.moverequest.html#getmentionedusers" class="tsd-kind-icon">get<wbr>Mentioned<wbr>Users</a>
 							</li>
 						</ul>
 					</li>
