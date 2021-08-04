@@ -1,15 +1,14 @@
-import { Executable } from './executable';
+import { Executable } from '.';
 import express from 'express';
 import helmet from 'helmet';
 import { EnvLoader, logger } from '../utils';
 
-export class DocsProvider extends Executable {
+export class DocsProvider implements Executable {
   __app: express.Application;
   __loader: EnvLoader;
   __port!: string;
 
   constructor(l: EnvLoader) {
-    super();
     this.__app = express();
     this.__loader = l;
     this.configure();

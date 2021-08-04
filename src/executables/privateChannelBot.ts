@@ -2,15 +2,14 @@ import { ApplicationCommandData, Client, CommandInteraction, Intents, VoiceState
 import { CommandRegistry, PrivateChannelRegistry } from '../registry';
 import { logger } from '../utils';
 import { ChannelRequest, MoveRequest, VoiceStateUpdate } from '../requests';
-import { Executable } from './executable';
-export class PrivateChannelBot extends Executable {
+import { Executable } from '.';
+export class PrivateChannelBot implements Executable {
   private __token: string;
   private __channelRegistry!: PrivateChannelRegistry;
   private __commandRegistry!: CommandRegistry;
   private __client!: Client;
 
   constructor(tok: string) {
-    super();
     this.__token = tok;
   }
 

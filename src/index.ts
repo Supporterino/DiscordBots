@@ -1,5 +1,4 @@
-import { DocsProvider, PrivateChannelBot } from './executables';
-import { Executable } from './executables/executable';
+import { DocsProvider, Executable, PrivateChannelBot } from './executables';
 import { EnvLoader } from './utils';
 
 const executables = new Array<Executable>();
