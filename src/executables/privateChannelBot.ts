@@ -21,7 +21,7 @@ export class PrivateChannelBot implements Executable {
     this.__commandRegistry = new CommandRegistry();
     this.createClient();
     this.registerEventHandler();
-    this.registerCommands(['privateChannelCreate']);
+    this.registerCommands(['privateChannelCreate', 'moveHere']);
     this.__client.login(this.__token);
   }
 
