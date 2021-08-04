@@ -25,7 +25,7 @@ export class DocsProvider implements Executable {
     this.__port = this.__loader.getVariable('docsPort');
 
     this.__app.use(helmet());
-    this.__app.use(express.static('./docs'));
+    this.__app.use('/discordBots', express.static('./docs'));
     this.__app.enable('trust proxy');
   }
 }
