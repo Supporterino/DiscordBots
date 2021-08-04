@@ -14,12 +14,18 @@ export class DocsProvider implements Executable {
     this.configure();
   }
 
+  /**
+   * Starts the created web server with the stored configuration. `configure()` should be called before this function.
+   */
   start() {
     this.__app.listen(this.__port, () => {
       logger.info(`Started DocsProvier on port ${this.__port}.`);
     });
   }
 
+  /**
+   * This function configures the underlying web server of the class. It loads the port to use from the env var `docsPort` via the provided EnvLoader.
+   */
   private configure() {
     this.__loader.loadVariable('docsPort');
     this.__port = this.__loader.getVariable('docsPort');
