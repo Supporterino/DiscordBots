@@ -26,7 +26,7 @@ export class VoiceStateUpdate {
 
   /**
    * This function indicates if a VoiceStateUpdate is relevant and runable for the bot.
-   * @returns true if runable else false
+   * @returns true if runnable else false
    */
   doable(): boolean {
     if (this.__owner && this.__channelName) return true;
