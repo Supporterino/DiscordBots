@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 WORKDIR /usr/local/app
 COPY package.json ./
 COPY tsconfig.json ./
@@ -8,7 +8,7 @@ RUN npm install
 RUN npm run build
 
 # ## this is stage two , where the app actually runs
-FROM node:14
+FROM node:16
 WORKDIR /usr
 COPY package.json ./
 COPY docs ./docs
