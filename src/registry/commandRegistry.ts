@@ -16,6 +16,18 @@ export class CommandRegistry {
    * Initializes the CommandRegistry with the predefined commands
    */
   private init() {
+    this.addCommand('triggerRename', {
+      name: 'rename',
+      description: 'Triggers a rename of all users and roles',
+      options: [
+        {
+          type: 3,
+          name: 'name',
+          description: 'Name for the everything',
+          required: true
+        }
+      ]
+    });
     this.addCommand('privateChannelCreate', {
       name: 'create_channel',
       description: 'Create a private Channel',

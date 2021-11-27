@@ -1,4 +1,4 @@
-import { ApplicationCommandData, Client, CommandInteraction, Intents, VoiceState } from 'discord.js';
+import { ApplicationCommandData, Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
 import { CommandRegistry, PrivateChannelRegistry } from '../registry';
 import { logger } from '../utils';
 import { ChannelRequest, MoveRequest, VoiceStateUpdate } from '../requests';
@@ -62,10 +62,12 @@ export class PrivateChannelBot implements Executable {
       else logger.warn(`Client wasn't logged in correctly and didn't get a user object.`);
     });
 
-    this.__client.ws.on('INTERACTION_CREATE', async (interaction: any) => {
-      if (interaction.type == '2') {
-        const command = new CommandInteraction(this.__client, interaction);
-        this.handleCommand(command);
+    this.__client.ws.on('INTERACTION_CREATE', async (interaction) => {
+      logger.debug(`${interaction}`);
+      const command: Interaction = JSON.parse(interaction);
+      if (command.isCommand()) {
+        //const command = new CommandInteraction(this.__client, interaction);
+        this.handleCommand(<CommandInteraction>interaction);
       } else {
         logger.warn(`Received interaction isn't a command. Type is ${interaction.type}`);
       }
