@@ -1,5 +1,5 @@
 import { CommandInteraction, Guild } from 'discord.js';
-import { genID, logger } from '../utils';
+import { genHash, logger } from '../utils';
 
 export class RenameRequest {
   private __guild!: Guild;
@@ -38,10 +38,9 @@ export class RenameRequest {
         data.forEach((member) => {
           logger.debug(`Changing name of ${member.user.username} with id ${member.id}`);
           if (set_name) {
-              if (this.__targetName === 'reset') member.setNickname(member.user.username);
-              else member.setNickname(this.__targetName);
-            }
-          else member.setNickname(genID());
+            if (this.__targetName === 'reset') member.setNickname(member.user.username);
+            else member.setNickname(this.__targetName);
+          } else member.setNickname(genHash());
         });
       })
       .catch((err) => {
