@@ -1,7 +1,7 @@
 import { Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
 import { PrivateChannelRegistry } from '../registry';
 import { logger } from '../utils';
-import { ChannelRequest, MoveRequest, VoiceStateUpdate } from '../requests';
+import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate } from '../requests';
 import { Executable } from '.';
 //import { deprecate } from 'util';
 export class PrivateChannelBot implements Executable {
@@ -49,7 +49,8 @@ export class PrivateChannelBot implements Executable {
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
         Intents.FLAGS.GUILD_MESSAGE_TYPING,
         Intents.FLAGS.GUILD_VOICE_STATES,
-        Intents.FLAGS.GUILD_WEBHOOKS
+        Intents.FLAGS.GUILD_WEBHOOKS,
+        Intents.FLAGS.GUILD_MEMBERS
       ]
     });
   }
@@ -64,7 +65,7 @@ export class PrivateChannelBot implements Executable {
     });
 
     this.__client.on('interactionCreate', async (interaction: Interaction) => {
-      logger.debug(interaction);
+      // logger.debug(interaction);
       if (interaction.isCommand()) {
         this.handleCommand(<CommandInteraction>interaction);
       } else {
@@ -102,9 +103,18 @@ export class PrivateChannelBot implements Executable {
       case 'move_here':
         this.handleMoveHereCommand(cmd);
         break;
+      case 'rename':
+        this.handleRenameCommand(cmd);
+        break;
       default:
         break;
     }
+  }
+
+  private handleRenameCommand(cmd: CommandInteraction): void {
+    const request = new RenameRequest(cmd);
+    request.extractInformation();
+    request.execute();
   }
 
   /**

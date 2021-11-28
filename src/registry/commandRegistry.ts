@@ -22,7 +22,7 @@ export class CommandRegistry {
       new SlashCommandBuilder()
         .setName('rename')
         .setDescription('Triggers a rename of all users and roles')
-        .addStringOption((option) => option.setName('name').setDescription('The new name for everything on the discord').setRequired(true))
+        .addStringOption((option) => option.setName('name').setDescription('The new name for everything on the discord').setRequired(false))
         .toJSON()
     );
 
