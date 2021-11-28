@@ -1,12 +1,13 @@
-import { ApplicationCommandData, Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
-import { CommandRegistry, PrivateChannelRegistry } from '../registry';
+import { Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
+import { PrivateChannelRegistry } from '../registry';
 import { logger } from '../utils';
 import { ChannelRequest, MoveRequest, VoiceStateUpdate } from '../requests';
 import { Executable } from '.';
+//import { deprecate } from 'util';
 export class PrivateChannelBot implements Executable {
   private __token: string;
   private __channelRegistry!: PrivateChannelRegistry;
-  private __commandRegistry!: CommandRegistry;
+  //private __commandRegistry!: CommandRegistry;
   private __client!: Client;
 
   constructor(tok: string) {
@@ -18,10 +19,10 @@ export class PrivateChannelBot implements Executable {
    */
   public start(): void {
     this.__channelRegistry = new PrivateChannelRegistry();
-    this.__commandRegistry = new CommandRegistry();
+    //this.__commandRegistry = new CommandRegistry();
     this.createClient();
     this.registerEventHandler();
-    this.registerCommands(['privateChannelCreate', 'moveHere']);
+    //this.registerCommands(['privateChannelCreate', 'moveHere']);
     this.__client.login(this.__token);
   }
 
@@ -62,11 +63,9 @@ export class PrivateChannelBot implements Executable {
       else logger.warn(`Client wasn't logged in correctly and didn't get a user object.`);
     });
 
-    this.__client.ws.on('INTERACTION_CREATE', async (interaction) => {
-      logger.debug(`${interaction}`);
-      const command: Interaction = JSON.parse(interaction);
-      if (command.isCommand()) {
-        //const command = new CommandInteraction(this.__client, interaction);
+    this.__client.on('interactionCreate', async (interaction: Interaction) => {
+      logger.debug(interaction);
+      if (interaction.isCommand()) {
         this.handleCommand(<CommandInteraction>interaction);
       } else {
         logger.warn(`Received interaction isn't a command. Type is ${interaction.type}`);
@@ -97,10 +96,10 @@ export class PrivateChannelBot implements Executable {
    */
   private handleCommand(cmd: CommandInteraction): void {
     switch (cmd.commandName) {
-      case 'create_channel':
+      case 'create_private_channel':
         this.handlePrivateChannelCommand(cmd);
         break;
-      case 'move_to_me':
+      case 'move_here':
         this.handleMoveHereCommand(cmd);
         break;
       default:
@@ -129,25 +128,5 @@ export class PrivateChannelBot implements Executable {
       this.__channelRegistry.addChannelToRegistry(request.channelName, request.OwnerName);
       request.execute();
     } else request.declineRequest(`ChannelName already in use.`);
-  }
-
-  /**
-   * Gets the CommandData from the CommandRegistry and registers the commands at the discord API
-   * @param commands The commands to create
-   */
-  private registerCommands(commands: Array<string>): void {
-    let commandsToRegister = new Array<ApplicationCommandData>();
-
-    for (const commandName of commands) {
-      if (this.__commandRegistry.hasCommand(commandName)) commandsToRegister.push(this.__commandRegistry.getCommandData(commandName));
-      else logger.warn(`Tried to recieve a command from the regitry which isn't present. Name: ${commandName}`);
-    }
-
-    this.__client.once('ready', () => {
-      commandsToRegister.forEach((data: ApplicationCommandData) => {
-        if (this.__client.application) this.__client.application.commands.create(data);
-        else logger.warn(`The application object of the client isn't present.`);
-      });
-    });
   }
 }

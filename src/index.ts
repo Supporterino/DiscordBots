@@ -1,14 +1,15 @@
-import { DocsProvider, Executable, PrivateChannelBot } from './executables';
+import { DocsProvider, Executable, PrivateChannelBot, Updater } from './executables';
 import { EnvLoader } from './utils';
 
 const executables = new Array<Executable>();
 const loader = new EnvLoader();
 loader.loadVariable('ChannelToken');
-//loader.loadVariable('RenamerToken');
 loader.loadVariable('enableDocs');
+loader.loadVariable('RestToken');
+loader.loadVariable('ID');
 
+executables.push(new Updater(loader.getVariable('ChannelToken'), loader.getVariable('ID')));
 executables.push(new PrivateChannelBot(loader.getVariable('ChannelToken')));
-//executables.push(new Renamer(loader.getVariable('RenamerToken')));
 
 if (loader.getVariable('enableDocs') === 'True') executables.push(new DocsProvider(loader));
 
