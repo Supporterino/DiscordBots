@@ -1,13 +1,11 @@
 import { Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
 import { PrivateChannelRegistry } from '../registry';
 import { logger } from '../utils';
-import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate } from '../requests';
+import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
 import { Executable } from '.';
-//import { deprecate } from 'util';
 export class PrivateChannelBot implements Executable {
   private __token: string;
   private __channelRegistry!: PrivateChannelRegistry;
-  //private __commandRegistry!: CommandRegistry;
   private __client!: Client;
 
   constructor(tok: string) {
@@ -19,10 +17,8 @@ export class PrivateChannelBot implements Executable {
    */
   public start(): void {
     this.__channelRegistry = new PrivateChannelRegistry();
-    //this.__commandRegistry = new CommandRegistry();
     this.createClient();
     this.registerEventHandler();
-    //this.registerCommands(['privateChannelCreate', 'moveHere']);
     this.__client.login(this.__token);
   }
 
@@ -106,9 +102,18 @@ export class PrivateChannelBot implements Executable {
       case 'rename':
         this.handleRenameCommand(cmd);
         break;
+      case 'vote':
+        this.handleVoteCommand(cmd);
+        break;
       default:
         break;
     }
+  }
+
+  private handleVoteCommand(cmd: CommandInteraction): void {
+    const request = new VotingProcedure(cmd);
+    request.extractInformation();
+    request.execute();
   }
 
   private handleRenameCommand(cmd: CommandInteraction): void {

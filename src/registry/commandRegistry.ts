@@ -17,6 +17,7 @@ export class CommandRegistry {
    * Initializes the CommandRegistry with the predefined commands
    */
   private init() {
+    this.addCommand('renameVoting', new SlashCommandBuilder().setName('vote').setDescription('Trigger a renaming vote').toJSON());
     this.addCommand(
       'triggerRename',
       new SlashCommandBuilder()

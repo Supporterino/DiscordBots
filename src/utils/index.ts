@@ -4,3 +4,5 @@ export * from './guildFunctions';
 export * from './compare';
 export * from './metricProvider';
 export * from './envLoader';
+export * from './types';
+export * from './formatter';

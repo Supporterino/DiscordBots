@@ -11,7 +11,7 @@ import {
   TextChannel,
   VoiceChannel
 } from 'discord.js';
-import { compTwoStringsInsensitive } from '../utils';
+import { compTwoStringsInsensitive, logger } from '../utils';
 
 /**
  * Returns a GuildMember based on its ID from the guild
@@ -72,4 +72,19 @@ export const getVoiceChannelOfUser = (user: GuildMember): VoiceChannel | undefin
   } else {
     return undefined;
   }
+};
+
+export const renameGuildMembers = (guild: Guild, newName: string): void => {
+  guild.members
+    .fetch()
+    .then((data) => {
+      data.forEach((member) => {
+        logger.debug(`Changing name of ${member.user.username} with id ${member.id}`);
+        if (newName === 'reset') member.setNickname(member.user.username);
+        else member.setNickname(newName);
+      });
+    })
+    .catch((err) => {
+      logger.error(err);
+    });
 };

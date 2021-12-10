@@ -21,7 +21,7 @@ export class Updater implements Executable {
   start(): void {
     this.__commandRegistry = new CommandRegistry();
     this.__client = new REST({ version: '9' }).setToken(this.__token);
-    this.__commands.push('privateChannelCreate', 'moveHere', 'triggerRename');
+    this.__commands.push('privateChannelCreate', 'moveHere', 'triggerRename', 'renameVoting');
     this.update();
   }
 
