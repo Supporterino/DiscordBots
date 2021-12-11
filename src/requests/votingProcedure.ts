@@ -30,6 +30,7 @@ export class VotingProcedure {
   private __opt1!: [string, string];
   private __opt2!: [string, string];
   private __opt3!: [string, string];
+  private __opt4!: [string, string];
   private __timeout: number;
 
   /**
@@ -199,8 +200,27 @@ export class VotingProcedure {
       });
       successfulVotingProcedures.inc();
     } else {
-      logger.info(`No new name won the VotingProcedure`);
-      this.__command.editReply({ content: 'No new name won', components: [] });
+      logger.info(`${this.__opt4[0]} randomly selected no winner. Starting rename.`);
+      renameGuildMembers(this.__guild, this.__opt4[0]);
+      renameGuildRoles(this.__guild, this.__opt4[0], 'Menschen');
+      this.__command.editReply({
+        content: 'Random name was choosen since there was no winnner.',
+        embeds: [
+          new MessageEmbed()
+            .setColor('#008080')
+            .setTitle(this.__opt4[0])
+            .setAuthor('The Rename Bot')
+            .setDescription(linkify(this.__opt4[1]))
+            .addFields(
+              { name: `Votes for ${this.__opt1[0]}`, value: `${this.__opt1C}`, inline: true },
+              { name: `Votes for ${this.__opt2[0]}`, value: `${this.__opt2C}`, inline: true },
+              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true }
+            )
+            .setTimestamp()
+        ],
+        components: []
+      });
+      successfulVotingProcedures.inc();
     }
   }
 
