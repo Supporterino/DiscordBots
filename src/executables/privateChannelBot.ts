@@ -115,8 +115,8 @@ export class PrivateChannelBot implements Executable {
 
   private handleVoteCommand(cmd: CommandInteraction): void {
     const now = new Date();
-    if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > <number>(<unknown>this.__loader.getVariable('VotingTimeout'))) {
-      const request = new VotingProcedure(cmd, <number>(<unknown>this.__loader.getVariable('VotingTime')));
+    if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > <number>(<unknown>this.__loader.getVariable('VoteTimeout'))) {
+      const request = new VotingProcedure(cmd, <number>(<unknown>this.__loader.getVariable('VoteTime')));
       request.extractInformation();
       request.execute();
       this.__lastNameVoting = now;
@@ -124,7 +124,7 @@ export class PrivateChannelBot implements Executable {
       cmd.reply({
         ephemeral: true,
         content: `Last vote was on ${this.__lastNameVoting.toUTCString()}. Next vote possible on ${new Date(
-          this.__lastNameVoting.getTime() + <number>(<unknown>this.__loader.getVariable('VotingTimeout'))
+          this.__lastNameVoting.getTime() + <number>(<unknown>this.__loader.getVariable('VoteTimeout'))
         ).toUTCString()}`
       });
     }
