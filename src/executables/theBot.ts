@@ -142,7 +142,7 @@ export class TheBot implements Executable {
       request.execute();
       this.__lastNameVoting = now;
     } else {
-      const next = new Date(this.__lastNameVoting.getTime() + <number>(<unknown>this.__loader.getVariable('VoteTimeout')));
+      const next = new Date(this.__lastNameVoting.getTime() + +this.__loader.getVariable('VoteTimeout'));
       logger.warn(`Vote request was called too early. Possible on ${next.toUTCString()}`);
       cmd.reply({
         ephemeral: true,
