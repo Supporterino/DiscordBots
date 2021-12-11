@@ -1,11 +1,16 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/rest/v9';
 import { genID, logger } from '../utils';
-
+/**
+ * This class provides an easy way to manage your SlashCommands an retrieve one or all if needed. It is also possible to add commands later down the way.
+ */
 export class CommandRegistry {
   private __store: Map<string, RESTPostAPIApplicationCommandsJSONBody>;
   private __id: string;
 
+  /**
+   * Initialize a new CommandRegistry
+   */
   constructor() {
     this.__id = genID();
     this.__store = new Map<string, RESTPostAPIApplicationCommandsJSONBody>();

@@ -1,3 +1,6 @@
+/**
+ * A class to represent the answer object of the urban dictonary API since it has no `@types`
+ */
 export class DefinitionObject {
   author!: string;
   current_vote!: string;

@@ -1,10 +1,16 @@
 import dotenv from 'dotenv';
 import { genID, logger } from '.';
 
+/**
+ * This class is a wrapper for environment variable loading. Based on the NODE_ENV the vars get loaded from `dotenv` or from the real environment
+ */
 export class EnvLoader {
   private __store: Map<string, string>;
   private __id: string;
 
+  /**
+   * Initialize a new EnvLoader
+   */
   constructor() {
     if (process.env.NODE_ENV !== 'production') dotenv.config();
     this.__id = genID();

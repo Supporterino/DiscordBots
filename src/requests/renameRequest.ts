@@ -1,6 +1,9 @@
 import { CommandInteraction, Guild } from 'discord.js';
 import { genHash, logger, renameGuildMembers, renameGuildRoles } from '../utils';
 
+/**
+ * The RenameRequest extracts the new name from the CommandInteraction and updates the server or uses a random hash as the new name
+ */
 export class RenameRequest {
   private __guild!: Guild;
   private __command: CommandInteraction;
@@ -20,27 +23,27 @@ export class RenameRequest {
   }
 
   /**
-   *  Start the execution of a MoveRequest
+   *  Start the execution of a RenameRequest
    */
   execute(): void {
     this.__command.reply(`Changing names to ${this.__targetName}`);
     if (this.__targetName) {
       renameGuildMembers(this.__guild, this.__targetName);
-      renameGuildRoles(this.__guild, this.__targetName);
+      renameGuildRoles(this.__guild, this.__targetName, 'Menschen');
     } else {
       const hash = genHash();
       renameGuildMembers(this.__guild, hash);
-      renameGuildRoles(this.__guild, hash);
+      renameGuildRoles(this.__guild, hash, 'Menschen');
     }
   }
 
   /**
-   * Extracts the possible mentioned users from the CommandInteraction and stores them in a local array
+   * Extracts the possible name for the new user and roles name from the command options
    */
   private getMentionedUsers(): void {
-    let mentionedName = this.__command.options.get('name');
-    if (mentionedName !== null) {
-      this.__targetName = mentionedName.value!.toString();
+    let name = this.__command.options.get('name');
+    if (name !== null) {
+      this.__targetName = name.value!.toString();
     }
   }
 }

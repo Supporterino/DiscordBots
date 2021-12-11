@@ -74,6 +74,11 @@ export const getVoiceChannelOfUser = (user: GuildMember): VoiceChannel | undefin
   }
 };
 
+/**
+ * This functions iterates over all member of a guild and changes their `displayname` to the provided value
+ * @param guild the guild to performe the operation on
+ * @param newName the new name to set on all users
+ */
 export const renameGuildMembers = (guild: Guild, newName: string): void => {
   guild.members
     .fetch()
@@ -89,14 +94,20 @@ export const renameGuildMembers = (guild: Guild, newName: string): void => {
     });
 };
 
-export const renameGuildRoles = (guild: Guild, newName: string): void => {
+/**
+ * This functions iterates over all roles of a guild and changes their `name` to the provided value if their name ends with the provided suffix
+ * @param guild the guild to performe the operation on
+ * @param newName the new name to set on all users
+ * @param suffix the name suffix to check for
+ */
+export const renameGuildRoles = (guild: Guild, newName: string, suffix: string): void => {
   guild.roles
     .fetch()
     .then((data) => {
       data.forEach((role) => {
-        if (role.name.endsWith('Menschen')) {
+        if (role.name.endsWith(suffix)) {
           logger.debug(`Updating ${role.name} to match the new server name of ${newName}`);
-          role.setName(`${newName}-Menschen`);
+          role.setName(`${newName}-${suffix}`);
         }
       });
     })

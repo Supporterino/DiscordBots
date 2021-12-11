@@ -1,12 +1,19 @@
 import { CommandInteraction, Guild, GuildMember } from 'discord.js';
 import { getGuildMemberByID, getVoiceChannelOfUser, logger, moveRequests, setVoiceChannel } from '../utils';
 
+/**
+ * The MoveRequest class extracts the targets to move from the command interaction and moves the to the owners channel
+ */
 export class MoveRequest {
   private __guild!: Guild;
   private __command: CommandInteraction;
   private __owner!: GuildMember;
   private __mentions: Array<GuildMember>;
 
+  /**
+   * Initialize a new MoveRequest with calling CommandInteraction
+   * @param cmd The CommandInteraction starting the request
+   */
   constructor(cmd: CommandInteraction) {
     this.__command = cmd;
     this.__mentions = new Array<GuildMember>();
@@ -38,7 +45,7 @@ export class MoveRequest {
       if (reply !== '') this.__command.reply(`Couldn't move the following users: ${reply}`);
       else this.__command.reply(`Movement completed.`);
     } else {
-      this.__command.reply(`You aren't connected to voice the command is canceled.`);
+      this.__command.reply(`You aren't connected to voice. The command is canceled.`);
       logger.error(new Error(`The initiator(${this.__owner.displayName}) of the request isn't connected to Voice`));
     }
   }

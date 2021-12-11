@@ -1,3 +1,8 @@
+/**
+ * This function readds the links to related words inside a urban dictonary definition
+ * @param text The initial text from the urban dictonary API
+ * @returns The same text but with added links which work in discord
+ */
 export const linkify = (text: string): string => {
   let output = text;
   const regex = /\[[^\]]*\]/gm;

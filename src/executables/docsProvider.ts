@@ -3,11 +3,18 @@ import express from 'express';
 import helmet from 'helmet';
 import { EnvLoader, logger } from '../utils';
 
+/**
+ * This class is a wrapper around a express app which is used to provide the ts docs for the bot. The configuration is done through env variables.
+ */
 export class DocsProvider implements Executable {
   __app: express.Application;
   __loader: EnvLoader;
   __port!: string;
 
+  /**
+   * Initialize a new DocsProvider
+   * @param l a environment loader to get the necessary config options
+   */
   constructor(l: EnvLoader) {
     this.__app = express();
     this.__loader = l;

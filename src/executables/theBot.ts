@@ -3,13 +3,21 @@ import { PrivateChannelRegistry } from '../registry';
 import { EnvLoader, logger } from '../utils';
 import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
 import { Executable } from '.';
-export class PrivateChannelBot implements Executable {
+/**
+ * This class is the main bot which is launched and logs into the desired servers. The class mostly initializes the discord.js client and handles the distribution of various events and task to sub classes.
+ */
+export class TheBot implements Executable {
   private __token: string;
   private __channelRegistry!: PrivateChannelRegistry;
   private __client!: Client;
   private __lastNameVoting: Date;
   private __loader: EnvLoader;
 
+  /**
+   * Initialize a new bot
+   * @param tok Application Token to access discord API
+   * @param envloader an intialized env variable loader to get the needed config parameters
+   */
   constructor(tok: string, envloader: EnvLoader) {
     this.__token = tok;
     this.__loader = envloader;
@@ -113,6 +121,10 @@ export class PrivateChannelBot implements Executable {
     }
   }
 
+  /**
+   * This function handles the execution of a server rename vote. It checks if a vote is allowed and then executes it
+   * @param cmd The CommandInteraction triggering the vote
+   */
   private handleVoteCommand(cmd: CommandInteraction): void {
     const now = new Date();
     if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > <number>(<unknown>this.__loader.getVariable('VoteTimeout'))) {
@@ -130,6 +142,10 @@ export class PrivateChannelBot implements Executable {
     }
   }
 
+  /**
+   * This function handles the trigger of a rename command and executes the request on the server
+   * @param cmd The CommandInteraction triggering the vote
+   */
   private handleRenameCommand(cmd: CommandInteraction): void {
     const request = new RenameRequest(cmd);
     request.extractInformation();

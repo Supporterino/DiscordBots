@@ -9,6 +9,9 @@ import {
 } from 'discord.js';
 import { DefinitionObject, linkify, logger, renameGuildMembers, renameGuildRoles } from '../utils';
 
+/**
+ * This class provides the ability to start a vote for a new server name by using three random words from urban dictonary
+ */
 export class VotingProcedure {
   private __command: CommandInteraction;
   private __guild!: Guild;
@@ -21,12 +24,20 @@ export class VotingProcedure {
   private __opt3!: [string, string];
   private __timeout: number;
 
+  /**
+   * Initialize a server rename voting procedure
+   * @param cmd The triggering CommandInteraction
+   * @param timeout The timeout for the collector to wait for votes
+   */
   constructor(cmd: CommandInteraction, timeout: number) {
     this.__command = cmd;
     this.__timeout = timeout;
     this.__pressed = new Array<string>();
   }
 
+  /**
+   * This function loads three possible new names for a voting procedure
+   */
   genOptions(): void {
     const ud = require('urban-dictionary');
     ud.random()
@@ -50,18 +61,24 @@ export class VotingProcedure {
   }
 
   /**
-   *  Start the execution of a MoveRequest
+   *  Start the execution of a VotingProcedure
    */
   execute(): void {
     this.genOptions();
   }
 
+  /**
+   * This method starts the actual execution of the voting procedure by posting the message and contructing the collector .
+   */
   run(): void {
     logger.debug('Execute voting procedure');
     this.__command.reply({ content: 'Please vote for the next server name', components: [this.createVotingMessage()] });
     this.constructorCollector();
   }
 
+  /**
+   * This function constructs a collector which listens for button presses. If a users presses the button for the first time the vote gets registered otherwise a error is sent to the user. After the vote time the actual rename is triggered by the collector end event.
+   */
   constructorCollector(): void {
     const opt1F: CollectorFilter<MessageComponentInteraction[]> = (i) =>
       i.customId === 'option1' || i.customId === 'option2' || i.customId === 'option3';
@@ -93,10 +110,13 @@ export class VotingProcedure {
     });
   }
 
+  /**
+   * This function dtermines which of the three options have won and then triggers the rename and constructs the information to update the message if. If no option won the message is adjusted acordingly.
+   */
   triggerRename(): void {
     if (this.__opt1C > this.__opt2C && this.__opt1C > this.__opt3C) {
       renameGuildMembers(this.__guild, this.__opt1[0]);
-      renameGuildRoles(this.__guild, this.__opt1[0]);
+      renameGuildRoles(this.__guild, this.__opt1[0], 'Menschen');
       this.__command.editReply({
         content: ' ',
         embeds: [
@@ -116,7 +136,7 @@ export class VotingProcedure {
       });
     } else if (this.__opt2C > this.__opt1C && this.__opt2C > this.__opt3C) {
       renameGuildMembers(this.__guild, this.__opt2[0]);
-      renameGuildRoles(this.__guild, this.__opt2[0]);
+      renameGuildRoles(this.__guild, this.__opt2[0], 'Menschen');
       this.__command.editReply({
         content: ' ',
         embeds: [
@@ -136,7 +156,7 @@ export class VotingProcedure {
       });
     } else if (this.__opt3C > this.__opt2C && this.__opt3C > this.__opt1C) {
       renameGuildMembers(this.__guild, this.__opt3[0]);
-      renameGuildRoles(this.__guild, this.__opt3[0]);
+      renameGuildRoles(this.__guild, this.__opt3[0], 'Menschen');
       this.__command.editReply({
         content: ' ',
         embeds: [
@@ -159,6 +179,10 @@ export class VotingProcedure {
     }
   }
 
+  /**
+   * Creates the MessageButtons to add to the voting message
+   * @returns A MessageActionRow with the three voting buttons
+   */
   createVotingMessage(): MessageActionRow {
     return new MessageActionRow()
       .addComponents(new MessageButton().setCustomId('option1').setLabel(this.__opt1[0]).setStyle('PRIMARY'))

@@ -1,6 +1,9 @@
 import { channelRequests, createChannel, getChannelByName, getGuildMemberByID, logger, setVoiceChannel } from '../utils';
 import { CommandInteraction, Guild, GuildChannelCreateOptions, GuildMember, VoiceChannel } from 'discord.js';
 
+/**
+ * The ChannelRequest class handles the creation of a private channel based on the given information in the CommandInteraction and persists the channel inside the PrivateChannelRegistry.
+ */
 export class ChannelRequest {
   private __guild!: Guild;
   private __command: CommandInteraction;
@@ -8,6 +11,10 @@ export class ChannelRequest {
   private __mentions: Array<GuildMember>;
   private __channelName!: string;
 
+  /**
+   * Initialize a new ChannelRequest with calling CommandInteraction
+   * @param cmd The CommandInteraction starting the request
+   */
   constructor(cmd: CommandInteraction) {
     this.__command = cmd;
     this.__mentions = new Array<GuildMember>();

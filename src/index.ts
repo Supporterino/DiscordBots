@@ -1,17 +1,15 @@
-import { DocsProvider, Executable, PrivateChannelBot, Updater } from './executables';
+import { DocsProvider, Executable, TheBot, Updater } from './executables';
 import { EnvLoader } from './utils';
 
 const executables = new Array<Executable>();
 const loader = new EnvLoader();
-loader.loadVariable('ChannelToken');
-loader.loadVariable('enableDocs');
-loader.loadVariable('RestToken');
-loader.loadVariable('ID');
-loader.loadVariable('VoteTimeout');
-loader.loadVariable('VoteTime');
+const to_load = ['Token', 'enableDocs', 'RestToken', 'ID', 'VoteTimeout', 'VoteTime', 'GuildID'];
+to_load.forEach((envVar) => {
+  loader.loadVariable(envVar);
+});
 
-executables.push(new Updater(loader.getVariable('ChannelToken'), loader.getVariable('ID')));
-executables.push(new PrivateChannelBot(loader.getVariable('ChannelToken'), loader));
+executables.push(new Updater(loader.getVariable('Token'), loader.getVariable('ID'), loader.getVariable('GuildID')));
+executables.push(new TheBot(loader.getVariable('Token'), loader));
 
 if (loader.getVariable('enableDocs') === 'True') executables.push(new DocsProvider(loader));
 
