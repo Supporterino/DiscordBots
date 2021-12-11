@@ -88,3 +88,19 @@ export const renameGuildMembers = (guild: Guild, newName: string): void => {
       logger.error(err);
     });
 };
+
+export const renameGuildRoles = (guild: Guild, newName: string): void => {
+  guild.roles
+    .fetch()
+    .then((data) => {
+      data.forEach((role) => {
+        if (role.name.endsWith('Menschen')) {
+          logger.debug(`Updating ${role.name} to match the new server name of ${newName}`);
+          role.setName(`${newName}-Menschen`);
+        }
+      });
+    })
+    .catch((err) => {
+      logger.error(err);
+    });
+};

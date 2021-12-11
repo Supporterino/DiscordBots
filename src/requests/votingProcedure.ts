@@ -7,7 +7,7 @@ import {
   MessageComponentInteraction,
   MessageEmbed
 } from 'discord.js';
-import { DefinitionObject, linkify, logger, renameGuildMembers } from '../utils';
+import { DefinitionObject, linkify, logger, renameGuildMembers, renameGuildRoles } from '../utils';
 
 export class VotingProcedure {
   private __command: CommandInteraction;
@@ -15,12 +15,14 @@ export class VotingProcedure {
   private __opt1C: number = 0;
   private __opt2C: number = 0;
   private __opt3C: number = 0;
+  private __pressed: Array<string>;
   private __opt1!: [string, string];
   private __opt2!: [string, string];
   private __opt3!: [string, string];
 
   constructor(cmd: CommandInteraction) {
     this.__command = cmd;
+    this.__pressed = new Array<string>();
   }
 
   genOptions(): void {
@@ -61,23 +63,26 @@ export class VotingProcedure {
   constructorCollector(): void {
     const opt1F: CollectorFilter<MessageComponentInteraction[]> = (i) =>
       i.customId === 'option1' || i.customId === 'option2' || i.customId === 'option3';
-    const collector = this.__command.channel?.createMessageComponentCollector({ filter: opt1F, time: 60000 });
+    const collector = this.__command.channel?.createMessageComponentCollector({ filter: opt1F, time: 30000 });
 
     collector?.on('collect', (mci) => {
-      if (mci.customId === 'option1') {
-        logger.debug('option 1 pressed');
+      if (mci.customId === 'option1' && !this.__pressed.includes(mci.user.id)) {
+        logger.debug(`${this.__opt1[0]} pressed by ${mci.user.id}`);
         this.__opt1C++;
+        this.__pressed.push(mci.user.id);
         mci.reply({ ephemeral: true, content: `You voted for ${this.__opt1[0]}` });
-      }
-      if (mci.customId === 'option2') {
-        logger.debug('option 2 pressed');
+      } else if (mci.customId === 'option2' && !this.__pressed.includes(mci.user.id)) {
+        logger.debug(`${this.__opt2[0]} pressed by ${mci.user.id}`);
         this.__opt2C++;
+        this.__pressed.push(mci.user.id);
         mci.reply({ ephemeral: true, content: `You voted for ${this.__opt2[0]}` });
-      }
-      if (mci.customId === 'option3') {
-        logger.debug('option 3 pressed');
+      } else if (mci.customId === 'option3' && !this.__pressed.includes(mci.user.id)) {
+        logger.debug(`${this.__opt3[0]} pressed by ${mci.user.id}`);
         this.__opt3C++;
+        this.__pressed.push(mci.user.id);
         mci.reply({ ephemeral: true, content: `You voted for ${this.__opt3[0]}` });
+      } else {
+        mci.reply({ ephemeral: true, content: `You already voted` });
       }
     });
 
@@ -89,7 +94,7 @@ export class VotingProcedure {
   triggerRename(): void {
     if (this.__opt1C > this.__opt2C && this.__opt1C > this.__opt3C) {
       renameGuildMembers(this.__guild, this.__opt1[0]);
-      //   this.__command.editReply({ content: `The new name is "${this.__opt1[0]}" with defintion:\n ${this.__opt1[1]}`, components: [] });
+      renameGuildRoles(this.__guild, this.__opt1[0]);
       this.__command.editReply({
         content: ' ',
         embeds: [
@@ -109,7 +114,7 @@ export class VotingProcedure {
       });
     } else if (this.__opt2C > this.__opt1C && this.__opt2C > this.__opt3C) {
       renameGuildMembers(this.__guild, this.__opt2[0]);
-      //this.__command.editReply({ content: `The new name is "${this.__opt2[0]}" with defintion:\n ${this.__opt2[1]}`, components: [] });
+      renameGuildRoles(this.__guild, this.__opt2[0]);
       this.__command.editReply({
         content: ' ',
         embeds: [
@@ -129,7 +134,7 @@ export class VotingProcedure {
       });
     } else if (this.__opt3C > this.__opt2C && this.__opt3C > this.__opt1C) {
       renameGuildMembers(this.__guild, this.__opt3[0]);
-      //this.__command.editReply({ content: `The new name is "${this.__opt3[0]}" with defintion:\n ${this.__opt3[1]}`, components: [] });
+      renameGuildRoles(this.__guild, this.__opt3[0]);
       this.__command.editReply({
         content: ' ',
         embeds: [

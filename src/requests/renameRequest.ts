@@ -1,5 +1,5 @@
 import { CommandInteraction, Guild } from 'discord.js';
-import { genHash, logger, renameGuildMembers } from '../utils';
+import { genHash, logger, renameGuildMembers, renameGuildRoles } from '../utils';
 
 export class RenameRequest {
   private __guild!: Guild;
@@ -26,8 +26,11 @@ export class RenameRequest {
     this.__command.reply(`Changing names to ${this.__targetName}`);
     if (this.__targetName) {
       renameGuildMembers(this.__guild, this.__targetName);
+      renameGuildRoles(this.__guild, this.__targetName);
     } else {
-      renameGuildMembers(this.__guild, genHash());
+      const hash = genHash();
+      renameGuildMembers(this.__guild, hash);
+      renameGuildRoles(this.__guild, hash);
     }
   }
 
