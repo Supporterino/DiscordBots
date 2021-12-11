@@ -19,6 +19,7 @@ export class DocsProvider implements Executable {
     this.__app = express();
     this.__loader = l;
     this.configure();
+    logger.info(`Initialized DocsProvider`);
   }
 
   /**
@@ -34,6 +35,7 @@ export class DocsProvider implements Executable {
    * This function configures the underlying web server of the class. It loads the port to use from the env var `docsPort` via the provided EnvLoader.
    */
   private configure() {
+    logger.debug(`Loading configuration from env vars`);
     this.__loader.loadVariable('docsPort');
     this.__port = this.__loader.getVariable('docsPort');
 

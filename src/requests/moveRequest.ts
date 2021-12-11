@@ -34,9 +34,11 @@ export class MoveRequest {
    *  Start the execution of a MoveRequest
    */
   execute(): void {
+    logger.info(`Executing MoveRequest`);
     const targetChannel = getVoiceChannelOfUser(this.__owner);
     if (targetChannel) {
       let reply = '';
+      logger.debug(`Moving mentions to owners voice channel`);
       this.__mentions.forEach((user) => {
         if (!setVoiceChannel(user, targetChannel)) {
           reply += `${user.displayName} `;

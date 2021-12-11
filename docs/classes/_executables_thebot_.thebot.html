@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PrivateChannelBot | Discord Bots - v0.1.0</title>
+	<title>TheBot | Discord Bots - v0.1.0</title>
 	<meta name="description" content="Documentation for Discord Bots - v0.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,31 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_executables_privatechannelbot_.html">&quot;executables/privateChannelBot&quot;</a>
+					<a href="../modules/_executables_thebot_.html">&quot;executables/theBot&quot;</a>
 				</li>
 				<li>
-					<a href="_executables_privatechannelbot_.privatechannelbot.html">PrivateChannelBot</a>
+					<a href="_executables_thebot_.thebot.html">TheBot</a>
 				</li>
 			</ul>
-			<h1>Class PrivateChannelBot</h1>
+			<h1>Class TheBot</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This class is the main bot which is launched and logs into the desired servers. The class mostly initializes the discord.js client and handles the distribution of various events and task to sub classes.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PrivateChannelBot</span>
+						<span class="target">TheBot</span>
 					</li>
 				</ul>
 			</section>
@@ -90,29 +97,31 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_executables_privatechannelbot_.privatechannelbot.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_executables_thebot_.thebot.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#__channelregistry" class="tsd-kind-icon">__channel<wbr>Registry</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#__client" class="tsd-kind-icon">__client</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#__commandregistry" class="tsd-kind-icon">__command<wbr>Registry</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#__token" class="tsd-kind-icon">__token</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#__channelregistry" class="tsd-kind-icon">__channel<wbr>Registry</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#__client" class="tsd-kind-icon">__client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#__lastnamevoting" class="tsd-kind-icon">__last<wbr>Name<wbr>Voting</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#__loader" class="tsd-kind-icon">__loader</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#__token" class="tsd-kind-icon">__token</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#createclient" class="tsd-kind-icon">create<wbr>Client</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#handlecommand" class="tsd-kind-icon">handle<wbr>Command</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#handlemoveherecommand" class="tsd-kind-icon">handle<wbr>Move<wbr>Here<wbr>Command</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#handleprivatechannelcommand" class="tsd-kind-icon">handle<wbr>Private<wbr>Channel<wbr>Command</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#handlevoicestateupdate" class="tsd-kind-icon">handle<wbr>Voice<wbr>State<wbr>Update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#registercommands" class="tsd-kind-icon">register<wbr>Commands</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_privatechannelbot_.privatechannelbot.html#registereventhandler" class="tsd-kind-icon">register<wbr>Event<wbr>Handler</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_executables_privatechannelbot_.privatechannelbot.html#start" class="tsd-kind-icon">start</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#createclient" class="tsd-kind-icon">create<wbr>Client</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#handlecommand" class="tsd-kind-icon">handle<wbr>Command</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#handlemoveherecommand" class="tsd-kind-icon">handle<wbr>Move<wbr>Here<wbr>Command</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#handleprivatechannelcommand" class="tsd-kind-icon">handle<wbr>Private<wbr>Channel<wbr>Command</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#handlerenamecommand" class="tsd-kind-icon">handle<wbr>Rename<wbr>Command</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#handlevoicestateupdate" class="tsd-kind-icon">handle<wbr>Voice<wbr>State<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#handlevotecommand" class="tsd-kind-icon">handle<wbr>Vote<wbr>Command</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_executables_thebot_.thebot.html#registereventhandler" class="tsd-kind-icon">register<wbr>Event<wbr>Handler</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_executables_thebot_.thebot.html#start" class="tsd-kind-icon">start</a></li>
 							</ul>
 						</section>
 					</div>
@@ -124,22 +133,40 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Private<wbr>Channel<wbr>Bot<span class="tsd-signature-symbol">(</span>tok<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_executables_privatechannelbot_.privatechannelbot.html" class="tsd-signature-type">PrivateChannelBot</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>The<wbr>Bot<span class="tsd-signature-symbol">(</span>tok<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, envloader<span class="tsd-signature-symbol">: </span><a href="_utils_envloader_.envloader.html" class="tsd-signature-type">EnvLoader</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_executables_thebot_.thebot.html" class="tsd-signature-type">TheBot</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:10</li>
+									<li>Defined in src/executables/theBot.ts:14</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Initialize a new bot</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>tok: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Application Token to access discord API</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>envloader: <a href="_utils_envloader_.envloader.html" class="tsd-signature-type">EnvLoader</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>an intialized env variable loader to get the needed config parameters</p>
+										</div>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_executables_privatechannelbot_.privatechannelbot.html" class="tsd-signature-type">PrivateChannelBot</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_executables_thebot_.thebot.html" class="tsd-signature-type">TheBot</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -152,7 +179,7 @@
 					<div class="tsd-signature tsd-kind-icon">__channel<wbr>Registry<span class="tsd-signature-symbol">:</span> <a href="_registry_privatechannelregistry_.privatechannelregistry.html" class="tsd-signature-type">PrivateChannelRegistry</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/executables/privateChannelBot.ts:8</li>
+							<li>Defined in src/executables/theBot.ts:11</li>
 						</ul>
 					</aside>
 				</section>
@@ -162,17 +189,27 @@
 					<div class="tsd-signature tsd-kind-icon">__client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Client</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/executables/privateChannelBot.ts:10</li>
+							<li>Defined in src/executables/theBot.ts:12</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="__commandregistry" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __command<wbr>Registry</h3>
-					<div class="tsd-signature tsd-kind-icon">__command<wbr>Registry<span class="tsd-signature-symbol">:</span> <a href="_registry_commandregistry_.commandregistry.html" class="tsd-signature-type">CommandRegistry</a></div>
+					<a name="__lastnamevoting" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __last<wbr>Name<wbr>Voting</h3>
+					<div class="tsd-signature tsd-kind-icon">__last<wbr>Name<wbr>Voting<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/executables/privateChannelBot.ts:9</li>
+							<li>Defined in src/executables/theBot.ts:13</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="__loader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __loader</h3>
+					<div class="tsd-signature tsd-kind-icon">__loader<span class="tsd-signature-symbol">:</span> <a href="_utils_envloader_.envloader.html" class="tsd-signature-type">EnvLoader</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/executables/theBot.ts:14</li>
 						</ul>
 					</aside>
 				</section>
@@ -182,7 +219,7 @@
 					<div class="tsd-signature tsd-kind-icon">__token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/executables/privateChannelBot.ts:7</li>
+							<li>Defined in src/executables/theBot.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +236,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:31</li>
+									<li>Defined in src/executables/theBot.ts:42</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -221,7 +258,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:96</li>
+									<li>Defined in src/executables/theBot.ts:111</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -252,7 +289,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:113</li>
+									<li>Defined in src/executables/theBot.ts:169</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -283,7 +320,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:123</li>
+									<li>Defined in src/executables/theBot.ts:180</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,6 +342,37 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="handlerenamecommand" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Rename<wbr>Command</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Rename<wbr>Command<span class="tsd-signature-symbol">(</span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/executables/theBot.ts:158</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This function handles the trigger of a rename command and executes the request on the server</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cmd: <span class="tsd-signature-type">CommandInteraction</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The CommandInteraction triggering the vote</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="handlevoicestateupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Voice<wbr>State<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -314,7 +382,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:83</li>
+									<li>Defined in src/executables/theBot.ts:96</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -336,29 +404,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="registercommands" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> register<wbr>Commands</h3>
+					<a name="handlevotecommand" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Vote<wbr>Command</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">register<wbr>Commands<span class="tsd-signature-symbol">(</span>commands<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Vote<wbr>Command<span class="tsd-signature-symbol">(</span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:136</li>
+									<li>Defined in src/executables/theBot.ts:135</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Gets the CommandData from the CommandRegistry and registers the commands at the discord API</p>
+									<p>This function handles the execution of a server rename vote. It checks if a vote is allowed and then executes it</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>commands: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>cmd: <span class="tsd-signature-type">CommandInteraction</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The commands to create</p>
+										<p>The CommandInteraction triggering the vote</p>
 									</div>
 								</li>
 							</ul>
@@ -376,7 +444,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:59</li>
+									<li>Defined in src/executables/theBot.ts:71</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -399,7 +467,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_executables_executable_h_.executable.html">Executable</a>.<a href="../interfaces/_executables_executable_h_.executable.html#start">start</a></p>
 								<ul>
-									<li>Defined in src/executables/privateChannelBot.ts:19</li>
+									<li>Defined in src/executables/theBot.ts:31</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -420,6 +488,9 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_executables_commandupdater_.html">&quot;executables/command<wbr>Updater&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_executables_docsprovider_.html">&quot;executables/docs<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -429,7 +500,7 @@
 						<a href="../modules/_executables_index_.html">&quot;executables/index&quot;</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/_executables_privatechannelbot_.html">&quot;executables/private<wbr>Channel<wbr>Bot&quot;</a>
+						<a href="../modules/_executables_thebot_.html">&quot;executables/the<wbr>Bot&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
@@ -453,13 +524,22 @@
 						<a href="../modules/_requests_moverequest_.html">&quot;requests/move<wbr>Request&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_requests_renamerequest_.html">&quot;requests/rename<wbr>Request&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_requests_voicestateupdate_.html">&quot;requests/voice<wbr>State<wbr>Update&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_requests_votingprocedure_.html">&quot;requests/voting<wbr>Procedure&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_compare_.html">&quot;utils/compare&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_envloader_.html">&quot;utils/env<wbr>Loader&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utils_formatter_.html">&quot;utils/formatter&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_guildfunctions_.html">&quot;utils/guild<wbr>Functions&quot;</a>
@@ -476,6 +556,9 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_metricprovider_.html">&quot;utils/metric<wbr>Provider&quot;</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utils_types_.html">&quot;utils/types&quot;</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -483,46 +566,52 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="_executables_privatechannelbot_.privatechannelbot.html" class="tsd-kind-icon">Private<wbr>Channel<wbr>Bot</a>
+						<a href="_executables_thebot_.thebot.html" class="tsd-kind-icon">The<wbr>Bot</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_executables_thebot_.thebot.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#__channelregistry" class="tsd-kind-icon">__channel<wbr>Registry</a>
+								<a href="_executables_thebot_.thebot.html#__channelregistry" class="tsd-kind-icon">__channel<wbr>Registry</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#__client" class="tsd-kind-icon">__client</a>
+								<a href="_executables_thebot_.thebot.html#__client" class="tsd-kind-icon">__client</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#__commandregistry" class="tsd-kind-icon">__command<wbr>Registry</a>
+								<a href="_executables_thebot_.thebot.html#__lastnamevoting" class="tsd-kind-icon">__last<wbr>Name<wbr>Voting</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#__token" class="tsd-kind-icon">__token</a>
+								<a href="_executables_thebot_.thebot.html#__loader" class="tsd-kind-icon">__loader</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_executables_thebot_.thebot.html#__token" class="tsd-kind-icon">__token</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#createclient" class="tsd-kind-icon">create<wbr>Client</a>
+								<a href="_executables_thebot_.thebot.html#createclient" class="tsd-kind-icon">create<wbr>Client</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#handlecommand" class="tsd-kind-icon">handle<wbr>Command</a>
+								<a href="_executables_thebot_.thebot.html#handlecommand" class="tsd-kind-icon">handle<wbr>Command</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#handlemoveherecommand" class="tsd-kind-icon">handle<wbr>Move<wbr>Here<wbr>Command</a>
+								<a href="_executables_thebot_.thebot.html#handlemoveherecommand" class="tsd-kind-icon">handle<wbr>Move<wbr>Here<wbr>Command</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#handleprivatechannelcommand" class="tsd-kind-icon">handle<wbr>Private<wbr>Channel<wbr>Command</a>
+								<a href="_executables_thebot_.thebot.html#handleprivatechannelcommand" class="tsd-kind-icon">handle<wbr>Private<wbr>Channel<wbr>Command</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#handlevoicestateupdate" class="tsd-kind-icon">handle<wbr>Voice<wbr>State<wbr>Update</a>
+								<a href="_executables_thebot_.thebot.html#handlerenamecommand" class="tsd-kind-icon">handle<wbr>Rename<wbr>Command</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#registercommands" class="tsd-kind-icon">register<wbr>Commands</a>
+								<a href="_executables_thebot_.thebot.html#handlevoicestateupdate" class="tsd-kind-icon">handle<wbr>Voice<wbr>State<wbr>Update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#registereventhandler" class="tsd-kind-icon">register<wbr>Event<wbr>Handler</a>
+								<a href="_executables_thebot_.thebot.html#handlevotecommand" class="tsd-kind-icon">handle<wbr>Vote<wbr>Command</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_executables_thebot_.thebot.html#registereventhandler" class="tsd-kind-icon">register<wbr>Event<wbr>Handler</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_executables_privatechannelbot_.privatechannelbot.html#start" class="tsd-kind-icon">start</a>
+								<a href="_executables_thebot_.thebot.html#start" class="tsd-kind-icon">start</a>
 							</li>
 						</ul>
 					</li>

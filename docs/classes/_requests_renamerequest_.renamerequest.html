@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PrivateChannelRegistry | Discord Bots - v0.1.0</title>
+	<title>RenameRequest | Discord Bots - v0.1.0</title>
 	<meta name="description" content="Documentation for Discord Bots - v0.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_registry_privatechannelregistry_.html">&quot;registry/privateChannelRegistry&quot;</a>
+					<a href="../modules/_requests_renamerequest_.html">&quot;requests/renameRequest&quot;</a>
 				</li>
 				<li>
-					<a href="_registry_privatechannelregistry_.privatechannelregistry.html">PrivateChannelRegistry</a>
+					<a href="_requests_renamerequest_.renamerequest.html">RenameRequest</a>
 				</li>
 			</ul>
-			<h1>Class PrivateChannelRegistry</h1>
+			<h1>Class RenameRequest</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>This class is the store for a ChannelRequest. The PrivateChannelRegistry persists active channels and assosiates them with their owner.</p>
+						<p>The RenameRequest extracts the new name from the CommandInteraction and updates the server or uses a random hash as the new name</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PrivateChannelRegistry</span>
+						<span class="target">RenameRequest</span>
 					</li>
 				</ul>
 			</section>
@@ -91,23 +91,23 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_requests_renamerequest_.renamerequest.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#__id" class="tsd-kind-icon">__id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#__store" class="tsd-kind-icon">__store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_renamerequest_.renamerequest.html#__command" class="tsd-kind-icon">__command</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_renamerequest_.renamerequest.html#__guild" class="tsd-kind-icon">__guild</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_renamerequest_.renamerequest.html#__targetname" class="tsd-kind-icon">__target<wbr>Name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#addchanneltoregistry" class="tsd-kind-icon">add<wbr>Channel<wbr>ToRegistry</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#available" class="tsd-kind-icon">available</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#checkownermatch" class="tsd-kind-icon">check<wbr>Owner<wbr>Match</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_registry_privatechannelregistry_.privatechannelregistry.html#deletechannelentry" class="tsd-kind-icon">delete<wbr>Channel<wbr>Entry</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_requests_renamerequest_.renamerequest.html#execute" class="tsd-kind-icon">execute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_requests_renamerequest_.renamerequest.html#extractinformation" class="tsd-kind-icon">extract<wbr>Information</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_requests_renamerequest_.renamerequest.html#getmentionedusers" class="tsd-kind-icon">get<wbr>Mentioned<wbr>Users</a></li>
 							</ul>
 						</section>
 					</div>
@@ -119,21 +119,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Private<wbr>Channel<wbr>Registry<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_registry_privatechannelregistry_.privatechannelregistry.html" class="tsd-signature-type">PrivateChannelRegistry</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rename<wbr>Request<span class="tsd-signature-symbol">(</span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_requests_renamerequest_.renamerequest.html" class="tsd-signature-type">RenameRequest</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/privateChannelRegistry.ts:8</li>
+									<li>Defined in src/requests/renameRequest.ts:10</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Initialize a new PrivateChannelRegistry with a unique ID</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="_registry_privatechannelregistry_.privatechannelregistry.html" class="tsd-signature-type">PrivateChannelRegistry</a></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cmd: <span class="tsd-signature-type">CommandInteraction</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_requests_renamerequest_.renamerequest.html" class="tsd-signature-type">RenameRequest</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -141,22 +142,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="__id" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __id</h3>
-					<div class="tsd-signature tsd-kind-icon">__id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="__command" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __command</h3>
+					<div class="tsd-signature tsd-kind-icon">__command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CommandInteraction</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/registry/privateChannelRegistry.ts:8</li>
+							<li>Defined in src/requests/renameRequest.ts:9</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="__store" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __store</h3>
-					<div class="tsd-signature tsd-kind-icon">__store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">String</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">String</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="__guild" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __guild</h3>
+					<div class="tsd-signature tsd-kind-icon">__guild<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Guild</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/registry/privateChannelRegistry.ts:7</li>
+							<li>Defined in src/requests/renameRequest.ts:8</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="__targetname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __target<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">__target<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/requests/renameRequest.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -164,141 +175,68 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="addchanneltoregistry" class="tsd-anchor"></a>
-					<h3>add<wbr>Channel<wbr>ToRegistry</h3>
+					<a name="execute" class="tsd-anchor"></a>
+					<h3>execute</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Channel<wbr>ToRegistry<span class="tsd-signature-symbol">(</span>channelName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, owner<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/privateChannelRegistry.ts:34</li>
+									<li>Defined in src/requests/renameRequest.ts:28</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Add a channel to the PrivateChannelRegistry.</p>
+									<p> Start the execution of a RenameRequest</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>channelName: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Name of the channel to add.</p>
-									</div>
-								</li>
-								<li>
-									<h5>owner: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The owner assosiated with the channel.</p>
-									</div>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="available" class="tsd-anchor"></a>
-					<h3>available</h3>
+					<a name="extractinformation" class="tsd-anchor"></a>
+					<h3>extract<wbr>Information</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">available<span class="tsd-signature-symbol">(</span>channelName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>Information<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/privateChannelRegistry.ts:24</li>
+									<li>Defined in src/requests/renameRequest.ts:19</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if a channel is free to register.</p>
+									<p>This function extracts the initial information from a CommandInteraction</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>channelName: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name of the channel to check.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>A boolean indecating true if the channel can be created.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="checkownermatch" class="tsd-anchor"></a>
-					<h3>check<wbr>Owner<wbr>Match</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">check<wbr>Owner<wbr>Match<span class="tsd-signature-symbol">(</span>channelName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, ownerToCheck<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getmentionedusers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Mentioned<wbr>Users</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Mentioned<wbr>Users<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/privateChannelRegistry.ts:46</li>
+									<li>Defined in src/requests/renameRequest.ts:47</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if the owner for a channel matches.</p>
+									<p>Extracts the possible name for the new user and roles name from the command options</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>channelName: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name of the channel to check.</p>
-									</div>
-								</li>
-								<li>
-									<h5>ownerToCheck: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The potential owner of the channel.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>True if the owner matches and false if it doesn&#39;t or the channel isn&#39;t found. If channel isn&#39;t found a warning is raised.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="deletechannelentry" class="tsd-anchor"></a>
-					<h3>delete<wbr>Channel<wbr>Entry</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">delete<wbr>Channel<wbr>Entry<span class="tsd-signature-symbol">(</span>channelName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/registry/privateChannelRegistry.ts:63</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Removes a channel from the PrivateChannelRegistry</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>channelName: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name of the channel to remove.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>Boolean if the deletion was successful.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -334,7 +272,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_registry_index_.html">&quot;registry/index&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_registry_privatechannelregistry_.html">&quot;registry/private<wbr>Channel<wbr>Registry&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -346,7 +284,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_requests_moverequest_.html">&quot;requests/move<wbr>Request&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_requests_renamerequest_.html">&quot;requests/rename<wbr>Request&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -389,28 +327,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="_registry_privatechannelregistry_.privatechannelregistry.html" class="tsd-kind-icon">Private<wbr>Channel<wbr>Registry</a>
+						<a href="_requests_renamerequest_.renamerequest.html" class="tsd-kind-icon">Rename<wbr>Request</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_requests_renamerequest_.renamerequest.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#__id" class="tsd-kind-icon">__id</a>
+								<a href="_requests_renamerequest_.renamerequest.html#__command" class="tsd-kind-icon">__command</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#__store" class="tsd-kind-icon">__store</a>
+								<a href="_requests_renamerequest_.renamerequest.html#__guild" class="tsd-kind-icon">__guild</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_requests_renamerequest_.renamerequest.html#__targetname" class="tsd-kind-icon">__target<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#addchanneltoregistry" class="tsd-kind-icon">add<wbr>Channel<wbr>ToRegistry</a>
+								<a href="_requests_renamerequest_.renamerequest.html#execute" class="tsd-kind-icon">execute</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#available" class="tsd-kind-icon">available</a>
+								<a href="_requests_renamerequest_.renamerequest.html#extractinformation" class="tsd-kind-icon">extract<wbr>Information</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#checkownermatch" class="tsd-kind-icon">check<wbr>Owner<wbr>Match</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_registry_privatechannelregistry_.privatechannelregistry.html#deletechannelentry" class="tsd-kind-icon">delete<wbr>Channel<wbr>Entry</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_requests_renamerequest_.renamerequest.html#getmentionedusers" class="tsd-kind-icon">get<wbr>Mentioned<wbr>Users</a>
 							</li>
 						</ul>
 					</li>
@@ -435,10 +373,11 @@
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>

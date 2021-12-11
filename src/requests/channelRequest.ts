@@ -38,6 +38,7 @@ export class ChannelRequest {
    * Start the execution of a PrivateChannelRequest
    */
   execute(): void {
+    logger.info(`Executing private channel request`);
     const parentChannel = getChannelByName(this.__guild, 'Private Channels');
     if (!parentChannel) logger.error(`The parent channel for privat channels wasn't found.`);
 
@@ -52,8 +53,11 @@ export class ChannelRequest {
       ]
     };
 
+    logger.info(`Creating channel with name(${this.__channelName})`);
     createChannel(this.__guild, this.__channelName, data).then((vc) => {
+      logger.debug(`Moving owner to channel`);
       if (setVoiceChannel(this.__owner, <VoiceChannel>vc)) {
+        logger.debug(`Moving mentions to channel`);
         this.moveMentions(<VoiceChannel>vc);
         this.__command.reply(`Your channel has been created and you are moved to it with your mentions.`);
       } else logger.warn(`The owner (${this.__owner.displayName}) isn't connected to voice.`);
@@ -100,6 +104,7 @@ export class ChannelRequest {
    * @param reason reason why execution was declined
    */
   declineRequest(reason: string): void {
+    logger.info(`Declining private channel request with following reason: ${reason}`);
     this.__command.reply(reason);
   }
 

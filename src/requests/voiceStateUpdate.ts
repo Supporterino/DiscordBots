@@ -41,6 +41,7 @@ export class VoiceStateUpdate {
    */
   deleteChannel(): void {
     if (this.__state.channel!.members.size > 0) {
+      logger.debug(`Moving other members of channel to AFK channel`);
       const afkChannel = getChannelByName(this.__guild, 'AFK');
       this.__state.channel!.members.forEach((user: GuildMember) => {
         setVoiceChannel(user, <VoiceChannel>afkChannel);

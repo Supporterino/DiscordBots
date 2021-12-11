@@ -1,5 +1,5 @@
 import { CommandInteraction, Guild } from 'discord.js';
-import { genHash, logger, renameGuildMembers, renameGuildRoles } from '../utils';
+import { genHash, logger, renameGuildMembers, renameGuildRoles, Renames } from '../utils';
 
 /**
  * The RenameRequest extracts the new name from the CommandInteraction and updates the server or uses a random hash as the new name
@@ -26,15 +26,19 @@ export class RenameRequest {
    *  Start the execution of a RenameRequest
    */
   execute(): void {
+    logger.info(`Executing RenameRequest`);
     this.__command.reply(`Changing names to ${this.__targetName}`);
     if (this.__targetName) {
+      logger.debug(`Renaming to ${this.__targetName}`);
       renameGuildMembers(this.__guild, this.__targetName);
       renameGuildRoles(this.__guild, this.__targetName, 'Menschen');
     } else {
+      logger.debug(`Renaming to random hash`);
       const hash = genHash();
       renameGuildMembers(this.__guild, hash);
       renameGuildRoles(this.__guild, hash, 'Menschen');
     }
+    Renames.inc();
   }
 
   /**

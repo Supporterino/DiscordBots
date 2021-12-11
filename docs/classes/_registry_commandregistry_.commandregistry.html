@@ -69,6 +69,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This class provides an easy way to manage your SlashCommands an retrieve one or all if needed. It is also possible to add commands later down the way.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -118,9 +125,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:6</li>
+									<li>Defined in src/registry/commandRegistry.ts:9</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Initialize a new CommandRegistry</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_registry_commandregistry_.commandregistry.html" class="tsd-signature-type">CommandRegistry</a></h4>
 						</li>
 					</ul>
@@ -134,17 +146,17 @@
 					<div class="tsd-signature tsd-kind-icon">__id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/registry/commandRegistry.ts:6</li>
+							<li>Defined in src/registry/commandRegistry.ts:9</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="__store" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __store</h3>
-					<div class="tsd-signature tsd-kind-icon">__store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ApplicationCommandData</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">__store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">RESTPostAPIApplicationCommandsJSONBody</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/registry/commandRegistry.ts:5</li>
+							<li>Defined in src/registry/commandRegistry.ts:8</li>
 						</ul>
 					</aside>
 				</section>
@@ -155,13 +167,13 @@
 					<a name="addcommand" class="tsd-anchor"></a>
 					<h3>add<wbr>Command</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Command<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApplicationCommandData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Command<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RESTPostAPIApplicationCommandsJSONBody</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:80</li>
+									<li>Defined in src/registry/commandRegistry.ts:64</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -178,7 +190,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>command: <span class="tsd-signature-type">ApplicationCommandData</span></h5>
+									<h5>command: <span class="tsd-signature-type">RESTPostAPIApplicationCommandsJSONBody</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The command definiton object</p>
 									</div>
@@ -192,13 +204,13 @@
 					<a name="getcommanddata" class="tsd-anchor"></a>
 					<h3>get<wbr>Command<wbr>Data</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Command<wbr>Data<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApplicationCommandData</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Command<wbr>Data<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RESTPostAPIApplicationCommandsJSONBody</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:98</li>
+									<li>Defined in src/registry/commandRegistry.ts:84</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -215,7 +227,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ApplicationCommandData</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RESTPostAPIApplicationCommandsJSONBody</span></h4>
 							<p>The ApplicationCommandData of the command</p>
 						</li>
 					</ul>
@@ -230,7 +242,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:89</li>
+									<li>Defined in src/registry/commandRegistry.ts:74</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -262,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/registry/commandRegistry.ts:18</li>
+									<li>Defined in src/registry/commandRegistry.ts:24</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -283,6 +295,9 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_executables_commandupdater_.html">&quot;executables/command<wbr>Updater&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_executables_docsprovider_.html">&quot;executables/docs<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -292,7 +307,7 @@
 						<a href="../modules/_executables_index_.html">&quot;executables/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/_executables_privatechannelbot_.html">&quot;executables/private<wbr>Channel<wbr>Bot&quot;</a>
+						<a href="../modules/_executables_thebot_.html">&quot;executables/the<wbr>Bot&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
@@ -316,13 +331,22 @@
 						<a href="../modules/_requests_moverequest_.html">&quot;requests/move<wbr>Request&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_requests_renamerequest_.html">&quot;requests/rename<wbr>Request&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_requests_voicestateupdate_.html">&quot;requests/voice<wbr>State<wbr>Update&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_requests_votingprocedure_.html">&quot;requests/voting<wbr>Procedure&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_compare_.html">&quot;utils/compare&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_envloader_.html">&quot;utils/env<wbr>Loader&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utils_formatter_.html">&quot;utils/formatter&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_guildfunctions_.html">&quot;utils/guild<wbr>Functions&quot;</a>
@@ -338,6 +362,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_utils_metricprovider_.html">&quot;utils/metric<wbr>Provider&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utils_types_.html">&quot;utils/types&quot;</a>
 					</li>
 				</ul>
 			</nav>

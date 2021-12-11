@@ -7,7 +7,15 @@ import {
   MessageComponentInteraction,
   MessageEmbed
 } from 'discord.js';
-import { DefinitionObject, linkify, logger, renameGuildMembers, renameGuildRoles } from '../utils';
+import {
+  DefinitionObject,
+  linkify,
+  logger,
+  renameGuildMembers,
+  renameGuildRoles,
+  successfulVotingProcedures,
+  VotingProcedures
+} from '../utils';
 
 /**
  * This class provides the ability to start a vote for a new server name by using three random words from urban dictonary
@@ -39,6 +47,7 @@ export class VotingProcedure {
    * This function loads three possible new names for a voting procedure
    */
   genOptions(): void {
+    logger.debug(`Loading random words to use from urban dictornary`);
     const ud = require('urban-dictionary');
     ud.random()
       .then((data: DefinitionObject[]) => {
@@ -64,6 +73,8 @@ export class VotingProcedure {
    *  Start the execution of a VotingProcedure
    */
   execute(): void {
+    logger.info(`Executing VotingProcedure`);
+    VotingProcedures.inc();
     this.genOptions();
   }
 
@@ -71,7 +82,7 @@ export class VotingProcedure {
    * This method starts the actual execution of the voting procedure by posting the message and contructing the collector .
    */
   run(): void {
-    logger.debug('Execute voting procedure');
+    logger.debug('Sending vote message');
     this.__command.reply({ content: 'Please vote for the next server name', components: [this.createVotingMessage()] });
     this.constructorCollector();
   }
@@ -83,6 +94,8 @@ export class VotingProcedure {
     const opt1F: CollectorFilter<MessageComponentInteraction[]> = (i) =>
       i.customId === 'option1' || i.customId === 'option2' || i.customId === 'option3';
     const collector = this.__command.channel?.createMessageComponentCollector({ filter: opt1F, time: this.__timeout });
+
+    logger.debug(`Initialized collector with timeout of ${this.__timeout / 1000} seconds`);
 
     collector?.on('collect', (mci) => {
       if (mci.customId === 'option1' && !this.__pressed.includes(mci.user.id)) {
@@ -106,6 +119,7 @@ export class VotingProcedure {
     });
 
     collector?.on('end', () => {
+      logger.info(`Voting phase over.`);
       this.triggerRename();
     });
   }
@@ -115,6 +129,7 @@ export class VotingProcedure {
    */
   triggerRename(): void {
     if (this.__opt1C > this.__opt2C && this.__opt1C > this.__opt3C) {
+      logger.info(`${this.__opt1[0]} won the vote. Starting rename.`);
       renameGuildMembers(this.__guild, this.__opt1[0]);
       renameGuildRoles(this.__guild, this.__opt1[0], 'Menschen');
       this.__command.editReply({
@@ -134,7 +149,9 @@ export class VotingProcedure {
         ],
         components: []
       });
+      successfulVotingProcedures.inc();
     } else if (this.__opt2C > this.__opt1C && this.__opt2C > this.__opt3C) {
+      logger.info(`${this.__opt2[0]} won the vote. Starting rename.`);
       renameGuildMembers(this.__guild, this.__opt2[0]);
       renameGuildRoles(this.__guild, this.__opt2[0], 'Menschen');
       this.__command.editReply({
@@ -154,7 +171,9 @@ export class VotingProcedure {
         ],
         components: []
       });
+      successfulVotingProcedures.inc();
     } else if (this.__opt3C > this.__opt2C && this.__opt3C > this.__opt1C) {
+      logger.info(`${this.__opt3[0]} won the vote. Starting rename.`);
       renameGuildMembers(this.__guild, this.__opt3[0]);
       renameGuildRoles(this.__guild, this.__opt3[0], 'Menschen');
       this.__command.editReply({
@@ -174,7 +193,9 @@ export class VotingProcedure {
         ],
         components: []
       });
+      successfulVotingProcedures.inc();
     } else {
+      logger.info(`No new name won the VotingProcedure`);
       this.__command.editReply({ content: 'No new name won', components: [] });
     }
   }

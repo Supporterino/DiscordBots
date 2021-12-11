@@ -26,6 +26,7 @@ export class Updater implements Executable {
     this.__id = id;
     this.__guild_id = guildID;
     this.__commands = new Array<string>();
+    logger.info(`Initialized new CommandUpdater for application(${this.__id}) on guild(${this.__guild_id})`);
   }
 
   /**

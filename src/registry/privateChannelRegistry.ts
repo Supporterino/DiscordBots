@@ -22,6 +22,7 @@ export class PrivateChannelRegistry {
    * @returns A boolean indecating true if the channel can be created.
    */
   available(channelName: string): boolean {
+    logger.debug(`Checking if name(${channelName}) for private channel isn't in use`);
     return !this.__store.has(channelName);
   }
 
@@ -31,6 +32,7 @@ export class PrivateChannelRegistry {
    * @param owner The owner assosiated with the channel.
    */
   addChannelToRegistry(channelName: string, owner: string): void {
+    logger.info(`Adding privateChannel(${channelName}) to the PrivateChannelRegistry`);
     this.__store.set(channelName, owner);
     activeChannels.set(this.__store.size);
   }
@@ -42,6 +44,7 @@ export class PrivateChannelRegistry {
    * @returns True if the owner matches and false if it doesn't or the channel isn't found. If channel isn't found a warning is raised.
    */
   checkOwnerMatch(channelName: string, ownerToCheck: string): boolean {
+    logger.debug(`Checking if ${ownerToCheck} owns the private channel ${channelName}`);
     if (this.__store.has(channelName)) {
       const ownerOfChannel = this.__store.get(channelName);
       if (ownerOfChannel === ownerToCheck) return true;
@@ -58,6 +61,7 @@ export class PrivateChannelRegistry {
    * @returns Boolean if the deletion was successful.
    */
   deleteChannelEntry(channelName: string): boolean {
+    logger.debug(`Deleting channel(${channelName}) from PrivateChannelRegistry`);
     const del = this.__store.delete(channelName);
     if (del) {
       activeChannels.set(this.__store.size);

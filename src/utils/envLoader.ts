@@ -29,7 +29,7 @@ export class EnvLoader {
       this.__store.set(name, value);
       return true;
     } else {
-      logger.info(`Couldn't load env var (${name}).`);
+      logger.warn(`Couldn't load env var (${name}).`);
       return false;
     }
   }

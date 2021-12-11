@@ -62,6 +62,7 @@ export class CommandRegistry {
    * @param command The command definiton object
    */
   addCommand(name: string, command: RESTPostAPIApplicationCommandsJSONBody): void {
+    logger.debug(`Adding ${name} to registry with data:`, command);
     this.__store.set(name, command);
   }
 
@@ -71,6 +72,7 @@ export class CommandRegistry {
    * @returns Boolean indicating if the command is present
    */
   hasCommand(name: string): boolean {
+    logger.debug(`Check if command (${name}) exists in registry`);
     return this.__store.has(name);
   }
 
@@ -80,6 +82,7 @@ export class CommandRegistry {
    * @returns The ApplicationCommandData of the command
    */
   getCommandData(name: string): RESTPostAPIApplicationCommandsJSONBody {
+    logger.debug(`Retrieving command (${name}) from registry`);
     return this.__store.get(name)!;
   }
 }

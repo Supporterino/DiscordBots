@@ -22,12 +22,14 @@ export class TheBot implements Executable {
     this.__token = tok;
     this.__loader = envloader;
     this.__lastNameVoting = new Date('1995-12-17T03:24:00');
+    logger.info(`Initialized new main bot class`);
   }
 
   /**
    * Start the bot by creating all necessary components and logging in to discord API
    */
   public start(): void {
+    logger.debug(`Starting bot by building sub classes and registering client`);
     this.__channelRegistry = new PrivateChannelRegistry();
     this.createClient();
     this.registerEventHandler();
@@ -67,6 +69,7 @@ export class TheBot implements Executable {
    * Register the client event handlers
    */
   private registerEventHandler(): void {
+    logger.debug(`Registering event handler for discord.js client`);
     this.__client.on('ready', () => {
       if (this.__client.user) logger.info(`Logged in as ${this.__client.user.tag}`);
       else logger.warn(`Client wasn't logged in correctly and didn't get a user object.`);
@@ -75,6 +78,7 @@ export class TheBot implements Executable {
     this.__client.on('interactionCreate', async (interaction: Interaction) => {
       if (interaction.isCommand()) {
         this.handleCommand(<CommandInteraction>interaction);
+      } else if (interaction.isButton()) {
       } else {
         logger.warn(`Received interaction isn't a command. Type is ${interaction.type}`);
       }
@@ -90,8 +94,10 @@ export class TheBot implements Executable {
    * @param vs The VoiceState event
    */
   private handleVoiceStateUpdate(vs: VoiceState): void {
+    logger.debug(`Handling VoiceStateUpdate`);
     const event = new VoiceStateUpdate(vs);
     if (event.doable() && this.__channelRegistry.checkOwnerMatch(event.ChannelName, event.OwnerName)) {
+      logger.debug(`Deleting private channel since owner left`);
       event.deleteChannel();
       if (!this.__channelRegistry.deleteChannelEntry(event.ChannelName))
         logger.warn(`Couldn't delete channel (${event.ChannelName}) from PrivateChannelRegistry.`);
@@ -103,6 +109,7 @@ export class TheBot implements Executable {
    * @param cmd the recieved CommandInteraction
    */
   private handleCommand(cmd: CommandInteraction): void {
+    logger.debug(`Got CommandInteraction with command: ${cmd.commandName}`);
     switch (cmd.commandName) {
       case 'create_private_channel':
         this.handlePrivateChannelCommand(cmd);
@@ -127,17 +134,19 @@ export class TheBot implements Executable {
    */
   private handleVoteCommand(cmd: CommandInteraction): void {
     const now = new Date();
+    logger.info(`Checking if a voting procedure can be done`);
     if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > <number>(<unknown>this.__loader.getVariable('VoteTimeout'))) {
+      logger.debug(`Starting voting procedure`);
       const request = new VotingProcedure(cmd, <number>(<unknown>this.__loader.getVariable('VoteTime')));
       request.extractInformation();
       request.execute();
       this.__lastNameVoting = now;
     } else {
+      const next = new Date(this.__lastNameVoting.getTime() + <number>(<unknown>this.__loader.getVariable('VoteTimeout'))).toUTCString();
+      logger.warn(`Vote request was called too early. Possible on ${next}`);
       cmd.reply({
         ephemeral: true,
-        content: `Last vote was on ${this.__lastNameVoting.toUTCString()}. Next vote possible on ${new Date(
-          this.__lastNameVoting.getTime() + <number>(<unknown>this.__loader.getVariable('VoteTimeout'))
-        ).toUTCString()}`
+        content: `Last vote was on ${this.__lastNameVoting.toUTCString()}. Next vote possible on ${next}`
       });
     }
   }
@@ -147,6 +156,7 @@ export class TheBot implements Executable {
    * @param cmd The CommandInteraction triggering the vote
    */
   private handleRenameCommand(cmd: CommandInteraction): void {
+    logger.debug(`Received rename. Executing it`);
     const request = new RenameRequest(cmd);
     request.extractInformation();
     request.execute();
@@ -157,6 +167,7 @@ export class TheBot implements Executable {
    * @param cmd The initiating CommandInteraction
    */
   private handleMoveHereCommand(cmd: CommandInteraction): void {
+    logger.debug(`Received move request. Executing it`);
     const request = new MoveRequest(cmd);
     request.extractInformation();
     request.execute();
@@ -167,6 +178,7 @@ export class TheBot implements Executable {
    * @param cmd The initiating CommandInteraction
    */
   private handlePrivateChannelCommand(cmd: CommandInteraction): void {
+    logger.debug(`Received private channel request. Executing it`);
     const request = new ChannelRequest(cmd);
     request.extractInformation();
     if (this.__channelRegistry.available(request.channelName)) {
