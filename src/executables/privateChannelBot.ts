@@ -1,15 +1,19 @@
 import { Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
 import { PrivateChannelRegistry } from '../registry';
-import { logger } from '../utils';
+import { EnvLoader, logger } from '../utils';
 import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
 import { Executable } from '.';
 export class PrivateChannelBot implements Executable {
   private __token: string;
   private __channelRegistry!: PrivateChannelRegistry;
   private __client!: Client;
+  private __lastNameVoting: Date;
+  private __loader: EnvLoader;
 
-  constructor(tok: string) {
+  constructor(tok: string, envloader: EnvLoader) {
     this.__token = tok;
+    this.__loader = envloader;
+    this.__lastNameVoting = new Date('1995-12-17T03:24:00');
   }
 
   /**
@@ -61,7 +65,6 @@ export class PrivateChannelBot implements Executable {
     });
 
     this.__client.on('interactionCreate', async (interaction: Interaction) => {
-      // logger.debug(interaction);
       if (interaction.isCommand()) {
         this.handleCommand(<CommandInteraction>interaction);
       } else {
@@ -111,9 +114,20 @@ export class PrivateChannelBot implements Executable {
   }
 
   private handleVoteCommand(cmd: CommandInteraction): void {
-    const request = new VotingProcedure(cmd);
-    request.extractInformation();
-    request.execute();
+    const now = new Date();
+    if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > <number>(<unknown>this.__loader.getVariable('VotingTimeout'))) {
+      const request = new VotingProcedure(cmd, <number>(<unknown>this.__loader.getVariable('VotingTime')));
+      request.extractInformation();
+      request.execute();
+      this.__lastNameVoting = now;
+    } else {
+      cmd.reply({
+        ephemeral: true,
+        content: `Last vote was on ${this.__lastNameVoting.toUTCString()}. Next vote possible on ${new Date(
+          this.__lastNameVoting.getTime() + <number>(<unknown>this.__loader.getVariable('VotingTimeout'))
+        ).toUTCString()}`
+      });
+    }
   }
 
   private handleRenameCommand(cmd: CommandInteraction): void {

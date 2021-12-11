@@ -19,9 +19,11 @@ export class VotingProcedure {
   private __opt1!: [string, string];
   private __opt2!: [string, string];
   private __opt3!: [string, string];
+  private __timeout: number;
 
-  constructor(cmd: CommandInteraction) {
+  constructor(cmd: CommandInteraction, timeout: number) {
     this.__command = cmd;
+    this.__timeout = timeout;
     this.__pressed = new Array<string>();
   }
 
@@ -63,7 +65,7 @@ export class VotingProcedure {
   constructorCollector(): void {
     const opt1F: CollectorFilter<MessageComponentInteraction[]> = (i) =>
       i.customId === 'option1' || i.customId === 'option2' || i.customId === 'option3';
-    const collector = this.__command.channel?.createMessageComponentCollector({ filter: opt1F, time: 30000 });
+    const collector = this.__command.channel?.createMessageComponentCollector({ filter: opt1F, time: this.__timeout });
 
     collector?.on('collect', (mci) => {
       if (mci.customId === 'option1' && !this.__pressed.includes(mci.user.id)) {
