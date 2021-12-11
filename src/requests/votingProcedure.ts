@@ -51,9 +51,13 @@ export class VotingProcedure {
     const ud = require('urban-dictionary');
     ud.random()
       .then((data: DefinitionObject[]) => {
-        this.__opt1 = [data[0].word, data[0].definition];
-        this.__opt2 = [data[1].word, data[1].definition];
-        this.__opt3 = [data[2].word, data[2].definition];
+        let counter = 1;
+        data.forEach((entry) => {
+          if (entry.word.length < 32) {
+            eval(`this.__opt${counter} = [entry.word, entry.definition]`);
+            counter++;
+          }
+        });
         this.run();
       })
       .catch((err: Error) => {

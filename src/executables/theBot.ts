@@ -135,7 +135,7 @@ export class TheBot implements Executable {
   private handleVoteCommand(cmd: CommandInteraction): void {
     const now = new Date();
     logger.info(`Checking if a voting procedure can be done`);
-    if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > <number>(<unknown>this.__loader.getVariable('VoteTimeout'))) {
+    if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > +this.__loader.getVariable('VoteTimeout')) {
       logger.debug(`Starting voting procedure`);
       const request = new VotingProcedure(cmd, <number>(<unknown>this.__loader.getVariable('VoteTime')));
       request.extractInformation();
