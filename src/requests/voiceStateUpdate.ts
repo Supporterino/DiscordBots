@@ -54,7 +54,7 @@ export class VoiceStateUpdate {
    * Getter for name of event owner
    */
   get OwnerName(): string {
-    return this.__owner.displayName;
+    return this.__owner.id;
   }
 
   /**

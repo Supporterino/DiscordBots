@@ -119,6 +119,6 @@ export class ChannelRequest {
    * Getter for owner of request
    */
   get OwnerName(): string {
-    return this.__owner.displayName;
+    return this.__owner.id;
   }
 }
