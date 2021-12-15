@@ -32,16 +32,18 @@ export class VotingProcedure {
   private __opt3!: [string, string];
   private __opt4!: [string, string];
   private __timeout: number;
+  private __nextVotetime: string;
 
   /**
    * Initialize a server rename voting procedure
    * @param cmd The triggering CommandInteraction
    * @param timeout The timeout for the collector to wait for votes
    */
-  constructor(cmd: CommandInteraction, timeout: number) {
+  constructor(cmd: CommandInteraction, timeout: number, nextVote: string) {
     this.__command = cmd;
     this.__timeout = timeout;
     this.__pressed = new Array<string>();
+    this.__nextVotetime = nextVote;
   }
 
   /**
@@ -148,7 +150,8 @@ export class VotingProcedure {
             .addFields(
               { name: `Votes for ${this.__opt1[0]}`, value: `${this.__opt1C}`, inline: true },
               { name: `Votes for ${this.__opt2[0]}`, value: `${this.__opt2C}`, inline: true },
-              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true }
+              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true },
+              { name: 'Next Vote', value: this.__nextVotetime }
             )
             .setTimestamp()
         ],
@@ -170,7 +173,8 @@ export class VotingProcedure {
             .addFields(
               { name: `Votes for ${this.__opt1[0]}`, value: `${this.__opt1C}`, inline: true },
               { name: `Votes for ${this.__opt2[0]}`, value: `${this.__opt2C}`, inline: true },
-              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true }
+              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true },
+              { name: 'Next Vote', value: this.__nextVotetime }
             )
             .setTimestamp()
         ],
@@ -192,7 +196,8 @@ export class VotingProcedure {
             .addFields(
               { name: `Votes for ${this.__opt1[0]}`, value: `${this.__opt1C}`, inline: true },
               { name: `Votes for ${this.__opt2[0]}`, value: `${this.__opt2C}`, inline: true },
-              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true }
+              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true },
+              { name: 'Next Vote', value: this.__nextVotetime }
             )
             .setTimestamp()
         ],
@@ -214,7 +219,8 @@ export class VotingProcedure {
             .addFields(
               { name: `Votes for ${this.__opt1[0]}`, value: `${this.__opt1C}`, inline: true },
               { name: `Votes for ${this.__opt2[0]}`, value: `${this.__opt2C}`, inline: true },
-              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true }
+              { name: `Votes for ${this.__opt3[0]}`, value: `${this.__opt3C}`, inline: true },
+              { name: 'Next Vote', value: this.__nextVotetime }
             )
             .setTimestamp()
         ],

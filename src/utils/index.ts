@@ -6,4 +6,4 @@ export * from './metricProvider';
 export * from './envLoader';
 export * from './types';
 export * from './formatter';
-export * from './timezones'
+export * from './timezones';
