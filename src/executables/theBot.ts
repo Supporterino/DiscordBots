@@ -1,6 +1,6 @@
 import { Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
 import { PrivateChannelRegistry } from '../registry';
-import { EnvLoader, logger } from '../utils';
+import { EnvLoader, getRandomTimezone, logger } from '../utils';
 import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
 import { Executable } from '.';
 /**
@@ -134,6 +134,7 @@ export class TheBot implements Executable {
    */
   private handleVoteCommand(cmd: CommandInteraction): void {
     const now = new Date();
+    const formatter = new Intl.DateTimeFormat('de-DE', {timeZone: getRandomTimezone()})
     logger.info(`Checking if a voting procedure can be done`);
     if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > +this.__loader.getVariable('VoteTimeout')) {
       logger.debug(`Starting voting procedure`);
@@ -146,7 +147,7 @@ export class TheBot implements Executable {
       logger.warn(`Vote request was called too early. Possible on ${next.toUTCString()}`);
       cmd.reply({
         ephemeral: true,
-        content: `Last vote was on ${this.__lastNameVoting.toUTCString()}. Next vote possible on ${next.toUTCString()}`
+        content: `Last vote was on ${formatter.format(this.__lastNameVoting)}. Next vote possible on ${formatter.format(next)}`
       });
     }
   }
