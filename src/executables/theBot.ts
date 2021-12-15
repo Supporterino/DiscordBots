@@ -134,7 +134,7 @@ export class TheBot implements Executable {
    */
   private handleVoteCommand(cmd: CommandInteraction): void {
     const now = new Date();
-    const formatter = new Intl.DateTimeFormat('de-DE', {timeZone: getRandomTimezone()})
+    const formatter = new Intl.DateTimeFormat('en-GB', { timeZoneName: 'short', timeZone: getRandomTimezone()})
     logger.info(`Checking if a voting procedure can be done`);
     if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > +this.__loader.getVariable('VoteTimeout')) {
       logger.debug(`Starting voting procedure`);
