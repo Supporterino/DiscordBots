@@ -3,6 +3,7 @@ import { PrivateChannelRegistry } from '../registry';
 import { EnvLoader, getRandomTimezone, logger } from '../utils';
 import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
 import { Executable } from '.';
+import { PermissionHandler } from './permissionHandler';
 /**
  * This class is the main bot which is launched and logs into the desired servers. The class mostly initializes the discord.js client and handles the distribution of various events and task to sub classes.
  */
@@ -12,15 +13,18 @@ export class TheBot implements Executable {
   private __client!: Client;
   private __lastNameVoting: Date;
   private __loader: EnvLoader;
+  private __permissionHandler: PermissionHandler;
 
   /**
    * Initialize a new bot
    * @param tok Application Token to access discord API
    * @param envloader an intialized env variable loader to get the needed config parameters
+   * @param permissionHandler an ready to use PermissionHandler instance
    */
-  constructor(tok: string, envloader: EnvLoader) {
+  constructor(tok: string, envloader: EnvLoader, permissionHandler: PermissionHandler) {
     this.__token = tok;
     this.__loader = envloader;
+    this.__permissionHandler = permissionHandler;
     this.__lastNameVoting = new Date('1995-12-17T03:24:00');
     logger.info(`Initialized new main bot class`);
   }
@@ -112,16 +116,36 @@ export class TheBot implements Executable {
     logger.debug(`Got CommandInteraction with command: ${cmd.commandName}`);
     switch (cmd.commandName) {
       case 'create_private_channel':
-        this.handlePrivateChannelCommand(cmd);
+        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handlePrivateChannelCommand(cmd);
+        else
+          cmd.reply({
+            ephemeral: true,
+            content: `You have no access to this command.`
+          });
         break;
       case 'move_here':
-        this.handleMoveHereCommand(cmd);
+        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleMoveHereCommand(cmd);
+        else
+          cmd.reply({
+            ephemeral: true,
+            content: `You have no access to this command.`
+          });
         break;
       case 'rename':
-        this.handleRenameCommand(cmd);
+        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleRenameCommand(cmd);
+        else
+          cmd.reply({
+            ephemeral: true,
+            content: `You have no access to this command.`
+          });
         break;
       case 'vote':
-        this.handleVoteCommand(cmd);
+        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleVoteCommand(cmd);
+        else
+          cmd.reply({
+            ephemeral: true,
+            content: `You have no access to this command.`
+          });
         break;
       default:
         break;
@@ -152,7 +176,11 @@ export class TheBot implements Executable {
     logger.info(`Checking if a voting procedure can be done`);
     if (Math.abs(this.__lastNameVoting.getTime() - now.getTime()) > +this.__loader.getVariable('VoteTimeout')) {
       logger.debug(`Starting voting procedure`);
-      const request = new VotingProcedure(cmd, <number>(<unknown>this.__loader.getVariable('VoteTime')), formatter.format((now.getTime() + +this.__loader.getVariable('VoteTimeout'))));
+      const request = new VotingProcedure(
+        cmd,
+        <number>(<unknown>this.__loader.getVariable('VoteTime')),
+        formatter.format(now.getTime() + +this.__loader.getVariable('VoteTimeout'))
+      );
       request.extractInformation();
       request.execute();
       this.__lastNameVoting = now;

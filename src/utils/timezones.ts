@@ -1,4 +1,4 @@
-import { logger } from ".";
+import { logger } from '.';
 
 export const getRandomTimezone = (): string => {
   const aryIannaTimeZones = [
@@ -351,7 +351,7 @@ export const getRandomTimezone = (): string => {
     'Pacific/Apia',
     'Africa/Johannesburg'
   ];
-  const index = Math.floor(Math.random() * aryIannaTimeZones.length)
-  logger.debug('Timezone array index', index)
+  const index = Math.floor(Math.random() * aryIannaTimeZones.length);
+  logger.debug('Timezone array index', index);
   return aryIannaTimeZones[index];
 };
