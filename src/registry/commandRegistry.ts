@@ -22,6 +22,24 @@ export class CommandRegistry {
    * Initializes the CommandRegistry with the predefined commands
    */
   private init() {
+    this.addCommand(
+      'removeRight',
+      new SlashCommandBuilder()
+        .setName('remove_right')
+        .setDescription('Remove a right to a user')
+        .addUserOption((option) => option.setName('user').setDescription('User to modify').setRequired(true))
+        .addStringOption((option) => option.setName('right').setDescription('The name of the permission').setRequired(true))
+        .toJSON()
+    );
+    this.addCommand(
+      'addRight',
+      new SlashCommandBuilder()
+        .setName('add_right')
+        .setDescription('Add a right to a user')
+        .addUserOption((option) => option.setName('user').setDescription('User to modify').setRequired(true))
+        .addStringOption((option) => option.setName('right').setDescription('The name of the permission').setRequired(true))
+        .toJSON()
+    );
     this.addCommand('renameVoting', new SlashCommandBuilder().setName('vote').setDescription('Trigger a renaming vote').toJSON());
     this.addCommand(
       'triggerRename',

@@ -99,12 +99,14 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__command" class="tsd-kind-icon">__command</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__guild" class="tsd-kind-icon">__guild</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__nextvotetime" class="tsd-kind-icon">__next<wbr>Votetime</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt1" class="tsd-kind-icon">__opt1</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt1c" class="tsd-kind-icon">__opt1C</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt2" class="tsd-kind-icon">__opt2</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt2c" class="tsd-kind-icon">__opt2C</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt3" class="tsd-kind-icon">__opt3</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt3c" class="tsd-kind-icon">__opt3C</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__opt4" class="tsd-kind-icon">__opt4</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__pressed" class="tsd-kind-icon">__pressed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_requests_votingprocedure_.votingprocedure.html#__timeout" class="tsd-kind-icon">__timeout</a></li>
 							</ul>
@@ -130,13 +132,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Voting<wbr>Procedure<span class="tsd-signature-symbol">(</span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span>, timeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_requests_votingprocedure_.votingprocedure.html" class="tsd-signature-type">VotingProcedure</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Voting<wbr>Procedure<span class="tsd-signature-symbol">(</span>cmd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span>, timeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, nextVote<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_requests_votingprocedure_.votingprocedure.html" class="tsd-signature-type">VotingProcedure</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:33</li>
+									<li>Defined in src/requests/votingProcedure.ts:35</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -161,6 +163,9 @@
 											<p>The timeout for the collector to wait for votes</p>
 										</div>
 									</div>
+								</li>
+								<li>
+									<h5>nextVote: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_requests_votingprocedure_.votingprocedure.html" class="tsd-signature-type">VotingProcedure</a></h4>
@@ -187,6 +192,16 @@
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/requests/votingProcedure.ts:25</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="__nextvotetime" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __next<wbr>Votetime</h3>
+					<div class="tsd-signature tsd-kind-icon">__next<wbr>Votetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/requests/votingProcedure.ts:35</li>
 						</ul>
 					</aside>
 				</section>
@@ -251,6 +266,16 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="__opt4" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __opt4</h3>
+					<div class="tsd-signature tsd-kind-icon">__opt4<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/requests/votingProcedure.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="__pressed" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __pressed</h3>
 					<div class="tsd-signature tsd-kind-icon">__pressed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
@@ -266,7 +291,7 @@
 					<div class="tsd-signature tsd-kind-icon">__timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/requests/votingProcedure.ts:33</li>
+							<li>Defined in src/requests/votingProcedure.ts:34</li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:93</li>
+									<li>Defined in src/requests/votingProcedure.ts:100</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,7 +330,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:207</li>
+									<li>Defined in src/requests/votingProcedure.ts:237</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -328,7 +353,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:75</li>
+									<li>Defined in src/requests/votingProcedure.ts:82</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -350,7 +375,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:67</li>
+									<li>Defined in src/requests/votingProcedure.ts:74</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,7 +397,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:49</li>
+									<li>Defined in src/requests/votingProcedure.ts:52</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -394,7 +419,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:84</li>
+									<li>Defined in src/requests/votingProcedure.ts:91</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -416,7 +441,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/requests/votingProcedure.ts:130</li>
+									<li>Defined in src/requests/votingProcedure.ts:137</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -436,77 +461,8 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_executables_commandupdater_.html">&quot;executables/command<wbr>Updater&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_executables_docsprovider_.html">&quot;executables/docs<wbr>Provider&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_executables_executable_h_.html">&quot;executables/executable.h&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_executables_index_.html">&quot;executables/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_executables_thebot_.html">&quot;executables/the<wbr>Bot&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_index_.html">&quot;index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_registry_commandregistry_.html">&quot;registry/command<wbr>Registry&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_registry_index_.html">&quot;registry/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_registry_privatechannelregistry_.html">&quot;registry/private<wbr>Channel<wbr>Registry&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_requests_channelrequest_.html">&quot;requests/channel<wbr>Request&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_requests_index_.html">&quot;requests/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_requests_moverequest_.html">&quot;requests/move<wbr>Request&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_requests_renamerequest_.html">&quot;requests/rename<wbr>Request&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_requests_voicestateupdate_.html">&quot;requests/voice<wbr>State<wbr>Update&quot;</a>
-					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/_requests_votingprocedure_.html">&quot;requests/voting<wbr>Procedure&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_compare_.html">&quot;utils/compare&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_envloader_.html">&quot;utils/env<wbr>Loader&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_formatter_.html">&quot;utils/formatter&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_guildfunctions_.html">&quot;utils/guild<wbr>Functions&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_id_.html">&quot;utils/id&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_index_.html">&quot;utils/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_logger_.html">&quot;utils/logger&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_metricprovider_.html">&quot;utils/metric<wbr>Provider&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/_utils_types_.html">&quot;utils/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -527,6 +483,9 @@
 								<a href="_requests_votingprocedure_.votingprocedure.html#__guild" class="tsd-kind-icon">__guild</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_requests_votingprocedure_.votingprocedure.html#__nextvotetime" class="tsd-kind-icon">__next<wbr>Votetime</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_requests_votingprocedure_.votingprocedure.html#__opt1" class="tsd-kind-icon">__opt1</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -543,6 +502,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_requests_votingprocedure_.votingprocedure.html#__opt3c" class="tsd-kind-icon">__opt3C</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_requests_votingprocedure_.votingprocedure.html#__opt4" class="tsd-kind-icon">__opt4</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_requests_votingprocedure_.votingprocedure.html#__pressed" class="tsd-kind-icon">__pressed</a>
@@ -592,6 +554,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>

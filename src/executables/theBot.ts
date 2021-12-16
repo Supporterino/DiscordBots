@@ -1,7 +1,7 @@
 import { Client, CommandInteraction, Intents, Interaction, VoiceState } from 'discord.js';
 import { PrivateChannelRegistry } from '../registry';
-import { EnvLoader, getRandomTimezone, logger } from '../utils';
-import { ChannelRequest, MoveRequest, RenameRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
+import { EnvLoader, getRandomTimezone, logger, RightsCommandType } from '../utils';
+import { ChannelRequest, MoveRequest, RenameRequest, RightsRequest, VoiceStateUpdate, VotingProcedure } from '../requests';
 import { Executable } from '.';
 import { PermissionHandler } from './permissionHandler';
 /**
@@ -109,12 +109,28 @@ export class TheBot implements Executable {
   }
 
   /**
-   * Checks the command name of the CommandInteraction and distributes the command to the right wrapper
+   * Checks the command name of the CommandInteraction and distributes the command to the right wrapper. The command is only processed if the PermissionHandler confirms that the user has access to the command
    * @param cmd the recieved CommandInteraction
    */
   private handleCommand(cmd: CommandInteraction): void {
     logger.debug(`Got CommandInteraction with command: ${cmd.commandName}`);
     switch (cmd.commandName) {
+      case 'add_right':
+        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleRightsCommand(cmd, RightsCommandType.ADD);
+        else
+          cmd.reply({
+            ephemeral: true,
+            content: `You have no access to this command.`
+          });
+        break;
+      case 'remove_right':
+        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleRightsCommand(cmd, RightsCommandType.REMOVE);
+        else
+          cmd.reply({
+            ephemeral: true,
+            content: `You have no access to this command.`
+          });
+        break;
       case 'create_private_channel':
         if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handlePrivateChannelCommand(cmd);
         else
@@ -150,6 +166,17 @@ export class TheBot implements Executable {
       default:
         break;
     }
+  }
+
+  /**
+   * Handles the execution of a right change command
+   * @param cmd The triggering CommandInteraction
+   * @param type The type defining if it is a type removal or addition
+   */
+  private handleRightsCommand(cmd: CommandInteraction, type: RightsCommandType): void {
+    const request = new RightsRequest(cmd, type, this.__permissionHandler);
+    request.extractInformation();
+    request.execute();
   }
 
   /**

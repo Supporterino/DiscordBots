@@ -15,3 +15,11 @@ export class DefinitionObject {
   word!: string;
   written_on!: string;
 }
+
+/**
+ * An enum defining the types of possible rights manipulation
+ */
+export enum RightsCommandType {
+  ADD,
+  REMOVE
+}

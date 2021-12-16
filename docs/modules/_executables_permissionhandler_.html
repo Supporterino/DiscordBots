@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;requests/moveRequest&quot; | Discord Bots - v0.1.0</title>
+	<title>&quot;executables/permissionHandler&quot; | Discord Bots - v0.1.0</title>
 	<meta name="description" content="Documentation for Discord Bots - v0.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_requests_moverequest_.html">&quot;requests/moveRequest&quot;</a>
+					<a href="_executables_permissionhandler_.html">&quot;executables/permissionHandler&quot;</a>
 				</li>
 			</ul>
-			<h1>Module &quot;requests/moveRequest&quot;</h1>
+			<h1>Module &quot;executables/permissionHandler&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -71,12 +71,61 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/_executables_permissionhandler_.permissions.html" class="tsd-kind-icon">PERMISSIONS</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/_requests_moverequest_.moverequest.html" class="tsd-kind-icon">Move<wbr>Request</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/_executables_permissionhandler_.permissionhandler.html" class="tsd-kind-icon">Permission<wbr>Handler</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_executables_permissionhandler_.html#getpermissionbystring" class="tsd-kind-icon">get<wbr>Permission<wbr>ByString</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getpermissionbystring" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Permission<wbr>ByString</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Permission<wbr>ByString<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/_executables_permissionhandler_.permissions.html" class="tsd-signature-type">PERMISSIONS</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/executables/permissionHandler.ts:190</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This function maps a string to it PERMISSION representiv. If the string doesn&#39;t match a PERMISSION an Error is thrown</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the string to transform to a permission</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../enums/_executables_permissionhandler_.permissions.html" class="tsd-signature-type">PERMISSIONS</a></h4>
+							<p>the requested PERMISSION</p>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -87,14 +136,20 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="_requests_moverequest_.html">&quot;requests/move<wbr>Request&quot;</a>
+						<a href="_executables_permissionhandler_.html">&quot;executables/permission<wbr>Handler&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/_executables_permissionhandler_.permissions.html" class="tsd-kind-icon">PERMISSIONS</a>
+					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/_requests_moverequest_.moverequest.html" class="tsd-kind-icon">Move<wbr>Request</a>
+						<a href="../classes/_executables_permissionhandler_.permissionhandler.html" class="tsd-kind-icon">Permission<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_executables_permissionhandler_.html#getpermissionbystring" class="tsd-kind-icon">get<wbr>Permission<wbr>ByString</a>
 					</li>
 				</ul>
 			</nav>
