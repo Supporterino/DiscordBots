@@ -9,7 +9,7 @@ to_load.forEach((envVar) => {
   loader.loadVariable(envVar);
 });
 
-const handler = new PermissionHandler(+loader.getVariable('PersistenceInterval'));
+const handler = new PermissionHandler();
 executables.push(handler);
 executables.push(new Updater(loader.getVariable('Token'), loader.getVariable('ID'), loader.getVariable('GuildID')));
 executables.push(new TheBot(loader.getVariable('Token'), loader, handler));

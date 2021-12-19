@@ -116,52 +116,64 @@ export class TheBot implements Executable {
     logger.debug(`Got CommandInteraction with command: ${cmd.commandName}`);
     switch (cmd.commandName) {
       case 'add_right':
-        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleRightsCommand(cmd, RightsCommandType.ADD);
-        else
-          cmd.reply({
-            ephemeral: true,
-            content: `You have no access to this command.`
-          });
+        this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName).then((data) => {
+          if (data) this.handleRightsCommand(cmd, RightsCommandType.ADD);
+          else
+            cmd.reply({
+              ephemeral: true,
+              content: `You have no access to this command.`
+            });
+        });
         break;
       case 'remove_right':
-        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleRightsCommand(cmd, RightsCommandType.REMOVE);
-        else
-          cmd.reply({
-            ephemeral: true,
-            content: `You have no access to this command.`
-          });
+        this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName).then((data) => {
+          if (data) this.handleRightsCommand(cmd, RightsCommandType.REMOVE);
+          else
+            cmd.reply({
+              ephemeral: true,
+              content: `You have no access to this command.`
+            });
+        });
         break;
       case 'create_private_channel':
-        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handlePrivateChannelCommand(cmd);
-        else
-          cmd.reply({
-            ephemeral: true,
-            content: `You have no access to this command.`
-          });
+        this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName).then((data) => {
+          if (data) this.handlePrivateChannelCommand(cmd);
+          else
+            cmd.reply({
+              ephemeral: true,
+              content: `You have no access to this command.`
+            });
+        });
         break;
       case 'move_here':
-        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleMoveHereCommand(cmd);
-        else
-          cmd.reply({
-            ephemeral: true,
-            content: `You have no access to this command.`
-          });
+        this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName).then((data) => {
+          if (data) this.handleMoveHereCommand(cmd);
+          else
+            cmd.reply({
+              ephemeral: true,
+              content: `You have no access to this command.`
+            });
+        });
         break;
       case 'rename':
-        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleRenameCommand(cmd);
-        else
-          cmd.reply({
-            ephemeral: true,
-            content: `You have no access to this command.`
-          });
+        this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName).then((data) => {
+          if (data) this.handleRenameCommand(cmd);
+          else
+            cmd.reply({
+              ephemeral: true,
+              content: `You have no access to this command.`
+            });
+        });
         break;
       case 'vote':
-        if (this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName)) this.handleVoteCommand(cmd);
-        else
-          cmd.reply({
-            ephemeral: true,
-            content: `You have no access to this command.`
-          });
+        this.__permissionHandler.checkRight(cmd.user.id, cmd.commandName).then((data) => {
+          if (data) this.handleVoteCommand(cmd);
+          else
+            cmd.reply({
+              ephemeral: true,
+              content: `You have no access to this command.`
+            });
+        });
         break;
       default:
         break;
