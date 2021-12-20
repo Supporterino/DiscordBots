@@ -99,9 +99,17 @@ export class PermissionHandler implements Executable {
    * @param userID the user to manipulate
    * @param newPermission the PERMISSION to add
    */
-  addRight(userID: string, newPermission: PERMISSIONS): void {
+  async addRight(userID: string, newPermission: PERMISSIONS): Promise<void> {
     const key = getStringForPermission(newPermission);
-    this.__permsDB.update({ [key]: true }, { where: { id: userID } });
+    const [updated, _] = await this.__permsDB.update({ [key]: true }, { where: { id: userID } });
+
+    if (updated == 0) {
+      logger.warn(`User (${userID}) wasn't in DB creating it.`)
+      this.__permsDB.create({
+        id: userID,
+        [key]: true
+      })
+    }
   }
 
   /**
