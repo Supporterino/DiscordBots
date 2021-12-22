@@ -1,7 +1,7 @@
 import { genID, logger, activeChannels } from '../utils';
 
 /**
- * This class is the store for a ChannelRequest. The PrivateChannelRegistry persists active channels and assosiates them with their owner.
+ * This class is the store for a {@link ChannelRequest}. The PrivateChannelRegistry persists active channels and assosiates them with their owner.
  */
 export class PrivateChannelRegistry {
   private __store: Map<String, String>;

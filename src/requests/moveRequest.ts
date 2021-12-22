@@ -2,7 +2,7 @@ import { CommandInteraction, Guild, GuildMember } from 'discord.js';
 import { getGuildMemberByID, getVoiceChannelOfUser, logger, moveRequests, setVoiceChannel } from '../utils';
 
 /**
- * The MoveRequest class extracts the targets to move from the command interaction and moves the to the owners channel
+ * The {@link MoveRequest} class extracts the targets to move from the command interaction and moves the to the owners channel
  */
 export class MoveRequest {
   private __guild!: Guild;
@@ -11,7 +11,7 @@ export class MoveRequest {
   private __mentions: Array<GuildMember>;
 
   /**
-   * Initialize a new MoveRequest with calling CommandInteraction
+   * Initialize a new {@link MoveRequest} with calling CommandInteraction
    * @param cmd The CommandInteraction starting the request
    */
   constructor(cmd: CommandInteraction) {
@@ -31,7 +31,7 @@ export class MoveRequest {
   }
 
   /**
-   *  Start the execution of a MoveRequest
+   *  Start the execution of a {@link MoveRequest}
    */
   execute(): void {
     logger.info(`Executing MoveRequest`);

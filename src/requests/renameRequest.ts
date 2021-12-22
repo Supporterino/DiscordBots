@@ -2,7 +2,7 @@ import { CommandInteraction, Guild } from 'discord.js';
 import { genHash, logger, renameGuildMembers, renameGuildRoles, Renames } from '../utils';
 
 /**
- * The RenameRequest extracts the new name from the CommandInteraction and updates the server or uses a random hash as the new name
+ * The {@link RenameRequest} extracts the new name from the CommandInteraction and updates the server or uses a random hash as the new name
  */
 export class RenameRequest {
   private __guild!: Guild;
@@ -23,7 +23,7 @@ export class RenameRequest {
   }
 
   /**
-   *  Start the execution of a RenameRequest
+   *  Start the execution of a {@link RenameRequest}
    */
   execute(): void {
     logger.info(`Executing RenameRequest`);

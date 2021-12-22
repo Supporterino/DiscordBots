@@ -13,9 +13,9 @@ export class RightsRequest {
   private __permissionHandler: PermissionHandler;
 
   /**
-   * Constructs a new RightsRequest
+   * Constructs a new {@link RightsRequest}
    * @param cmd The CommandInteraction triggering the request
-   * @param type The RightsCommandType indicating if its a removal or addition
+   * @param type The {@link RightsCommandType} indicating if its a removal or addition
    * @param ph The PermissionHandler of the bot
    */
   constructor(cmd: CommandInteraction, type: RightsCommandType, ph: PermissionHandler) {

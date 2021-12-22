@@ -2,7 +2,7 @@ import { getChannelByName, logger, setVoiceChannel, voiceStates } from '../utils
 import { Guild, GuildMember, VoiceChannel, VoiceState } from 'discord.js';
 
 /**
- * This is an event handler for VoiceStateUpdate to check if a owner of a private channel leaves it. If so the channel is deleted and the channel removed from the PrivateChannelRegistry
+ * This is an event handler for VoiceStateUpdate to check if a owner of a private channel leaves it. If so the channel is deleted and the channel removed from the {@link PrivateChannelRegistry}
  */
 export class VoiceStateUpdate {
   private __state: VoiceState;

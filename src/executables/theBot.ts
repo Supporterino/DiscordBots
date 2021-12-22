@@ -19,7 +19,7 @@ export class TheBot implements Executable {
    * Initialize a new bot
    * @param tok Application Token to access discord API
    * @param envloader an intialized env variable loader to get the needed config parameters
-   * @param permissionHandler an ready to use PermissionHandler instance
+   * @param permissionHandler an ready to use {@link PermissionHandler} instance
    */
   constructor(tok: string, envloader: EnvLoader, permissionHandler: PermissionHandler) {
     this.__token = tok;
