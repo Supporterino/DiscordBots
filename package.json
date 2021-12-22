@@ -1,6 +1,6 @@
 {
   "name": "discordbots",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Project for multiple discord bots",
   "main": "src/index.ts",
   "scripts": {
