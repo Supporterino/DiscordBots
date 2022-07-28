@@ -21,7 +21,7 @@ export class PermissionHandler implements Executable {
   }
 
   initDatabase(): void {
-    this.__dbConnection = new Sequelize('discordBot', 'discordBot', 'KY2mekfPhT%T8Kk', {
+    this.__dbConnection = new Sequelize('discordbot', 'discordbot', 'KY2mekfPhT%T8Kk', {
       host: 'postgres.databases.svc.cluster.local',
       dialect: 'postgres',
       logging: ((sql: string, timing?: number) => {logger.debug(`Ran ${sql} in ${timing}`)})
