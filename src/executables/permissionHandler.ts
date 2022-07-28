@@ -21,11 +21,10 @@ export class PermissionHandler implements Executable {
   }
 
   initDatabase(): void {
-    this.__dbConnection = new Sequelize('permissionsDB', 'user', 'password', {
-      host: 'localhost',
-      dialect: 'sqlite',
-      logging: true,
-      storage: 'data/permsDB.sqlite'
+    this.__dbConnection = new Sequelize('discordBot', 'discordBot', 'KY2mekfPhT%T8Kk', {
+      host: 'postgres.databases.svc.cluster.local',
+      dialect: 'postgres',
+      logging: ((sql: string, timing?: number) => {logger.debug(`Ran ${sql} in ${timing}`)})
     });
     this.loadModel();
   }
