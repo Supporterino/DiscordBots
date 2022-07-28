@@ -100,7 +100,7 @@ export class PermissionHandler implements Executable {
    */
   async addRight(userID: string, newPermission: PERMISSIONS): Promise<void> {
     const key = getStringForPermission(newPermission);
-    const [updated, _] = await this.__permsDB.update({ [key]: true }, { where: { id: userID } });
+    const updated = (await this.__permsDB.update({ [key]: true }, { where: { id: userID } }))[0];
 
     if (updated == 0) {
       logger.warn(`User (${userID}) wasn't in DB creating it.`)

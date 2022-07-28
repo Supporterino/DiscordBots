@@ -5,7 +5,7 @@ import { genID, logger } from '../utils';
  * This class provides an easy way to manage your SlashCommands an retrieve one or all if needed. It is also possible to add commands later down the way.
  */
 export class CommandRegistry {
-  private __store: Map<string, RESTPostAPIApplicationCommandsJSONBody>;
+  private __store: Map<string, any>;
   private __id: string;
 
   /**
@@ -13,7 +13,7 @@ export class CommandRegistry {
    */
   constructor() {
     this.__id = genID();
-    this.__store = new Map<string, RESTPostAPIApplicationCommandsJSONBody>();
+    this.__store = new Map<string, any>();
     logger.info(`Created new PrivateChannelRegistry with id (${this.__id}).`);
     this.init();
   }
@@ -79,7 +79,7 @@ export class CommandRegistry {
    * @param name The name to identify the command
    * @param command The command definiton object
    */
-  addCommand(name: string, command: RESTPostAPIApplicationCommandsJSONBody): void {
+  addCommand(name: string, command: any): void {
     logger.debug(`Adding ${name} to registry with data:`, command);
     this.__store.set(name, command);
   }
