@@ -3,7 +3,6 @@ WORKDIR /usr/local/app
 COPY package.json ./
 COPY tsconfig.json ./
 COPY src ./src
-RUN npm install -g npm
 RUN npm install
 RUN npm run build
 
@@ -12,7 +11,6 @@ FROM node:16
 WORKDIR /usr
 COPY package.json ./
 COPY docs ./docs
-RUN npm install -g npm
 RUN npm install
 COPY --from=0 /usr/local/app/build ./
 RUN npm install pm2 -g
